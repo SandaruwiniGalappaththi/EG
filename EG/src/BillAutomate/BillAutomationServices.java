@@ -30,6 +30,20 @@ public class BillAutomationServices {
 	}
 	
 	
+	@GET
+	@Path("/searchperunit")
+	@Produces(MediaType.TEXT_HTML) 
+	public String readPerUnitBySearch(String itemData) {		
+		//Convert the input string to an XML document
+		Document doc = Jsoup.parse(itemData, "", Parser.xmlParser()); 
+		 
+		//Read the value from the element <billType>
+		String billType = doc.select("billType").text(); 
+		String output = bill.readPerUnitBySearch(billType); 
+		return output; 	
+	}
+	
+	
 	@POST
 	@Path("/") 
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
