@@ -2,6 +2,7 @@ package BillAutomate;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -9,7 +10,7 @@ public class BillAutomation {
 	private Connection connect() { 
 		Connection con = null; 
 		try { 
-			Class.forName("com.mysql.jdbc.Driver"); 
+			Class.forName("com.mysql.cj.jdbc.Driver"); 
 		 
 			//Provide the correct details: DBServer/DBName, user-name, password 
 			String url = "jdbc:mysql://127.0.0.1:3306/bill_automate";
@@ -24,7 +25,7 @@ public class BillAutomation {
 	} 
 	
 	
-	//Read items
+	//Read Per Unit
 	public String redPerUnit() { 
 		String output = ""; 
 		try { 
@@ -34,7 +35,7 @@ public class BillAutomation {
 			} 
 				
 			// Prepare the HTML table to be displayed
-			output = "<html><head><title>Item Page</title>"
+			output = "<html><head><title>Per Unit Page</title>"
 					+ "<link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC\" crossorigin=\"anonymous\">"
 					+ "</head><body><table class='table' border='1'><tr>"
 					+ "<th>Bill Type</th>"
@@ -53,7 +54,7 @@ public class BillAutomation {
 			
 			// iterate through the rows in the result set
 			while (rs.next()) { 
-				String billType = rs.getString("billtype"); 
+				String billType = rs.getString("type"); 
 				String KWH = Double.toString(rs.getDouble("kwh")); 
 				String Fixed = Double.toString(rs.getDouble("fixed")); 
 				String Fuel = Double.toString(rs.getDouble("fuel")); 
@@ -85,6 +86,47 @@ public class BillAutomation {
 		} 
 		catch (Exception e) { 
 			output = "Error while reading the items."; 
+			System.err.println(e.getMessage()); 
+		} 
+		return output; 
+	} 
+	
+	
+	//Insert Per Unit
+	public String insertPerUnit(String billType, String KWH, String Fixed, String Fuel, String Rebate, String Tax, String Total) { 
+		String output = ""; 
+		try { 
+			Connection con = connect(); 
+			if (con == null) {
+				return "Error while connecting to the database for inserting.";
+			}
+			// create a prepared statement
+			String query = "insert into perunit(type, kwh, fixed, fuel, rebate, tax, total)" + " values(?, ?, ?, ?, ?, ?, ?)"; 
+			PreparedStatement preparedStmt = con.prepareStatement(query); 
+			// binding values
+			preparedStmt.setString(1, billType); 
+			preparedStmt.setDouble(2, Double.parseDouble(KWH)); 
+			preparedStmt.setDouble(3, Double.parseDouble(Fixed)); 
+			preparedStmt.setDouble(4, Double.parseDouble(Fuel)); 
+			preparedStmt.setDouble(5, Double.parseDouble(Rebate)); 	
+			preparedStmt.setDouble(6, Double.parseDouble(Tax)); 
+			preparedStmt.setDouble(7, Double.parseDouble(Total)); 
+			
+			// execute the statement
+			preparedStmt.execute(); 
+			con.close(); 
+			output = "<html><head><title>Per Unit Page</title>"
+					+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+					+ "</head><body>"
+					+ "<div class='card'><h4 class='text-center'>Inserted successfully</h4></div>"
+					+ "</body></html>"; 
+		} 
+		catch (Exception e) { 
+			output = "<html><head><title>Per Unit Page</title>"
+					+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+					+ "</head><body>"
+					+ "<div class='card'><h4 class='text-center'>Error while inserting the item</h4></div>"
+					+ "</body></html>"; 
 			System.err.println(e.getMessage()); 
 		} 
 		return output; 
