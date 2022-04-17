@@ -125,8 +125,89 @@ public class BillAutomation {
 			output = "<html><head><title>Per Unit Page</title>"
 					+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 					+ "</head><body>"
-					+ "<div class='card'><h4 class='text-center'>Error while inserting the item</h4></div>"
+					+ "<div class='card'><h4 class='text-center'>Error while inserting</h4></div>"
 					+ "</body></html>"; 
+			System.err.println(e.getMessage()); 
+		} 
+		return output; 
+	} 
+	
+	
+	//Update items
+	public String updatePerUnit(String billType, String KWH, String Fixed, String Fuel, String Rebate, String Tax, String Total) { 
+		String output = ""; 
+		try { 
+			Connection con = connect(); 
+			if (con == null) {
+				return "Error while connecting to the database for updating."; 
+			} 
+			
+			// create a prepared statement
+			String query = "UPDATE perunit SET kwh=?,fixed=?,fuel=?,rebate=?,tax=?,total=? WHERE type=?"; 
+			PreparedStatement preparedStmt = con.prepareStatement(query); 
+			 
+			// binding values 
+			preparedStmt.setDouble(1, Double.parseDouble(KWH)); 
+			preparedStmt.setDouble(2, Double.parseDouble(Fixed)); 
+			preparedStmt.setDouble(3, Double.parseDouble(Fuel)); 
+			preparedStmt.setDouble(4, Double.parseDouble(Rebate)); 
+			preparedStmt.setDouble(5, Double.parseDouble(Tax)); 
+			preparedStmt.setDouble(6, Double.parseDouble(Total));
+			preparedStmt.setString(7, billType);
+			
+			// execute the statement
+			preparedStmt.execute(); 
+			con.close(); 
+			output = "<html><head><title>Per Unit Page</title>"
+					+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+					+ "</head><body>"
+					+ "<div class='card'><h4 class='text-center'>Updated Successfully</h4></div>"
+					+ "</body></html>";
+		} 
+		catch (Exception e) { 
+			output = "<html><head><title>Per Unit Page</title>"
+					+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+					+ "</head><body>"
+					+ "<div class='card'><h4 class='text-center'>Error while updating</h4></div>"
+					+ "</body></html>";
+			System.err.println(e.getMessage()); 
+		} 
+		return output; 
+	}
+	
+	
+	//Delete Item
+	public String deletePerUnit(String billType) { 
+		String output = ""; 
+		try { 
+			Connection con = connect(); 
+			if (con == null) {
+				return "Error while connecting to the database for deleting."; 
+			} 
+			
+			// create a prepared statement
+			String query = "delete from perunit where type=?"; 
+			PreparedStatement preparedStmt = con.prepareStatement(query);
+			
+			// binding values
+			preparedStmt.setString(1, billType);
+			
+			// execute the statement
+			preparedStmt.execute(); 
+			con.close(); 
+			output = "<html><head><title>Per Unit Page</title>"
+					+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+					+ "</head><body>"
+					+ "<div class='card'><h4 class='text-center'>Deleted successfully</h4></div>"
+					+ "</body></html>";
+		}
+		catch (Exception e) 
+		{ 
+			output = "<html><head><title>Per Unit Page</title>"
+					+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+					+ "</head><body>"
+					+ "<div class='card'><h4 class='text-center'>Error while deleting</h4></div>"
+					+ "</body></html>";
 			System.err.println(e.getMessage()); 
 		} 
 		return output; 
