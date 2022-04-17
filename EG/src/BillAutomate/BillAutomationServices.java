@@ -29,7 +29,7 @@ public class BillAutomationServices {
 		return bill.redPerUnit();	
 	}
 	
-	
+
 	@GET
 	@Path("/searchperunit")
 	@Produces(MediaType.TEXT_HTML) 
@@ -43,7 +43,7 @@ public class BillAutomationServices {
 		return output; 	
 	}
 	
-	
+
 	@POST
 	@Path("/") 
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
