@@ -13,7 +13,7 @@ public class Schedule {
 					Connection con = null;
 			 try
 			 {
-				 	Class.forName("com.mysql.jdbc.Driver");
+				 	Class.forName("com.mysql.cj.jdbc.Driver");
 
 				 	//Provide the correct details: DBServer/DBName, username, password
 				 	con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/powercut", "root", "sandaru@1S");
@@ -57,7 +57,7 @@ public class Schedule {
   
 			
 			public String readSchedule()
-			 {
+			 {           System.out.println("yju7");
 						String output = "";
 			 try
 			 {
@@ -89,6 +89,48 @@ public class Schedule {
 						 output += "<td class=\"col-sm-4\" style=\"background-color:lavender;\">" + end + "</td>";
 						 output += "<td class=\"col-sm-4\" style=\"background-color:lavender;\">" + onDate + "</td>";
 						 // buttons
+						 output += "</tr>";
+			 }
+				 			con.close();
+				 			// Complete the html table
+				 			output += "</table></html>";
+				 					
+			 }
+			 catch(Exception e)
+			 {
+				 output = "Error while reading the items.";
+				 System.err.println(e.getMessage());
+			 }
+			 return output;
+			 }
+public String readzone()
+			 {
+						String output = "";
+			 try
+			 {      System.out.println("went to zone");
+				 	Connection con = connect();
+				 	if (con == null)
+			 {
+				 		return "Error while connecting to the database for reading."; }
+				 	// Prepare the html table to be displayed
+				 	output = "<html><link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css\">"
+				 			+ "<table border='1'><tr>"
+				 			+"<th class=\"col-sm-4\" style=\"background-color:lavender;\">zone</th>"
+				 			+"<th class=\"col-sm-4\" style=\"background-color:lavender;\">zone</th></tr>";
+
+				 		String query = "select * from zone";
+				 		Statement stmt = con.createStatement();
+				 		ResultSet rs = stmt.executeQuery(query);
+				 		// iterate through the rows in the result set
+				 			while (rs.next())
+			 {
+				 
+				 	String zone = rs.getString("zone");
+				 	String ch = rs.getString("zone_character");
+				 	
+						 // Add into the html table
+						 output += "<tr><td class=\"col-sm-4\" style=\"background-color:lavender;\">" + zone + "</td>";
+						 output += "<td class=\"col-sm-4\" style=\"background-color:lavender;\">" + ch + "</td>";
 						 output += "</tr>";
 			 }
 				 			con.close();
@@ -161,6 +203,52 @@ public class Schedule {
 			 {
 			 output = "Error while deleting the item.";
 			 System.err.println(e.getMessage());
+			 }
+			 return output;
+			 }
+			
+public String read(String accNo)
+			 {          System.out.println("hello");
+						
+						String output = "";
+			 try
+			 {
+				 	Connection con = connect();
+				 	if (con == null)
+			 {
+				 		return "Error while connecting to the database for reading.";
+				 		
+			 }
+				 	// Prepare the html table to be displayed
+				 	output ="<table border='1'><tr>";
+
+				 		String query = "select * from consumerinfo where accountNo=?";
+				 				
+				 		PreparedStatement preparedStmt = con.prepareStatement(query);
+				 		// binding values
+				 	    preparedStmt.setString(1,accNo);
+				 		// execute the statement
+				 	    preparedStmt.execute();
+				 	    ResultSet rs = preparedStmt.executeQuery(query);
+				 	    String loc = rs.getString("location");
+				 		
+					 		// iterate through the rows in the result set
+				
+						 // Add into the html table
+						 output += "<td>" + loc + "</td>";
+					
+						 // buttons
+						 output += "</tr>";
+			
+				 			con.close();
+				 			// Complete the html table
+				 			output += "</table>";
+}
+				 
+			 catch(Exception e)
+			 {
+				 output = "Error while reading the items.";
+				 System.err.println(e.getMessage());
 			 }
 			 return output;
 			 }
