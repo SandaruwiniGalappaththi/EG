@@ -31,7 +31,11 @@ public class BillAutomation {
 		try { 
 			Connection con = connect(); 
 			if (con == null) {
-				return "Error while connecting to the database for reading."; 
+				return "<html><head><title>Per Unit Page</title>"
+						+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+						+ "</head><body>"
+						+ "<div class='card'><h4 class='text-center'>Error while connecting to the database for reading.</h4></div>"
+						+ "</body></html>";
 			} 
 				
 			// Prepare the HTML table to be displayed
@@ -98,7 +102,11 @@ public class BillAutomation {
 		try { 
 			Connection con = connect(); 
 			if (con == null) {
-				return "Error while connecting to the database for reading."; 
+				return "<html><head><title>Per Unit Page</title>"
+						+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+						+ "</head><body>"
+						+ "<div class='card'><h4 class='text-center'>Error while connecting to the database for reading.</h4></div>"
+						+ "</body></html>";
 			} 
 				
 			// Prepare the HTML table to be displayed
@@ -165,7 +173,22 @@ public class BillAutomation {
 		try { 
 			Connection con = connect(); 
 			if (con == null) {
-				return "Error while connecting to the database for inserting.";
+				return "<html><head><title>Per Unit Page</title>"
+						+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+						+ "</head><body>"
+						+ "<div class='card'><h4 class='text-center'>Error while connecting to the database for inserting.</h4></div>"
+						+ "</body></html>";
+			}
+			
+			double tot = Double.parseDouble(KWH) + Double.parseDouble(Fixed) + Double.parseDouble(Fuel) + Double.parseDouble(Rebate) + Double.parseDouble(Tax);
+			// verify total
+			if (tot != Double.parseDouble(Total)) {
+				output = "<html><head><title>Per Unit Page</title>"
+						+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+						+ "</head><body>"
+						+ "<div class='card'><h4 class='text-center'>Total Mismatch</h4></div>"
+						+ "</body></html>";
+				return output;
 			}
 			// create a prepared statement
 			String query = "insert into perunit(type, kwh, fixed, fuel, rebate, tax, total)" + " values(?, ?, ?, ?, ?, ?, ?)"; 
@@ -206,8 +229,23 @@ public class BillAutomation {
 		try { 
 			Connection con = connect(); 
 			if (con == null) {
-				return "Error while connecting to the database for updating."; 
+				return "<html><head><title>Per Unit Page</title>"
+						+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+						+ "</head><body>"
+						+ "<div class='card'><h4 class='text-center'>Error while connecting to the database for updating.</h4></div>"
+						+ "</body></html>";
 			} 
+			
+			double tot = Double.parseDouble(KWH) + Double.parseDouble(Fixed) + Double.parseDouble(Fuel) + Double.parseDouble(Rebate) + Double.parseDouble(Tax);
+			// verify total
+			if (tot != Double.parseDouble(Total)) {
+				output = "<html><head><title>Per Unit Page</title>"
+						+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+						+ "</head><body>"
+						+ "<div class='card'><h4 class='text-center'>Total Mismatch</h4></div>"
+						+ "</body></html>";
+				return output;
+			}
 			
 			// create a prepared statement
 			String query = "UPDATE perunit SET kwh=?,fixed=?,fuel=?,rebate=?,tax=?,total=? WHERE type=?"; 
@@ -249,7 +287,11 @@ public class BillAutomation {
 		try { 
 			Connection con = connect(); 
 			if (con == null) {
-				return "Error while connecting to the database for deleting."; 
+				return "<html><head><title>Per Unit Page</title>"
+						+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+						+ "</head><body>"
+						+ "<div class='card'><h4 class='text-center'>Error while connecting to the database for deleting.</h4></div>"
+						+ "</body></html>";
 			} 
 			
 			// create a prepared statement
