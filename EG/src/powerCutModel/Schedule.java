@@ -146,7 +146,7 @@ public String readzone()
 			 return output;
 			 }
 			
-			
+		
 			
 			public String updateSchedule(String ID1,String location1,String start1,String end1,String onDate1, String createdDate1)
 			{
@@ -206,10 +206,12 @@ public String readzone()
 			 }
 			 return output;
 			 }
+		
 			
-public String read(String accNo)
+			
+			public String read(String accNo)
 			 {          System.out.println("hello");
-						
+						Boolean existschedule= false,existacc=false;
 						String output = "";
 			 try
 			 {
@@ -221,35 +223,77 @@ public String read(String accNo)
 			 }
 				 	// Prepare the html table to be displayed
 				 	output ="<table border='1'><tr>";
-
-				 		String query = "select * from consumerinfo where accountNo=?";
-				 				
-				 		PreparedStatement preparedStmt = con.prepareStatement(query);
-				 		// binding values
-				 	    preparedStmt.setString(1,accNo);
-				 		// execute the statement
-				 	    preparedStmt.execute();
-				 	    ResultSet rs = preparedStmt.executeQuery(query);
-				 	    String loc = rs.getString("location");
-				 		
-					 		// iterate through the rows in the result set
+				 	System.out.println("yes");
+				 	
+							 
+		String query = "select * from consumerinfo where accountNo='"+accNo+"'"; 
+		Statement stmt = con.createStatement(); 
+		ResultSet rs = stmt.executeQuery(query); 
+		System.out.println("yes");
+		System.out.println(accNo);
+		System.out.println(accNo.getClass());
+		System.out.println(rs.next());
+					while(rs.next()) {
+						String location2 = rs.getString("location"); 
+						System.out.println("nooooooooo");
+						System.out.println("yes");
+						existacc= true;
+						
+						String query1 = "select * from schedules where location='" + location2 + "'"; 
+						Statement stmt1 = con.createStatement(); 
+						ResultSet rs1 = stmt1.executeQuery(query1); 
 				
-						 // Add into the html table
-						 output += "<td>" + loc + "</td>";
-					
-						 // buttons
+						
+						// iterate through the rows in the result set
+						while(rs1.next()) {
+							existschedule= true;
+							String location = rs1.getString("location");
+							String start = rs1.getString("start");
+							String end = rs1.getString("end"); 
+							String onDate = rs1.getString("onDate");	
+							
+						
+						String query2 = "select * from zone where zone='" + location2 + "'"; 
+						Statement stmt2 = con.createStatement(); 
+						ResultSet rs2 = stmt2.executeQuery(query2); 
+						
+						// iterate through the rows in the result set
+						while(rs2.next()) {
+							String zonecharacter = rs2.getString("zone_character");
+						 output += "<td>" + zonecharacter + "</td>"
+								 +"<td>" + location + "</td>"
+								 +"<td>" + start + "</td>"
+								 +"<td>" + end + "</td>"
+								 +"<td>" + onDate + "</td>";
 						 output += "</tr>";
-			
-				 			con.close();
+						 
+						 
+					}
+					}
+					}
+						con.close();
 				 			// Complete the html table
 				 			output += "</table>";
+				 			if(existacc == false) {
+								return output = "INVALID ACCOUNT NUMBER!!!  PLEASE RECHECK"; 
+							 }	
+				 			if(existschedule == false) {
+								return output = "NO SCHEDULE ADDED YET FOR YOUR AREA!!!"; 
+							 }	
+				 			
+				 		return output;	
 }
 				 
 			 catch(Exception e)
 			 {
 				 output = "Error while reading the items.";
 				 System.err.println(e.getMessage());
+				 return output;
 			 }
-			 return output;
+			 
+			 
+			 
 			 }
+			
+
 }
