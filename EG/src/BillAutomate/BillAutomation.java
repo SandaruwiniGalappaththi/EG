@@ -89,7 +89,11 @@ public class BillAutomation {
 			output += "</table></body></html>"; 
 		} 
 		catch (Exception e) { 
-			output = "Error while reading the items."; 
+			output = "<html><head><title>Per Unit Page</title>"
+					+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+					+ "</head><body>"
+					+ "<div class='card'><h4 class='text-center'>Error while reading.</h4></div>"
+					+ "</body></html>";
 			System.err.println(e.getMessage()); 
 		} 
 		return output; 
