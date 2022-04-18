@@ -11,7 +11,7 @@ import org.jsoup.parser.Parser;
 
 import powerCutModel.Schedule;
 @Path("/zone")
-public class DisplayService {
+public class ZoneService {
 	
 	Schedule schedule1 = new Schedule();
 	/*@GET
