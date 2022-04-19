@@ -48,9 +48,7 @@ public class BillAutomation {
 					+ "<th>Fuel Charges</th>" 
 					+ "<th>Rebate</th>"
 					+ "<th>Tax Amount</th>"
-					+ "<th>Total Amount</th>"
-					+ "<th>Update</th>"
-					+ "<th>Remove</th></tr>"; 
+					+ "<th>Total Amount</th></tr>"; 
 			 
 			String query = "select * from perunit"; 
 			Statement stmt = con.createStatement(); 
@@ -74,13 +72,6 @@ public class BillAutomation {
 				output += "<td>" + Rebate + "</td>"; 
 				output += "<td>" + Tax + "</td>"; 
 				output += "<td>" + Total + "</td>"; 
-				
-				// buttons
-				output += "<td><input name='btnUpdate' type='button' value='Update' class='btn btn-secondary'></td>"
-				+ "<td><form method='post' action='items.jsp'>"
-				+ "<input name='btnRemove' type='submit' value='Remove' class='btn btn-danger'>"
-				+ "<input name='itemID' type='hidden' value='" + billType 
-				+ "'>" + "</form></td></tr>"; 
 			} 
 			
 			con.close(); 
@@ -123,9 +114,7 @@ public class BillAutomation {
 					+ "<th>Fuel Charges</th>" 
 					+ "<th>Rebate</th>"
 					+ "<th>Tax Amount</th>"
-					+ "<th>Total Amount</th>"
-					+ "<th>Update</th>"
-					+ "<th>Remove</th></tr>"; 
+					+ "<th>Total Amount</th></tr>"; 
 			 
 			String query = "select * from perunit where type='" + billtype + "'"; 
 			Statement stmt = con.createStatement(); 
@@ -149,13 +138,6 @@ public class BillAutomation {
 				output += "<td>" + Rebate + "</td>"; 
 				output += "<td>" + Tax + "</td>"; 
 				output += "<td>" + Total + "</td>"; 
-				
-				// buttons
-				output += "<td><input name='btnUpdate' type='button' value='Update' class='btn btn-secondary'></td>"
-				+ "<td><form method='post' action='items.jsp'>"
-				+ "<input name='btnRemove' type='submit' value='Remove' class='btn btn-danger'>"
-				+ "<input name='itemID' type='hidden' value='" + billType 
-				+ "'>" + "</form></td></tr>"; 
 			} 
 			
 			con.close(); 
@@ -227,7 +209,7 @@ public class BillAutomation {
 	} 
 	
 	
-	//Update items
+	//Update Per Unit
 	public String updatePerUnit(String billType, String KWH, String Fixed, String Fuel, String Rebate, String Tax, String Total) { 
 		String output = ""; 
 		try { 
@@ -285,7 +267,7 @@ public class BillAutomation {
 	}
 	
 	
-	//Delete Item
+	//Delete Per Unit
 	public String deletePerUnit(String billType) { 
 		String output = ""; 
 		try { 
