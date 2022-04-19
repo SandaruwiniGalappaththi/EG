@@ -86,6 +86,44 @@ public class Contacts {
 				System.err.println(e.getMessage()); 
 			} 
 			return output; 
+		}		
+			//Delete Per Unit
+			public String deleteContact(String District){ 
+				String output = ""; 
+				try { 
+					Connection con = connect(); 
+					if (con == null) {
+						return "<html><head><title>Per Unit Page</title>"
+								+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+								+ "</head><body>"
+								+ "<div class='card'><h4 class='text-center'>Error while connecting to the database for deleting.</h4></div>"
+								+ "</body></html>";
+					} 
+					
+					// create a prepared statement
+					String query = "delete from contact where District=?"; 
+					PreparedStatement preparedStmt = con.prepareStatement(query);
+					
+					// binding values
+					preparedStmt.setString(1, District);
+					
+					// execute the statement
+					preparedStmt.execute(); 
+					con.close(); 
+					output = "Delete Succesfully";
+						
+				}
+				catch (Exception e) 
+				{ 
+					output = "Error Happen While Deleting";
+						
+					System.err.println(e.getMessage()); 
+				} 
+				return output; 
+			} 
+			
+			
+			
 		} 
 		
 	
@@ -96,4 +134,4 @@ public class Contacts {
 		
 	
 	
-}
+
