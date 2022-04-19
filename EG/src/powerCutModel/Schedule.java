@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 public class Schedule {
 	//A common method to connect to the DB
-			private Connection connect()
+	private Connection connect()
 			 {
 					Connection con = null;
 			 try
@@ -23,7 +23,7 @@ public class Schedule {
 			    	return con;
 			 }
 			
-			public String insertschedule(String location1, String start1, String end1, String onDate1, String createdDate1)
+	public String insertschedule(String location1, String start1, String end1, String onDate1, String createdDate1)
 			 {
 					String output = "";
 			 try
@@ -56,7 +56,7 @@ public class Schedule {
 			 }
   
 			
-			public String readSchedule()
+	public String readSchedule()
 			 {           System.out.println("yju7");
 						String output = "";
 			 try
@@ -103,7 +103,7 @@ public class Schedule {
 			 }
 			 return output;
 			 }
-public String readzone()
+    public String readzone()
 			 {
 						String output = "";
 			 try
@@ -148,7 +148,7 @@ public String readzone()
 			
 		
 			
-			public String updateSchedule(String ID1,String location1,String start1,String end1,String onDate1, String createdDate1)
+	public String updateSchedule(String ID1,String location1,String start1,String end1,String onDate1, String createdDate1)
 			{
 				 String output = "";
 				 try
