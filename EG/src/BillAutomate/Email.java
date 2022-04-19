@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.Properties;
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -58,16 +59,28 @@ public class Email {
 		
 		Transport.send(message);
 	}
-	
+
 	
 	// preparing email message
 	private static Message prepareMessage(Session session, String myAccountEmail, String recepient, String name, String amount) {		
 		try {
+			// access current date
+			LocalDate currentdate = LocalDate.now();
+			
+			Integer year = currentdate.getYear();
+			Month month = currentdate.getMonth(); 
+			
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(myAccountEmail));
 			message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
 			message.setSubject("Electricity Bill");
-			message.setText("Hello " + name + "\nYour bill amount is Rs." + amount);
+			message.setContent("<center><h2>Hello " + name 
+					+ "</h2><h4>Your bill amount is Rs." + amount 
+					+ "</h4><h4>for " + month + " " + year
+					+ "</h4><h3 style='color:#F6B600;'>Pay in here"
+					+ "</h3><br><a href='www.google.com'>"
+					+ "<button style='color:white; background-color:gray; padding:10px; border-radius:7px;'>Pay Now"
+					+ "</button class='btn btn-primary'></a></center>", "text/html");
 			return message;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -88,8 +101,7 @@ public class Email {
 						+ "<div class='card'><h4 class='text-center'>Error while connecting to the database for reading.</h4></div>"
 						+ "</body></html>";
 			} 
-				
-			 
+			
 			String query = "select * from user"; 
 			Statement stmt = con.createStatement(); 
 			ResultSet rs = stmt.executeQuery(query); 
@@ -100,6 +112,64 @@ public class Email {
 				String Name = rs.getString("name"); 
 				String Email = rs.getString("email"); 
 				
+				// access current date
+				LocalDate currentdate = LocalDate.now();
+				
+				Integer Year = currentdate.getYear();
+				Integer Month = currentdate.getMonthValue();
+				String currentYear = Year.toString();
+				String currentMonth = Month.toString();
+				
+				// calculate bill
+				String amount = calcUnits(currentYear, currentMonth, AccNo);
+				
+				// Send into the sendMail()
+				sendMail(Email, Name, amount);				
+			} 
+			
+			con.close(); 
+			
+			// Complete the HTML table
+			output = "<html><head><title>Per Unit Page</title>"
+					+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+					+ "</head><body>"
+					+ "<div class='card'><h4 class='text-center'>Mails Sent Successfully.</h4></div>"
+					+ "</body></html>"; 
+		} 
+		catch (Exception e) { 
+			output = "<html><head><title>Per Unit Page</title>"
+					+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+					+ "</head><body>"
+					+ "<div class='card'><h4 class='text-center'>Error while reading.</h4></div>"
+					+ "</body></html>"; 
+			System.err.println(e.getMessage()); 
+		} 
+		return output; 
+	}
+
+	
+	// send email to a single person
+	public String sendEmail(String accountNo) {
+		String output = ""; 
+		try { 
+			Connection con = connect(); 
+			if (con == null) {
+				return "<html><head><title>Per Unit Page</title>"
+						+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+						+ "</head><body>"
+						+ "<div class='card'><h4 class='text-center'>Error while connecting to the database for reading.</h4></div>"
+						+ "</body></html>";
+			} 
+			
+			String query = "select * from user where accno='" + accountNo + "'"; 
+			Statement stmt = con.createStatement(); 
+			ResultSet rs = stmt.executeQuery(query); 
+			
+			// iterate through the rows in the result set
+			while (rs.next()) {  
+				String AccNo = rs.getString("accno"); 
+				String Name = rs.getString("name"); 
+				String Email = rs.getString("email"); 
 				
 				// access current date
 				LocalDate currentdate = LocalDate.now();
