@@ -1,5 +1,7 @@
 package Login;
 
+//package com.jersey.bean;
+
 public class UserBean {
 
 private String name, email,password,mobile;

@@ -1,9 +1,11 @@
 package com.jersey.loginUser;
 
 
+
 import java.io.IOException;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -13,16 +15,18 @@ import javax.ws.rs.core.MediaType;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
-
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.parser.Parser;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.jersey.bean.ChangePasswordBean;
-import com.jersey.bean.ForgotPasswordBean;
-import com.jersey.bean.LoginBean;
-import com.jersey.bean.UserBean;
-import com.jersey.bean.UserOtpVerificationBean;
+import Login.ChangePasswordBean;
+import Login.ForgotPasswordBean;
+import Login.LoginBean;
+import Login.UserBean;
+import Login.UserOtpVerificationBean;
 import com.jersey.dao.ChangePasswordDao;
 import com.jersey.dao.ForgotPasswordDao;
 import com.jersey.dao.LoginDao;
@@ -30,7 +34,8 @@ import com.jersey.dao.UserDao;
 import com.jersey.dao.UserOtpVerificationDao;
 
 import com.jersey.dao.UpdateUser;
- 
+import com.jersey.dao.UserDelete;
+
 
 @Path("/user")
 public class UserServices 
@@ -62,7 +67,7 @@ public class UserServices
     	
     	ObjectMapper mapper = new ObjectMapper();
     	UserBean userbean = mapper.readValue(userdata, UserBean.class);
-    //	str = UserDao.registerDao(userbean);
+    	str = UserDao.registerDao(userbean);
     	if(str.equals("already exist"))
     	{
     		return "already exist....!!!";
@@ -94,15 +99,15 @@ public class UserServices
     		ObjectMapper objectMapper = new ObjectMapper();
     		LoginBean loginBean = objectMapper.readValue(userdata, LoginBean.class);
     	
-  //  String str = LoginDao.login(loginBean);
+    String str = LoginDao.login(loginBean);
     
-   // 	if(str.equals("fail")) 
+    	if(str.equals("fail")) 
     		
     		
     	{
     		return "Username and Password Incorrect ...!!!";
     	}
-   	else
+    	else
     	{
     		return str;
     	} 
@@ -121,7 +126,7 @@ public class UserServices
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-	public String optUser(String userdata) throws JsonParseException, JsonMappingException, IOException
+	public String otpUser(String userdata) throws JsonParseException, JsonMappingException, IOException
     {
     	try {
     		
@@ -237,6 +242,23 @@ public class UserServices
     }
     
     
+    @DELETE
+    @Path("/deleteUser") 
+    @Consumes(MediaType.APPLICATION_XML) 
+    @Produces(MediaType.TEXT_PLAIN) 
+    public String DeleteUser(String userdata) 
+    { 
+    //Convert the input string to an XML document
+     Document doc = Jsoup.parse(userdata, "", Parser.xmlParser()); 
+     
+     UserDelete deletU =new UserDelete();
+     
+    //Read the value from the element <itemID>
+     String otp = doc.select("otp").text(); 
+     String output = deletU.deleteUser(otp); 
+    return output; 
+    }
     
     
-} 
+    
+}
