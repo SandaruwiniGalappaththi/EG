@@ -101,6 +101,8 @@ public class PowerCutMail {
 				String onDate = rs.getString("onDate");
 				//place = location;
 				//output +=location;
+			
+				
 				
 				
 				String query1 = "select * from consumerinfo where location='"+location+"'"; 
