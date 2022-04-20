@@ -387,4 +387,47 @@ public class Email {
 			} 
 			return output; 
 		}
+
+
+	// insert bill
+	public String insertBill(String year, String month, String reading, String accno) { 
+		String output = ""; 
+		try { 
+			Connection con = connect(); 
+			if (con == null) {
+				return "<html><head><title>Per Unit Page</title>"
+						+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+						+ "</head><body>"
+						+ "<div class='card'><h4 class='text-center'>Error while connecting to the database for inserting.</h4></div>"
+						+ "</body></html>";
+			}
+			
+			// create a prepared statement
+			String query = "insert into calcbill(year, month, reading, accno)" + " values(?, ?, ?, ?)"; 
+			PreparedStatement preparedStmt = con.prepareStatement(query); 
+			// binding values
+			preparedStmt.setString(1, year); 
+			preparedStmt.setString(2, month); 
+			preparedStmt.setString(3, reading); 
+			preparedStmt.setString(4, accno); 
+			
+			// execute the statement
+			preparedStmt.execute(); 
+			con.close(); 
+			output = "<html><head><title>Per Unit Page</title>"
+					+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+					+ "</head><body>"
+					+ "<div class='card'><h4 class='text-center'>Inserted successfully</h4></div>"
+					+ "</body></html>"; 
+		} 
+		catch (Exception e) { 
+			output = "<html><head><title>Per Unit Page</title>"
+					+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+					+ "</head><body>"
+					+ "<div class='card'><h4 class='text-center'>Error while inserting</h4></div>"
+					+ "</body></html>"; 
+			System.err.println(e.getMessage()); 
+		} 
+		return output; 
+	} 
 }
