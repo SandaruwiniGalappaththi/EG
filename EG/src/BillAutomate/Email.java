@@ -20,6 +20,8 @@ import javax.mail.internet.MimeMessage;
 public class Email {
 	BillAutomation billautomation = new BillAutomation();
 	
+	
+	//Database Connection
 	private Connection connect() { 
 		Connection con = null; 
 		try { 
