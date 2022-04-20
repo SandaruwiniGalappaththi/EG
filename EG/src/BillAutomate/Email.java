@@ -286,6 +286,7 @@ public class Email {
 				
 			rs2.next();
 			String type = rs2.getString("type");
+			
 			// iterate through the rows in the result set
 			while (rs.next()) { 
 				int isres = rs.getInt("isres");
@@ -296,7 +297,7 @@ public class Email {
 				
 				
 				if(type.equals("Residential") && (isres == 1)) {
-					perunit = Double.parseDouble(billautomation.readPerUnitBySearch("Residential"));
+					perunit = Double.parseDouble(billautomation.perUnit("Residential"));
 					if(units <= 20) {
 						amount = basic + units * perunit;
 					}else if(units <= 50) {
@@ -306,9 +307,10 @@ public class Email {
 					}else {
 						amount = basic + 30 * perunit + (30 * perunit * ((twentytofifty + 100)/100.0)) + (40 * perunit * ((fiftytoninty + 100)/100.0) + ((units-90) * perunit * ((nintyabove + 100)/100.0)));
 					}
-					System.out.println(amount);
+					output = amount.toString();
+					return output;
 				}else if(type.equals("Commercial") && (isres == 0)) {
-					perunit = Double.parseDouble(billautomation.readPerUnitBySearch("Commercial"));
+					perunit = Double.parseDouble(billautomation.perUnit("Commercial"));
 					if(units <= 20) {
 						amount = basic + units * perunit;
 					}else if(units <= 50) {
@@ -318,14 +320,13 @@ public class Email {
 					}else {
 						amount = basic + 30 * perunit + (30 * perunit * ((twentytofifty + 100)/100.0)) + (40 * perunit * ((fiftytoninty + 100)/100.0) + ((units-90) * perunit * ((nintyabove + 100)/100.0)));
 					}
-					System.out.println(amount);
+					output = amount.toString();
+					return output;
 				}else {
 					continue;
 				}
-				
-				output = amount.toString();
 			}
-					
+						
 			con.close(); 
 		} 
 		catch (Exception e) { 
@@ -338,12 +339,4 @@ public class Email {
 		} 
 		return output;
 	}
-	
-	
-	// bill calculation
-	/*public double billCalculation(int isres, double basic, double twentytofifty, double fiftytoninty, double nintyabove, String type) {
-		double amount = 0;
-		
-		return amount;
-	}*/
 }

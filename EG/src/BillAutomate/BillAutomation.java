@@ -307,4 +307,40 @@ public class BillAutomation {
 		} 
 		return output; 
 	} 
+
+	
+	// return per unit value for a given type
+	public String perUnit(String billtype) {
+		String output = ""; 
+		try { 
+			Connection con = connect(); 
+			if (con == null) {
+				return "<html><head><title>Per Unit Page</title>"
+						+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+						+ "</head><body>"
+						+ "<div class='card'><h4 class='text-center'>Error while connecting to the database for reading.</h4></div>"
+						+ "</body></html>";
+			} 
+			
+			 
+			String query = "select * from perunit where type='" + billtype + "'"; 
+			Statement stmt = con.createStatement(); 
+			ResultSet rs = stmt.executeQuery(query); 
+			
+			// iterate through the rows in the result set
+			while (rs.next()) {  
+				String Total = Double.toString(rs.getDouble("total")); 
+				
+				return Total;
+			} 
+			
+			con.close(); 
+			
+		} 
+		catch (Exception e) { 
+			output = "Error while reading the items."; 
+			System.err.println(e.getMessage()); 
+		} 
+		return output; 
+	}
 }
