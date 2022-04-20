@@ -34,7 +34,7 @@ public class ContactServices {
 	}
 	
 	
-<<<<<<< HEAD
+
 	 @DELETE 
 	 @Path("/")  
 	 @Consumes(MediaType.APPLICATION_XML)  
@@ -65,28 +65,7 @@ public class ContactServices {
 			String output = contact.insertContact(District,Description,Complain,CustomerService,NewConnections,Emergency,Address); 
 			return output; 
 		}
-		
-=======
-	@DELETE
-	@Path("/") 
-	@Consumes(MediaType.APPLICATION_XML) 
-	@Produces(MediaType.TEXT_PLAIN) 
-	public String deleteNo(String itemData) { 
-		//Convert the input string to an XML document
-		Document doc = Jsoup.parse(itemData, "", Parser.xmlParser()); 
-		 
-		//Read the value from the element <billType>
-		String District = doc.select("District").text(); 
-		String output = contact.deleteContact(District); 
-		return output; 
-	}
-	
 
-	
->>>>>>> branch 'master' of https://github.com/SandaruwiniGalappaththi/EG.git
-
-
-	
 }
 	
 
