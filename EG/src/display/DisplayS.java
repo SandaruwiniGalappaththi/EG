@@ -50,7 +50,7 @@ public String readzone()
 		//Convert the input string to an XML document
 		try {
 			Document doc = Jsoup.parse(itemData, "", Parser.xmlParser()); 
-			//Read the value from the element <accountNo>
+			//Read the value from the element <zone>
 			String zone = doc.select("zone").text(); 
 			String output = d.readByZone(zone); 
 			return output;
