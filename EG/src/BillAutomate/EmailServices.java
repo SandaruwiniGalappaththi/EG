@@ -1,7 +1,9 @@
 package BillAutomate;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -54,6 +56,19 @@ public class EmailServices {
 		String fifty = itemObject.get("fifty").getAsString(); 
 		String ninty = itemObject.get("ninty").getAsString(); 
 		String output = email.updateRates(isres, basic, twenty, fifty, ninty); 
+		return output; 
+	}
+	
+	
+	@POST
+	@Path("/") 
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
+	@Produces(MediaType.TEXT_PLAIN) 
+	public String insertBill(@FormParam("Year") String year, 
+							 @FormParam("Month") String month, 
+							 @FormParam("Reading") String reading,
+							 @FormParam("Account Number") String accno) { 
+		String output = email.insertBill(year, month, reading, accno); 
 		return output; 
 	}
 }
