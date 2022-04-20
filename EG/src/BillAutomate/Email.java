@@ -17,6 +17,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class Email {
+	BillAutomation billautomation = new BillAutomation();
+	
 	private Connection connect() { 
 		Connection con = null; 
 		try { 
@@ -241,7 +243,7 @@ public class Email {
 					String Reading2 = rs2.getString("reading");
 					
 					// send to calcBill(units)
-					output = calcBill(Integer.parseInt(Reading)-Integer.parseInt(Reading2));
+					output = calcBill(Integer.parseInt(Reading)-Integer.parseInt(Reading2), accNo);
 					return output;
 				}				
 			} 			
@@ -260,10 +262,88 @@ public class Email {
 	
 	
 	// calculate bill
-	public String calcBill(Integer units) {		
+	public String calcBill(Integer units, String accNo) {	
+		String output = "";
 		Double amount = 0.0;
-		double basic = 500.00;
-		amount = basic + units*9.0;
-		return amount.toString();
+		double perunit = 0;
+		try { 
+			Connection con = connect(); 
+			if (con == null) {
+				return "<html><head><title>Per Unit Page</title>"
+						+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+						+ "</head><body>"
+						+ "<div class='card'><h4 class='text-center'>Error while connecting to the database for reading.</h4></div>"
+						+ "</body></html>";
+			} 
+				
+			String query = "select * from rate"; 	
+			Statement stmt = con.createStatement(); 
+			ResultSet rs = stmt.executeQuery(query); 
+			
+			String query2 = "select type from user where accno='" +accNo+ "'"; 
+			Statement stmt2 = con.createStatement(); 
+			ResultSet rs2 = stmt2.executeQuery(query2);
+				
+			rs2.next();
+			String type = rs2.getString("type");
+			// iterate through the rows in the result set
+			while (rs.next()) { 
+				int isres = rs.getInt("isres");
+				double basic = rs.getDouble("basic");
+				double twentytofifty = rs.getDouble("twentytofifty");
+				double fiftytoninty = rs.getDouble("fiftytoninty");
+				double nintyabove = rs.getDouble("nintyabove");
+				
+				
+				if(type.equals("Residential") && (isres == 1)) {
+					perunit = Double.parseDouble(billautomation.readPerUnitBySearch("Residential"));
+					if(units <= 20) {
+						amount = basic + units * perunit;
+					}else if(units <= 50) {
+						amount = basic + 20 * perunit + ((units-20) * perunit * ((twentytofifty + 100)/100.0));
+					}else if(units <= 90) {
+						amount = basic + 30 * perunit + (30 * perunit * ((twentytofifty + 100)/100.0)) + ((units-50) * perunit * ((fiftytoninty + 100)/100.0));
+					}else {
+						amount = basic + 30 * perunit + (30 * perunit * ((twentytofifty + 100)/100.0)) + (40 * perunit * ((fiftytoninty + 100)/100.0) + ((units-90) * perunit * ((nintyabove + 100)/100.0)));
+					}
+					System.out.println(amount);
+				}else if(type.equals("Commercial") && (isres == 0)) {
+					perunit = Double.parseDouble(billautomation.readPerUnitBySearch("Commercial"));
+					if(units <= 20) {
+						amount = basic + units * perunit;
+					}else if(units <= 50) {
+						amount = basic + 20 * perunit + ((units-20) * perunit * ((twentytofifty + 100)/100.0));
+					}else if(units <= 90) {
+						amount = basic + 30 * perunit + (30 * perunit * ((twentytofifty + 100)/100.0)) + ((units-50) * perunit * ((fiftytoninty + 100)/100.0));
+					}else {
+						amount = basic + 30 * perunit + (30 * perunit * ((twentytofifty + 100)/100.0)) + (40 * perunit * ((fiftytoninty + 100)/100.0) + ((units-90) * perunit * ((nintyabove + 100)/100.0)));
+					}
+					System.out.println(amount);
+				}else {
+					continue;
+				}
+				
+				output = amount.toString();
+			}
+					
+			con.close(); 
+		} 
+		catch (Exception e) { 
+			output = "<html><head><title>Per Unit Page</title>"
+					+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+					+ "</head><body>"
+					+ "<div class='card'><h4 class='text-center'>Error while reading.</h4></div>"
+					+ "</body></html>"; 
+			System.err.println(e.getMessage()); 
+		} 
+		return output;
 	}
+	
+	
+	// bill calculation
+	/*public double billCalculation(int isres, double basic, double twentytofifty, double fiftytoninty, double nintyabove, String type) {
+		double amount = 0;
+		
+		return amount;
+	}*/
 }
