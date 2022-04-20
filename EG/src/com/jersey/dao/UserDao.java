@@ -28,7 +28,6 @@ public static String registerDao(UserBean rs)
 		PreparedStatement ps1=con.prepareStatement("select email from user where email=?");
 		ps1.setString(1, rs.getEmail());
 		ResultSet rrs=ps1.executeQuery();
-		System.out.println(rrs.next());
 		if(rrs.next())
 		{
 			return "already exist";

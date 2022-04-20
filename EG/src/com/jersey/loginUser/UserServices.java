@@ -1,7 +1,6 @@
 package com.jersey.loginUser;
 
 
-
 import java.io.IOException;
 
 import javax.ws.rs.Consumes;
@@ -15,23 +14,30 @@ import javax.ws.rs.core.MediaType;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.parser.Parser;
+
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import Login.ChangePasswordBean;
 import Login.ForgotPasswordBean;
-import Login.LoginBean;
 import Login.UserBean;
+import Login.LoginBean;
 import Login.UserOtpVerificationBean;
 import com.jersey.dao.ChangePasswordDao;
 import com.jersey.dao.ForgotPasswordDao;
 import com.jersey.dao.LoginDao;
+import com.jersey.dao.RestPassword;
+import com.jersey.dao.SearchUser;
 import com.jersey.dao.UserDao;
 import com.jersey.dao.UserOtpVerificationDao;
+import Login.RestPasswordBean;
+import Login.SearchUserBean;
 
 import com.jersey.dao.UpdateUser;
 import com.jersey.dao.UserDelete;
@@ -126,7 +132,7 @@ public class UserServices
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-	public String otpUser(String userdata) throws JsonParseException, JsonMappingException, IOException
+	public String optUser(String userdata) throws JsonParseException, JsonMappingException, IOException
     {
     	try {
     		
@@ -170,7 +176,7 @@ public class UserServices
     		//boolean str1=ChangePasswordDao.changePasswordUser(changePasswordBean);
     		//if(str==true && str1==false)
     			
-    	     if(ChangePasswordDao.checkEmailPassword(changePasswordBean)==true || ChangePasswordDao.changePasswordUser(changePasswordBean))
+    	     if(ChangePasswordDao.checkEmailPassword(changePasswordBean) && ChangePasswordDao.changePasswordUser(changePasswordBean))
     	      {
     	    	  return "change password successfully...!!!";
     	      }
@@ -187,7 +193,7 @@ public class UserServices
     
     }
     
- /*   @Path("/forgotpassword")
+    @Path("/forgotpassword")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -195,8 +201,8 @@ public class UserServices
     {
     
     		
-    		Object obj = JSONValue.parse(userdata).getAsjsonObject;
-    		JsonObject jsonObject=(JSONObject)obj;
+    		Object obj = JSONValue.parse(userdata);
+    		JSONObject jsonObject=(JSONObject)obj;
     		
     		ForgotPasswordBean forgotPasswordBean=new ForgotPasswordBean();
     		forgotPasswordBean.setEmail((String)jsonObject.get("email"));
@@ -214,9 +220,9 @@ public class UserServices
     	    	return "otp send failed";
     	    }
     	      
-    	return "fail";
     	
-        } */
+    	
+        } 
     
     
     
@@ -260,5 +266,101 @@ public class UserServices
     }
     
     
+    @Path("/resetpassword")
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+	public String restpasswordUser(String userdata) throws JsonParseException, JsonMappingException, IOException
+    {
+    	try {
+    		
+    		ObjectMapper objectMapper = new ObjectMapper();
+    		RestPasswordBean restPasswordBean=objectMapper.readValue(userdata,RestPasswordBean.class);
+    		
+    		//boolean str=ChangePasswordDao.checkEmailPassword(changePasswordBean);
+    		//boolean str1=ChangePasswordDao.changePasswordUser(changePasswordBean);
+    		//if(str==true && str1==false)
+    			
+    	     if(RestPassword.checkEmail(restPasswordBean) && RestPassword.restPasswordUser(restPasswordBean))
+    	      {
+    	    	  return "change password successfully...!!!";
+    	      }
+    	      else
+    	      {
+    	    	  return "Change password fail";
+    	      }
+    	      
+    	} catch (Exception e) {
+    		//TODO:handle exception
+    		e.printStackTrace();
+    	}
+        return "fail";
+    
+    }
+    
+    
+    @Path("/searchuser")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+	public String serachUser(String userdata) throws JsonParseException, JsonMappingException, IOException
+    {
+    	try {
+    		ObjectMapper objectMapper = new ObjectMapper();
+    		SearchUserBean searchUserBean = objectMapper.readValue(userdata, SearchUserBean.class);
+    	
+    String str = SearchUser.search(searchUserBean);
+    
+    	if(str.equals("fail")) 
+    		
+    		
+    	{
+    		return "No any User holding this mobile number ...!!!";
+    	}
+    	else
+    	{
+    		return str;
+    	} 
+   
+    
+    	} catch (Exception e) {
+    		//TODO: handle exception
+    		e.printStackTrace();
+    	}
+    	return "fail";
+	
+	}
+    
+    @Path("/adminlogin")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+	public String loginAdmin(String userdata) throws JsonParseException, JsonMappingException, IOException
+    {
+    	try {
+    		ObjectMapper objectMapper = new ObjectMapper();
+    		LoginBean loginBean = objectMapper.readValue(userdata, LoginBean.class);
+    	
+    String str = LoginDao.login(loginBean);
+    
+    	if(str.equals("fail")) 
+    		
+    		
+    	{
+    		return "Username and Password Incorrect ...!!!";
+    	}
+    	else
+    	{
+    		return str;
+    	} 
+   
+    
+    	} catch (Exception e) {
+    		//TODO: handle exception
+    		e.printStackTrace();
+    	}
+    	return "fail";
+	
+	}
     
 }
