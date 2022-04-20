@@ -19,8 +19,16 @@ public class LoginDao {
 	public static String login(LoginBean loginBean) 
 	{
 		Connection con =DbConnectionProvider.getConnection();
+		String output= "";
 		
 		try {
+			
+			
+			output = "<table border='1'><tr><th>Name</th>"
+					+ "<th>Email</th>" +
+					 "<th>Password</th>" + 
+					 "<th>Mobile</th>" +
+					 "<th>Update Account</th><th>Remove Account</th></tr>";
 			
 			PreparedStatement ps=con.prepareStatement("select * from user where email=? and password=?");
 			ps.setString(1,loginBean.getEmail());
@@ -39,33 +47,59 @@ public class LoginDao {
 				JSONArray jsonArray = new JSONArray();
 				jsonArray.put(jsonObject2);
 				
+				  
+				 String name = rs.getString("name"); 
+				 String email = rs.getString("email"); 
+				 String password = rs.getString("password") ; 
+				 String mobile = rs.getString("mobile");
+				 String otp = Integer.toString(rs.getInt("otp"));
+				
+				
+				// Add into the html table
+				 output += "<tr><td>" + name + "</td>"; 
+				 output += "<td>" + email + "</td>"; 
+				 output += "<td>" + password + "</td>"; 
+				 output += "<td>" + mobile + "</td>"; 
+				// buttons
+				 output += "<td><input name='btnUpdate' type='button' value='Update' class='btn btn-secondary'></td>"
+				// + "<td><form method='post' action=''>"
+				 + "<td><input name='btnRemove' type='button' value='Remove' class='btn btn-secondary'></td>"
+				 + "<input name='otp' type='hidden' value='" + otp + "'>" + "</form></td></tr>";
+				
+				
 				PreparedStatement ps1 = con.prepareStatement("update user set status=? where email=?");
-				ps1.setString(1,"Logged"); 
+			
+				ps1.setString(1,"Logged");
 				ps1.setString(2, loginBean.getEmail());
 				int i =ps1.executeUpdate();
 				if(i>0)
 				{
-					return ""+jsonArray;
+					//return ""+jsonArray
+					return ""+output + "</table>";
+					
 				}
 				
+				 
 				
-			}
+		 }
 			else 
 			{
 				return "fail";
 			}
 			
-			
-			
+
 		} catch (Exception e ) {
 			//TODO: handle exception
 			e.printStackTrace();
 		}
 		
-		return "fail";
+		return "fail"; 
+	
 		
 	}
+	
+	
 
 		
-	}
+}
 	

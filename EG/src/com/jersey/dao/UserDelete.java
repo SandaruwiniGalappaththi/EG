@@ -22,7 +22,8 @@ public class UserDelete {
 	 String query = "delete from user where otp=?"; 
 	 PreparedStatement preparedStmt = con.prepareStatement(query); 
 	 // binding values
-	 preparedStmt.setInt(1, Integer.parseInt(otp)); 
+	 
+	 preparedStmt.setInt(1, Integer.parseInt(otp));                 
 	 // execute the statement
 	 preparedStmt.execute(); 
 	 con.close(); 
