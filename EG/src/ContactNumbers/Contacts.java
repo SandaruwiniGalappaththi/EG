@@ -86,6 +86,98 @@ public class Contacts {
 				System.err.println(e.getMessage()); 
 			} 
 			return output; 
+			
+		}
+			
+			
+		 //Delete Per Unit 
+				   public String deleteContact(String District){  
+				    String output = "";  
+				    try {  
+				     Connection con = connect();  
+				     if (con == null) { 
+				      return "<html><head><title>Per Unit Page</title>" 
+				        + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>" 
+				        + "</head><body>" 
+				        + "<div class='card'><h4 class='text-center'><marquee>Error while connecting to the database for deleting.</marquee></h4></div>" 
+				        + "</body></html>"; 
+				     }  
+				      
+				     // create a prepared statement 
+				     String query = "delete from contact where District=?";  
+				     PreparedStatement preparedStmt = con.prepareStatement(query); 
+				      
+				     // binding
+				     preparedStmt.setString(1, District); 
+				      
+				     // execute the statement 
+				     preparedStmt.execute();  
+				     con.close();  
+				     output = "<html><head><title>Contact Page</br> Deleted Succesfully</title> " ;
+			
+				      
+				    } 
+				    catch (Exception e)  
+				    {  
+				     output = "<html><head><title>Contact Page</title>" 
+				       + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>" 
+				       + "</head><body>" 
+				       + "<div class='card'><h4 class='text-center'><marquee>Error while deleting</marquee></h4></div>" 
+				       + "</body></html>"; 
+				     System.err.println(e.getMessage());  
+				    }  
+				    return output;  
+				   }  
+				    
+				    
+					//Insert Per Unit
+					public String insertContact(String District, String Description, String Complain, String CustomerService, String NewConnections, String Emergency, String Address) { 
+						String output = ""; 
+						try { 
+							Connection con = connect(); 
+							if (con == null) {
+								return "<html><head><title>Contact Page</title>"
+										+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+										+ "</head><body>"
+										+ "<div class='card'><h4 class='text-center'><marquee>Error while connecting to the database for inserting.</marquee></h4></div>"
+										+ "</body></html>";
+							}
+							
+
+							// create a prepared statement
+							String query = "insert into contact(District,Description,Complain,CustomerService,NewConnections,Emergency,Address )" + " values(?, ?, ?, ?, ?, ?, ?)"; 
+							PreparedStatement preparedStmt = con.prepareStatement(query); 
+							// binding values
+							preparedStmt.setString(1, District); 
+							preparedStmt.setString(2, Description); 
+							preparedStmt.setInt(3, Integer.parseInt(Complain)); 
+							preparedStmt.setInt(4, Integer.parseInt(CustomerService)); 
+							preparedStmt.setInt(5, Integer.parseInt(NewConnections)); 	
+							preparedStmt.setInt(6, Integer.parseInt(Emergency)); 
+							preparedStmt.setString(7, Address); 
+							
+							// execute the statement
+							preparedStmt.execute(); 
+							con.close(); 
+							output = "<html><head><title>Contact Page</title>"
+									+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+									+ "</head><body>"
+									+ "<div class='card'><h4 class='text-center' style=\"color: red;> <marquee>Inserted successfully </marquee></h4></div>"
+									+ "</body></html>"; 
+						} 
+						catch (Exception e) { 
+							output = "<html><head><title>Contact Page</title>"
+									+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+									+ "</head><body>"
+									+ "<div class='card'><h4 class='text-center'><marquee>Error while inserting</marquee></h4></div>"
+									+ "</body></html>"; 
+							System.err.println(e.getMessage()); 
+						} 
+						return output; 
+					} 
+					
+
+			
 		} 
 		
 	
@@ -95,5 +187,4 @@ public class Contacts {
 		
 		
 	
-	
-}
+
