@@ -67,7 +67,7 @@ public class Schedule {
 				 		return "Error while connecting to the database for reading."; }
 				 	// Prepare the html table to be displayed
 				 	output = "<html><link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css\">"
-				 			+ "  <table border='1'><tr><th class=\"col-sm-4\" style=\"background-color:lavender;\">Location</th><th class=\"col-sm-4\" style=\"background-color:lavender;\">Start Time</th>" +
+				 			+ "  <table border='1'><tr><th class=\"col-sm-4\"style=\"background-color:lavender;\">Location</th><th class=\"col-sm-4\"style=\"background-color:lavender;\">Start Time</th>" +
 				 				"<th class=\"col-sm-4\" style=\"background-color:lavender;\">End Time</th><th class=\"col-sm-4\" style=\"background-color:lavender;\">On Date</th>" +
 				 				"</tr>";
 
