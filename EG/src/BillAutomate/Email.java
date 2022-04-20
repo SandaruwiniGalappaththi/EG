@@ -2,6 +2,7 @@ package BillAutomate;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDate;
@@ -339,4 +340,49 @@ public class Email {
 		} 
 		return output;
 	}
+
+
+	//Update Per Unit
+	public String updateRates(String isres, String basic, String twentytofifty, String fiftytoninty, String nintyabove) { 
+			String output = ""; 
+			try { 
+				Connection con = connect(); 
+				if (con == null) {
+					return "<html><head><title>Per Unit Page</title>"
+							+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+							+ "</head><body>"
+							+ "<div class='card'><h4 class='text-center'>Error while connecting to the database for updating.</h4></div>"
+							+ "</body></html>";
+				} 
+				
+				// create a prepared statement
+				String query = "UPDATE rate SET basic=?,twentytofifty=?,fiftytoninty=?,nintyabove=? WHERE isres=?"; 
+				PreparedStatement preparedStmt = con.prepareStatement(query); 
+				 
+				// binding values 
+				preparedStmt.setDouble(1, Double.parseDouble(basic)); 
+				preparedStmt.setDouble(2, Double.parseDouble(twentytofifty)); 
+				preparedStmt.setDouble(3, Double.parseDouble(fiftytoninty)); 
+				preparedStmt.setDouble(4, Double.parseDouble(nintyabove)); 
+				preparedStmt.setInt(5, Integer.parseInt(isres)); 
+				
+				// execute the statement
+				preparedStmt.execute(); 
+				con.close(); 
+				output = "<html><head><title>Per Unit Page</title>"
+						+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+						+ "</head><body>"
+						+ "<div class='card'><h4 class='text-center'>Updated Successfully</h4></div>"
+						+ "</body></html>";
+			} 
+			catch (Exception e) { 
+				output = "<html><head><title>Per Unit Page</title>"
+						+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+						+ "</head><body>"
+						+ "<div class='card'><h4 class='text-center'>Error while updating</h4></div>"
+						+ "</body></html>";
+				System.err.println(e.getMessage()); 
+			} 
+			return output; 
+		}
 }
