@@ -17,7 +17,7 @@ import org.jsoup.parser.Parser;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import BillAutomate.BillAutomation;
+ 
 
 
 
@@ -26,28 +26,43 @@ public class ContactServices {
 	
 	Contacts contact = new Contacts();
 	
-	@GET
-	@Path("/")
-	@Produces(MediaType.TEXT_HTML) 
-	public String getContact() {		
+		@GET
+		@Path("/")
+		@Produces(MediaType.TEXT_HTML) 
+		public String getContact() {		
 		return contact.readContact();	
-	}
+		}
 	
 	
 
-	 @DELETE 
-	 @Path("/")  
-	 @Consumes(MediaType.APPLICATION_XML)  
-	 @Produces(MediaType.TEXT_PLAIN)  
-	 public String deleteNo(String itemData) {  
-	  //Convert the input string to an XML document 
-	  Document doc = Jsoup.parse(itemData, "", Parser.xmlParser());  
+		@GET
+		@Path("/searchcontact")
+		@Produces(MediaType.TEXT_HTML) 
+		public String readContact(String itemData) {		
+			//Convert the input string to an XML document
+			Document doc = Jsoup.parse(itemData, "", Parser.xmlParser()); 
+			//Read the value from the element <billType>
+			String ContactType = doc.select("DistrictCode").text(); 
+			String output = contact.readContact(ContactType); 
+			return output; 	
+		}
+		
+		
+		
+		
+	 	@DELETE 
+	 	@Path("/")  
+	 	@Consumes(MediaType.APPLICATION_XML)  
+	 	@Produces(MediaType.TEXT_PLAIN)  
+	 	public String deleteNo(String itemData) {  
+		//Convert the input string to an XML document 
+		Document doc = Jsoup.parse(itemData, "", Parser.xmlParser());  
 	    
-	  //Read the value from the element <billType> 
-	  String District = doc.select("District").text();  
-	  String output = contact.deleteContact(District);  
-	  return output;  
-	 } 
+	  	//Read the value from the element <billType> 
+	  	String DistrictCode = doc.select("DistrictCode").text();  
+	  	String output = contact.deleteContact(DistrictCode);  
+	  	return output;  
+	  } 
 	
 
 
@@ -55,18 +70,40 @@ public class ContactServices {
 		@Path("/") 
 		@Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
 		@Produces(MediaType.TEXT_PLAIN) 
-		public String insertContact(@FormParam("District") String District, 
+		public String insertContact(@FormParam("DistrictCode") String DistrictCode, 
 								 @FormParam("Description") String Description, 
-								 @FormParam("Complain") String Complain,
-								 @FormParam("CustomerService") String CustomerService, 
-								 @FormParam("NewConnections") String NewConnections, 
-								 @FormParam("Emergency") String Emergency,
+								 @FormParam("ComplainNo") String ComplainNo,
+								 @FormParam("CustomerServiceNo") String CustomerServiceNo, 
+								 @FormParam("NewConnectionsNo") String NewConnectionsNo, 
+								 @FormParam("EmergencyNo") String EmergencyNo,
 								 @FormParam("Address") String Address) { 
-			String output = contact.insertContact(District,Description,Complain,CustomerService,NewConnections,Emergency,Address); 
+			String output = contact.insertContact(DistrictCode,Description,ComplainNo,CustomerServiceNo,NewConnectionsNo,EmergencyNo,Address); 
 			return output; 
 		}
+		
+		@PUT
+		@Path("/") 
+		@Consumes(MediaType.APPLICATION_JSON) 
+		@Produces(MediaType.TEXT_PLAIN) 
+		public String updateItem(String itemData) { 
+			//Convert the input string to a JSON object 
+			JsonObject itemObject = new JsonParser().parse(itemData).getAsJsonObject(); 
+		//Read the values from the JSON object
+		String DistrictCode= itemObject.get("DistrictCode").getAsString(); 
+		String Description= itemObject.get("Description").getAsString(); 
+		String ComplainNo= itemObject.get("ComplainNo").getAsString(); 
+		String CustomerServiceNo= itemObject.get("CustomerServiceNo").getAsString(); 
+		String NewConnectionsNo= itemObject.get("NewConnectionsNo").getAsString(); 
+		String EmergencyNo= itemObject.get("EmergencyNo").getAsString(); 
+		String Address= itemObject.get("Address").getAsString();
+		String output = contact.updateContact(DistrictCode,Description,ComplainNo,CustomerServiceNo,NewConnectionsNo,EmergencyNo,Address); 
+		return output;
+		
+		 }
+	
+	}
 
-}
+
 	
 
 
