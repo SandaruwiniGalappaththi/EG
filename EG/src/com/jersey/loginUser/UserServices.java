@@ -133,7 +133,14 @@ public class UserServices
     	
     String str = LoginDao.login(loginBean);
     
-    	if(str.equals("fail")) 
+    	if(str.equals("Please Verify Your Otp Number.")){
+    		
+    		return "Please Verify Your Otp Number.";
+    	}
+    
+    
+    
+       else if(str.equals("fail")) 
     		
     		
     	{
