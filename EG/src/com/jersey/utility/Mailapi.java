@@ -49,7 +49,8 @@ public class Mailapi {
 			message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));
 			message.setSubject("otp");
 			
-			message.setContent("<h3>otp code:</h3> "+i + "<a href=''><button>"+value+"</button></a>","text/html");
+			message.setContent("<center><body style=\"background: crimson;\"><h1>Welcome to EG Mail Service</body></h1><h2>Your Otp Code:</h2>"+i 
+					           +" <br><a href=''><button style=\"color:red;\">"+value+"</button></a></br></center>","text/html");
 			//send message
 			Transport.send(message);
 			System.out.println("messasge sent successfully");
