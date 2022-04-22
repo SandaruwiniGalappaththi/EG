@@ -20,6 +20,8 @@ import com.google.gson.JsonParser;
 public class EmailServices {
 	Email email = new Email();
 	
+	
+	// send email to all users
 	@GET
 	@Path("/")
 	@Produces(MediaType.TEXT_HTML)
@@ -28,6 +30,7 @@ public class EmailServices {
 	}
 	
 	
+	// send email to a single user
 	@GET
 	@Path("/singlemail")
 	@Produces(MediaType.TEXT_HTML)
@@ -41,6 +44,7 @@ public class EmailServices {
 	}
 	
 	
+	// update rate details
 	@PUT
 	@Path("/") 
 	@Consumes(MediaType.APPLICATION_JSON) 
@@ -60,6 +64,7 @@ public class EmailServices {
 	}
 	
 	
+	// insert bill
 	@POST
 	@Path("/") 
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
