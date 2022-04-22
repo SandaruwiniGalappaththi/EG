@@ -49,7 +49,7 @@ public class Contacts {
 	     					+ "<th>EmergencyNo</th>"
 	     					+ "<th>Address</th></tr>"; 
 	     			 
-	     				String query = "select * from contact where type='" + DistrictCode + "'"; 
+	     				String query = "select * from contact where DistrictCode='" + DistrictCode + "'"; 
 	     				Statement stmt = con.createStatement(); 
 	     				ResultSet rs = stmt.executeQuery(query); 
 	     			
@@ -71,6 +71,13 @@ public class Contacts {
 	     					output += "<td>" +NewConnectionsNo + "</td>"; 
 	     					output += "<td>" +EmergencyNo + "</td>"; 
 	     					output += "<td>" +Address  + "</td>"; 
+	     					
+							output += "<td><input name='btnUpdate' type='button' value='Update' class='btn btn-secondary'></td>"
+									+ "<td><form method='post' action='items.jsp'>"
+									+ "<input name='btnRemove' type='submit' value='Remove' class='btn btn-danger'>"
+									+ "<input name='itemID' type='hidden' value='" + DistrictCode
+									+ "'>" + "</form></td></tr>"; 
+	     					
 	     				} 
 	     			
 	     				con.close(); 
@@ -174,7 +181,11 @@ public class Contacts {
 				    				// execute the statement 
 				    				preparedStmt.execute();  
 				    				con.close();  
-				    				output = " Deleted Succesfully " ;
+									output = "<html><head><title>Contact Page</title>"
+											+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+											+ "</head><body>"
+											+ "<div class='card'><h4 class='text-center' style=\"color: red;\"> Deleted Successfully</h4></div>"
+											+ "</body></html>";
 			
 				      
 				    			} 
@@ -220,23 +231,23 @@ public class Contacts {
 								// execute the statement
 								preparedStmt.execute(); 
 								con.close(); 
-								output = "<html><head><title>Contact Page</title>"
+								output = "<html><head><title>Per Unit Page</title>"
 										+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 										+ "</head><body>"
-										+ "<div class='card'><h4 class='text-center' style=\"color: red;> <marquee>Inserted successfully </marquee></h4></div>"
+										+ "<div class='card'><h4 class='text-center' style=\\\"color: red;\\>Inserted successfully</h4></div>"
 										+ "</body></html>"; 
+							} 
+							catch (Exception e) { 
+								output = "<html><head><title>Per Unit Page</title>"
+										+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+										+ "</head><body>"
+										+ "<div class='card'><h4 class='text-center' style=\\\"color: red;\\>Error while inserting</h4></div>"
+										+ "</body></html>"; 
+								System.err.println(e.getMessage()); 
+							} 
+							return output; 
 						} 
-						        catch (Exception e) { 
-						        	output = "<html><head><title>Contact Page</title>"
-						        			+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
-						        			+ "</head><body>"
-						        			+ "<div class='card'><h4 class='text-center'><marquee>Error while inserting</marquee></h4></div>"
-						        			+ "</body></html>"; 
-						        			System.err.println(e.getMessage()); 
-						} 
-						return output; 
-						
-					}	
+
 					
 					
 					
@@ -272,11 +283,13 @@ public class Contacts {
 									// execute the statement
 									preparedStmt.execute(); 
 									con.close(); 
+                                     
 									output = "<html><head><title>Contact Page</title>"
 											+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 											+ "</head><body>"
-											+ "<div class='card'><h4 class='text-center'>Updated Successfully</h4></div>"
+											+ "<div class='card'><h4 class='text-center' style=\"color: red;\"> Updated Successfully</h4></div>"
 											+ "</body></html>";
+			
 								} 
 								catch (Exception e) { 
 									output = "<html><head><title>Contact Page</title>"
