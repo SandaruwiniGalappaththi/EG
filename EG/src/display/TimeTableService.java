@@ -11,16 +11,7 @@ import org.jsoup.parser.Parser;
 @Path("/displayBySearch")
 public class TimeTableService {
 	TimeTable d = new TimeTable();
-	@GET
-	@Path("/")
-	@Produces(MediaType.TEXT_HTML)
-public String readzone()
-{          
-		return d.readzone();
-}
-	
-	
-	
+
 	@GET
 	@Path("/searchAcc")
 	@Produces(MediaType.TEXT_HTML) 
