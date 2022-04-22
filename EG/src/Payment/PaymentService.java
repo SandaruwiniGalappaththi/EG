@@ -38,5 +38,13 @@ public class PaymentService {
 	}
 	
 	
+	@GET
+	@Path("/")
+	@Produces(MediaType.TEXT_HTML) 
+	public String getPayment() {		
+	return payment_obj.readPayment();	
+	}
+	
+	
 
 }
