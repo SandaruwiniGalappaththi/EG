@@ -73,7 +73,6 @@ public class TimeTable {
 																		while(rs2.next()) {
 																		String zonecharacter = rs2.getString("zone_character");
 																		letter = zonecharacter;
-																		System.out.println("pass");
 																		//prepare output including power cut zone,location,starting time, ending time and date
 																	    output += "<td>" + zonecharacter + "</td>"
 																			   +"<td>" + location + "</td>"
