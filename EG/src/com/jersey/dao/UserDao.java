@@ -80,7 +80,7 @@ public static String registerDao(UserBean rs)
 			
 			if(i>0)	
 			{
-			    String txt="Congratulations! You're almost set to start using EG Group of Compnay. Just click the button below to verify your Otp";
+			    String txt="Congratulations! You're almost set to start using EG Group of Compnay. Just click the button below to verify your Otp Number.";
 				String value = "Verify";
 				Mailapi.sendOtp(otp, mail, value, txt);
 				//sendMail.sendOtp(otp);

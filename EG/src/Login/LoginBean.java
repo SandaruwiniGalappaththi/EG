@@ -5,8 +5,20 @@ package Login;
 
 public class LoginBean {
 	
-	public String email,password;
+	public String email,password,status;
 	
+
+	
+
+	
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	public String getEmail() {
 		return email;
@@ -23,5 +35,7 @@ public class LoginBean {
 	public void setPassword(String password) {
 		this.password =password;
 	}
+
+	
 
 }
