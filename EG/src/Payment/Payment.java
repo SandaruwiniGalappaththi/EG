@@ -56,14 +56,14 @@ public class Payment{
                 // execute the statement
                 preparedStmt.execute(); 
                 con.close(); 
-                output = "<html><head><title>Per Unit Page</title>"
+                output = "<html><head><title>Insert Page</title>"
                         + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
                         + "</head><body>"
                         + "<div class='card'><h4 class='text-center' style=\\\"color: red;\\>Inserted successfully</h4></div>"
                         + "</body></html>"; 
             } 
             catch (Exception e) { 
-                output = "<html><head><title>Per Unit Page</title>"
+                output = "<html><head><title>Insert Page</title>"
                         + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
                         + "</head><body>"
                         + "<div class='card'><h4 class='text-center' style=\\\"color: red;\\>Error while inserting</h4></div>"
@@ -176,7 +176,7 @@ public class Payment{
                     preparedStmt.execute(); 
                     con.close(); 
                      
-                    output = "<html><head><title>Contact Page</title>"
+                    output = "<html><head><title>Payment Page</title>"
                             + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
                             + "</head><body>"
                             + "<div class='card'><h4 class='text-center' style=\"color: red;\"> Updated Successfully</h4></div>"
@@ -184,7 +184,7 @@ public class Payment{
 
                 } 
                 catch (Exception e) { 
-                    output = "<html><head><title>Contact Page</title>"
+                    output = "<html><head><title>Payment Page</title>"
                             + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
                             + "</head><body>"
                             + "<div class='card'><h4 class='text-center'>Error while updating</h4></div>"
@@ -193,6 +193,50 @@ public class Payment{
                 } 
                 return output; 
             }
+    
+    
+    //Delete Payment Details
+    public String deletePaymentDetails(String paymentID){  
+            String output = "";  
+                try {  
+                    Connection con = connect();  
+                    if (con == null) { 
+                        return "<html><head><title>Payment Page</title>" 
+                                + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>" 
+                                + "</head><body>" 
+                                + "<div class='card'><h4 class='text-center'><marquee>Error while connecting to the database for deleting.</marquee></h4></div>" 
+                                + "</body></html>"; 
+     }  
+      
+                    // create a prepared statement 
+                    String query = "delete from Payment_details where paymentID=?";  
+                    PreparedStatement preparedStmt = con.prepareStatement(query); 
+      
+                    // binding
+                    preparedStmt.setString(1, paymentID); 
+     
+                    // execute the statement 
+                    preparedStmt.execute();  
+                    con.close();  
+                    output = "<html><head><title>Payment Page</title>"
+                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+                            + "</head><body>"
+                            + "<div class='card'><h4 class='text-center' style=\"color: red;\"> Deleted Successfully</h4></div>"
+                            + "</body></html>";
+
+      
+                } 
+                catch (Exception e)  
+                {  
+                    output = "<html><head><title>Payment Page</title>" 
+                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>" 
+                            + "</head><body>" 
+                            + "<div class='card'><h4 class='text-center'><marquee>Error while deleting</marquee></h4></div>" 
+                            + "</body></html>"; 
+                            System.err.println(e.getMessage());  
+                }  
+                return output;  
+    }  
 
 
 
