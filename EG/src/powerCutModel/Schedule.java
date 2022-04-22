@@ -294,6 +294,35 @@ public class Schedule {
 			 
 			 
 			 }
+
+			public boolean findLocation(String location) {
+				// TODO Auto-generated method stub
+				try
+				 {
+					 	Connection con = connect();
+					 	if (con == null)
+				 {
+					 		return false;
+					 		
+				 }
+				
+				String query2 = "select * from zone where zone='" + location + "'"; 
+				Statement stmt2 = con.createStatement(); 
+				ResultSet rs2 = stmt2.executeQuery(query2); 
+				
+				// iterate through the rows in the result set
+				while(rs2.next()) {
+					return true;
+				
+			      }
 			
 
+			}catch(Exception e) {
+	 
+				
+				
+		    }
+				return false;
+				
+        }
 }

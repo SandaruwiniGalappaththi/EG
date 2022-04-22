@@ -14,12 +14,12 @@ import powerCutModel.PowerCutMail;
 public class PowerCutMailService {
     PowerCutMail mail = new PowerCutMail();
 	
-	
+	//function to send power cut alerts through mails for registered users 
 	@GET
 	@Path("/all")
 	@Produces(MediaType.TEXT_HTML)
 	public String sendToRegistertedUsers() {
-		return mail.sendToRegistertedUsers();
+		return mail.sendToRegistertedUsers();//calling the function in PowerCutMail class
 	}
 	
 }

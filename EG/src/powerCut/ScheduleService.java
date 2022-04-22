@@ -36,35 +36,18 @@ import com.google.gson.JsonParser;
 public class ScheduleService {
 
 		Schedule schedule = new Schedule();
+		
+		//function to get all power cut schedules
 		@GET
 		@Path("/")
 		@Produces(MediaType.TEXT_HTML)
-	public String readSchedule()
-{          
-			return schedule.readSchedule();
-}
-		@GET
-		@Path("/searchAcc")
-		@Produces(MediaType.TEXT_HTML) 
-		public String read(String itemData) {		
-			//Convert the input string to an XML document
-			try {
-				Document doc = Jsoup.parse(itemData, "", Parser.xmlParser()); 
-				 System.out.println("hj");
-				//Read the value from the element <accountNo>
-				String accountNo = doc.select("accountNo").text(); 
-				String output = schedule.read(accountNo); 
-				System.out.println(output);
-				return output;
-			}catch(Exception e) {
-			String output = "error";
-			return output;
-			}
-		}
-		
+		public String readSchedule()
+   {          
+			return schedule.readSchedule();//calling readSchedule function in Schedule class
+   }
 	    
 	
-	
+		//function to add new power cut schedules
 		@POST
 		@Path("/")
 		@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -74,198 +57,202 @@ public class ScheduleService {
 			 @FormParam("end") String end,
 			 @FormParam("onDate") String onDate) throws ParseException,DateTimeParseException,NullPointerException
 	{   
-			String output = "";
-			Boolean startOk = false,onDateOk = false,endOk= false;
-			System.out.println("first entry");
+							String output = "";
+							Boolean startOk = false,onDateOk = false,endOk= false,locationOk=false;
 	
-	try{
-        	LocalTime.parse(start);
-        	System.out.println("Valid time string: " + start);
-        	startOk = true;
-    }
-	catch(DateTimeParseException|NullPointerException e) {
-    	
-        	System.out.println("Invalid time string: " + start);
-        	output = "INCORRECT TIME FORMAT.PLEASE USE HH:MM FORMAT";
-    }
+							try{//check input start time is valid time
+					        	LocalTime.parse(start);
+					        	System.out.println("Valid time string: " + start);
+					        	startOk = true;
+							}catch(DateTimeParseException|NullPointerException e) {
+    	                        //if start time is invalid, give error message to use correct format
+					        	System.out.println("Invalid time string: " + start);
+					        	output = "INCORRECT TIME FORMAT.PLEASE USE HH:MM FORMAT";
+							}
 	
-	try{
-			LocalTime.parse(end);
-			System.out.println("Valid time string: " + end);
-			endOk = true;
-    }
-	catch(DateTimeParseException|NullPointerException e) {
-    	
-        	System.out.println("Invalid time string: " + end);
-        	output = "INCORRECT TIME FORMAT.PLEASE USE HH:MM FORMAT";
-    }	
+							try{//check input end time is valid time
+								LocalTime.parse(end);
+								System.out.println("Valid time string: " + end);
+								endOk = true;
+							}catch(DateTimeParseException|NullPointerException e) {
+								//if end time is invalid, give error message to use correct format
+					        	System.out.println("Invalid time string: " + end);
+					        	output = "INCORRECT TIME FORMAT.PLEASE USE HH:MM FORMAT";
+							}	
 	
 	
-	    		SimpleDateFormat sdfrmt = new SimpleDateFormat("dd/MM/yyyy");
-	    		sdfrmt.setLenient(false);
-	 
-			    /* Create Date object
-			     * parse the string into date 
-		             */
-	try{  
-	    
-	        Date javaDate = sdfrmt.parse(onDate); 
-	        LocalDate localDate = javaDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-	        int year  = localDate.getYear();
-	        int month = localDate.getMonthValue();
-	        int day   = localDate.getDayOfMonth();
-	        	System.out.println(year+" " + month+" " + day);
-	        	System.out.println(onDate+" is valid date format");
-	        onDateOk = true;
+		    		SimpleDateFormat sdfrmt = new SimpleDateFormat("dd/MM/yyyy");//create date format
+		    		sdfrmt.setLenient(false);
+		
+		    				try{  
+	                               //check input date format is correct or not
+							        Date javaDate = sdfrmt.parse(onDate); 
+							        LocalDate localDate = javaDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+							        int year  = localDate.getYear();//getting year to check
+							        int month = localDate.getMonthValue();//getting month to check
+							        int day   = localDate.getDayOfMonth();//getting day to check
+							        	System.out.println(year+" " + month+" " + day);
+							        	System.out.println(onDate+" is valid date format");
+							        onDateOk = true;
+							        
+		    				}catch(ParseException e)
+		    				{       
+								   // if date format is invalid, give error message to use correct format
+							        System.out.println(onDate+" is Invalid Date format");
+							        output = "INCORRECT DATE FORMAT.PLEASE USE DD/MM/YYYY FORMAT";
 	       
-	  }
-	    /* Date format is invalid */
-       catch(ParseException e)
-	 {
-	        System.out.println(onDate+" is Invalid Date format");
-	        output = "INCORRECT DATE FORMAT.PLEASE USE DD/MM/YYYY FORMAT";
-	       
-	 }
-	    try {
-	    	Duration timeElapsed = Duration.between(LocalTime.parse(start), LocalTime.parse(end));
-	    	System.out.println(timeElapsed.toMinutes());
-	    	if(timeElapsed.toMinutes() < 0) {
-	    	  	startOk = false;
-	    	 	endOk = false;
-	    	 	output = "START TIME IS GREATER THAN END TIME";
-	    	    }
-	    }catch(DateTimeParseException|NullPointerException e) {
+		    				}
+		    				try {  //getting the time duration
+							    	Duration timeElapsed = Duration.between(LocalTime.parse(start), LocalTime.parse(end));
+							    	
+							    	if(timeElapsed.toMinutes() < 0) {//checking start time is greater than end time
+							    	  	startOk = false;
+							    	 	endOk = false;
+							    	 	output = "START TIME IS GREATER THAN END TIME";
+							    		}
+		    				}catch(DateTimeParseException|NullPointerException e) {
 	    	
-	    	System.out.println();
-	    }
+		    					System.out.println();
+		    				}
 	   
-	   
-	    
-	    if(startOk == true && endOk ==true && onDateOk ==true  ) {
-	    		Date date = Calendar.getInstance().getTime();  
-	        	DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  
-	        	String createdDate = dateFormat.format(date);  
-	        	System.out.println(createdDate);  
-	        	output = schedule.insertschedule(location,start,end,onDate,createdDate);
+	                        
+		    				try {//checking input location is available location
+		    					 locationOk = schedule.findLocation(location);//find location is a valid one using findLocation function in Schedule class
+		    					if(locationOk == false) {
+		    						output = "ENTER VALID LOCATION";//otherwise give error message
+		    					}
+		    					
+		    				}catch(Exception e) {
+		    					
+		    					
+		    				}
+	                        //if only start time,end time and date is in correct format that schedule will enter to database
+		    				if(startOk == true && endOk ==true && onDateOk ==true && locationOk ==true ) {
+		    					
+				    		Date date = Calendar.getInstance().getTime();  //getting the current time
+				        	DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  //set format
+				        	String createdDate = dateFormat.format(date);  
+				        	output = schedule.insertschedule(location,start,end,onDate,createdDate);//calling insertSchedule function in Schedule class
 	  	  
-	    }
+		    	}
 	    
-	return output;
+		    return output;
     
 	}
-	
+	    //function to update schedules
 		@PUT
 		@Path("/")
 		@Consumes(MediaType.APPLICATION_JSON)
 		@Produces(MediaType.TEXT_PLAIN)
 		public String updateSchedule(String itemData)
 		{
-		//Convert the input string to a JSON object
-		 JsonObject itemObject = new JsonParser().parse(itemData).getAsJsonObject();
-		//Read the values from the JSON object
-		 String ID = itemObject.get("ID").getAsString();
-		 String location = itemObject.get("location").getAsString();
-		 String start = itemObject.get("start").getAsString();
-		 String end = itemObject.get("end").getAsString();
-		 String onDate = itemObject.get("onDate").getAsString();
-		 
-		 
-			String output = "";
-		    Boolean startOk = false,onDateOk = false,endOk= false;
+							//Convert the input string to a JSON object
+							JsonObject itemObject = new JsonParser().parse(itemData).getAsJsonObject();
+							//Read the values from the JSON object
+							String ID = itemObject.get("ID").getAsString();
+							String location = itemObject.get("location").getAsString();
+						    String start = itemObject.get("start").getAsString();
+							String end = itemObject.get("end").getAsString();
+							String onDate = itemObject.get("onDate").getAsString();
+				 
+				 
+								String output = "";
+							    Boolean startOk = false,onDateOk = false,endOk= false,locationOk=false;
+							
+				
+					 try{//check input start time is valid time
+					        LocalTime.parse(start);
+					        System.out.println("Valid time string: " + start);
+					        startOk = true;
+					 }catch (DateTimeParseException|NullPointerException e) {
+						  //if start time is invalid, give error message to use correct format
+					        System.out.println("Invalid time string: " + start);
+					        output = "INCORRECT TIME FORMAT.PLEASE USE HH:MM FORMAT";
+					 }
+				
+					try{  //check input end time is valid time
+					        LocalTime.parse(end);
+					        System.out.println("Valid time string: " + end);
+					        endOk = true;
+			        
+					}catch (DateTimeParseException|NullPointerException e) {
+						//if end time is invalid, give error message to use correct format
+					        System.out.println("Invalid time string: " + end);
+					        output = "INCORRECT TIME FORMAT.PLEASE USE HH:MM FORMAT";
+					}
+				
+				
+				    SimpleDateFormat sdfrmt = new SimpleDateFormat("dd/MM/yyyy");//create date format
+				    sdfrmt.setLenient(false);
+				 
+				   
+				    try{  
+				    	//check input date format is correct or not
+						        Date javaDate = sdfrmt.parse(onDate); 
+						        LocalDate localDate = javaDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+						        int year  = localDate.getYear();//getting year to check
+						        int month = localDate.getMonthValue();//getting month to check
+						        int day   = localDate.getDayOfMonth();//getting day to check
+						        System.out.println(year+" " + month+" " + day);
+						        System.out.println(onDate+" is valid date format");
+						        onDateOk = true;
+				   
+				    }catch (ParseException e)
+				    {           // if date format is invalid, give error message to use correct format
+						        System.out.println(onDate+" is Invalid Date format");
+						        output = "INCORRECT DATE FORMAT.PLEASE USE DD/MM/YYYY FORMAT";
+				       
+				    }
+				    try {      //getting the time duration
+						    	Duration timeElapsed = Duration.between(LocalTime.parse(start), LocalTime.parse(end));
+						    	System.out.println(timeElapsed.toMinutes());
+						    	if(timeElapsed.toMinutes() < 0) {//checking start time is greater than end time
+						    	  	startOk = false;
+						    	 	endOk = false;
+						    	 	output = "START TIME IS GREATER THAN END TIME";
+						    	    }
+				    }catch(DateTimeParseException|NullPointerException e) {
+				    	
+				    			System.out.println();
+				    }
+				   
+				    try {//checking input location is available location
+   					 			locationOk = schedule.findLocation(location);//find location is a valid one using findLocation function in Schedule class
+   					 			if(locationOk == false) {
+   					 				output = "ENTER VALID LOCATION";//otherwise give error message
+   					}
+   					
+				    }catch(Exception e) {
+   					
+   					
+   				}
+				    //if only start time,end time and date is in correct format that schedule will enter to database
+				    	if(startOk == true && endOk ==true && onDateOk ==true && locationOk ==true ) {
+				    		Date date = Calendar.getInstance().getTime();  //getting the current time
+				    		DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  //setting format
+				    		String createdDate = dateFormat.format(date);  
+				    		System.out.println(createdDate);  
+				    		output = schedule.updateSchedule(ID, location, start, end, onDate,createdDate);//calling updateSchedule function in Schedule class
+				  	  
+				    		}
+				    
+				    return output;
+				
+				}
 		
-		
-		try{
-	        LocalTime.parse(start);
-	        System.out.println("Valid time string: " + start);
-	        startOk = true;
-	    }
-		catch (DateTimeParseException|NullPointerException e) {
-	    	
-	        System.out.println("Invalid time string: " + start);
-	        output = "INCORRECT TIME FORMAT.PLEASE USE HH:MM FORMAT";
-	    }
-		
-		try{
-	        LocalTime.parse(end);
-	        System.out.println("Valid time string: " + end);
-	        endOk = true;
-	        
-	    }
-		catch (DateTimeParseException|NullPointerException e) {
-	    	
-	        System.out.println("Invalid time string: " + end);
-	        output = "INCORRECT TIME FORMAT.PLEASE USE HH:MM FORMAT";
-	    }
-		
-		
-		    SimpleDateFormat sdfrmt = new SimpleDateFormat("dd/MM/yyyy");
-		    sdfrmt.setLenient(false);
-		 
-		    /* Create Date object
-		     * parse the string into date 
-	             */
-		    try{  
-		    
-		        Date javaDate = sdfrmt.parse(onDate); 
-		       // System.out.println(start2+" is valid time format");
-		        LocalDate localDate = javaDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		        int year  = localDate.getYear();
-		        int month = localDate.getMonthValue();
-		        int day   = localDate.getDayOfMonth();
-		        System.out.println(year+" " + month+" " + day);
-		        System.out.println(onDate+" is valid date format");
-		        onDateOk = true;
-		       
-		    }
-		    /* Date format is invalid */
-		    catch (ParseException e)
-		    {
-		        System.out.println(onDate+" is Invalid Date format");
-		        output = "INCORRECT DATE FORMAT.PLEASE USE DD/MM/YYYY FORMAT";
-		       
-		    }
-		    try {
-		    	Duration timeElapsed = Duration.between(LocalTime.parse(start), LocalTime.parse(end));
-		    	System.out.println(timeElapsed.toMinutes());
-		    	if(timeElapsed.toMinutes() < 0) {
-		    	  	startOk = false;
-		    	 	endOk = false;
-		    	 	output = "START TIME IS GREATER THAN END TIME";
-		    	    }
-		    }catch(DateTimeParseException|NullPointerException e) {
-		    	
-		    	System.out.println();
-		    }
-		   
-		    
-		    
-		    if(startOk == true && endOk ==true && onDateOk ==true  ) {
-		    	Date date = Calendar.getInstance().getTime();  
-	        	DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  
-	        	String createdDate = dateFormat.format(date);  
-	        	System.out.println(createdDate);  
-		    	output = schedule.updateSchedule(ID, location, start, end, onDate,createdDate);
-		  	  
-		    }
-		    
-		return output;
-		
-		}
-		
-		
+		//function to delete power cut schedules
 		@DELETE
 		@Path("/")
 		@Consumes(MediaType.APPLICATION_XML)
 		@Produces(MediaType.TEXT_PLAIN)
 		public String deletetimes(String itemData)
 		{
-		//Convert the input string to an XML document
-		 Document doc = Jsoup.parse(itemData, "", Parser.xmlParser());
-
-		//Read the value from the element <itemID>
-		 String ID = doc.select("ID").text();
-		 String output = schedule.deleteSchedule(ID);
-		return output;
+					//Convert the input string to an XML document
+					 Document doc = Jsoup.parse(itemData, "", Parser.xmlParser());
+					//Read the value from the element <ID>
+					 String ID = doc.select("ID").text();
+					 String output = schedule.deleteSchedule(ID);//calling the deleteSchedule function in Schedule class
+				return output;
 		}
 	
 	    
