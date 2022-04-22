@@ -62,15 +62,6 @@ public class ScheduleService {
 			}
 		}
 		
-		
-	/*{//Convert the input string to an XML document
-			 Document doc = Jsoup.parse(itemData, "", Parser.xmlParser());
-                 System.out.println("ghjkl");
-				//Read the value from the element <accountNo>
-				 String accountNo = doc.select("accountNo").text();
-				 String output = schedule.read(accountNo);
-				return output;
-	}*/
 	    
 	
 	
