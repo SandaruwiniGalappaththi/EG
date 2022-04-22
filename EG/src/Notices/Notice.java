@@ -23,7 +23,11 @@ public class Notice {
 	 return con; 
 	 } 
 	
-	public String inserNotice(String type, String date,  String desc) 
+	
+	
+	
+	
+	public String inserNotice(String type,String code, String date, String topic, String desc, String person, String mail) 
 	 { 
 	 String output = ""; 
 	 try
@@ -32,14 +36,19 @@ public class Notice {
 	 if (con == null) 
 	 {return "Error while connecting to the database for inserting."; } 
 	 // create a prepared statement
-	 String query = " insert into noticet  (`noticeID`,`noticeType`,`noticeDate`,`noticeDesc`)" + " values (?, ?, ?, ?)"; 
+	 String query = " insert into notices  (`noticeID`,`noticeType`,`noticeCode`,`noticeDate`,`noticeTopic`,`noticeDesc`,`noticePerson`,`noticeMails`)" + " values (?, ?, ?, ?, ?, ?, ?,?)"; 
 	 
 	 PreparedStatement preparedStmt = con.prepareStatement(query);
 	 // binding values
 	 preparedStmt.setInt(1, 0); 
 	 preparedStmt.setString(2, type); 
-	 preparedStmt.setString(3, date);  
-	 preparedStmt.setString(4, desc); 
+	 preparedStmt.setString(3, code); 
+	 preparedStmt.setString(4, date); 
+	 preparedStmt.setString(5, topic);  
+	 preparedStmt.setString(6, desc); 
+	 preparedStmt.setString(7, person); 
+	 preparedStmt.setString(8, mail); 
+
 	 // execute the statement
 	 
 	 preparedStmt.execute(); 
@@ -55,6 +64,10 @@ public class Notice {
 	 }
 	
 	
+	
+	
+	
+	
 	public String readNotices() 
 	 { 
 	 String output = ""; 
@@ -65,12 +78,15 @@ public class Notice {
 	 {return "Error while connecting to the database for reading."; } 
 	 // Prepare the html table to be displayed
 	 output = "<html><link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css\">"
-	 			+"<table border='1'><tr><th  style=\"background-color:lightgreen;\">Notice Type</th><th  style=\"background-color:lightgreen;\">Notice Date</th>" +
-	 "<th  style=\"background-color:lightgreen;\">Notice Description</th>" + 
-	 //"<th>Item Description</th>" +
-	 "<th>Update</th><th>Remove</th></tr>"; 
+	 			+"<table border='1'><tr><th  style=\"background-color:lightgreen;\">Notice Type</th>"+
+			 "<th  style=\"background-color:lightgreen;\">Notice Code</th>"+
+			 "<th  style=\"background-color:lightgreen;\">Released Date</th>" +
+			 "<th  style=\"background-color:lightgreen;\">Notice Tpoic</th>" +
+			 "<th  style=\"background-color:lightgreen;\">Notice Description</th>" +
+			 "<th  style=\"background-color:lightgreen;\">Published by</th>" +
+			 "<th  style=\"background-color:lightgreen;\">Mails</th></tr>"; 
 	 
-	 String query = "select * from noticet"; 
+	 String query = "select * from notices"; 
 	 Statement stmt = con.createStatement(); 
 	 ResultSet rs = stmt.executeQuery(query); 
 	 // iterate through the rows in the result set
@@ -80,19 +96,33 @@ public class Notice {
 	 String noticeID = Integer.toString(rs.getInt("noticeID")); 
 	 
 	 String noticeType = rs.getString("noticeType"); 
-	// String itemPrice = Double.toString(rs.getDouble("itemPrice"));
+	 String noticeCode = rs.getString("noticeCode");
 	 String noticeDate = rs.getString("noticeDate"); 
+	 String noticeTopic = rs.getString("noticeTopic");
 	 String noticeDesc = rs.getString("noticeDesc"); 
+	 String noticePerson = rs.getString("noticePerson");
+	 String noticeMails = rs.getString("noticeMails");
 	 // Add into the html table
 	
-	 output += "<td>" + noticeType + "</td>"; 
-	 output += "<td>" + noticeDate + "</td>"; 
-	 output += "<td>" + noticeDesc + "</td>"; 
+	 
+	 output += "<td style=\"background-color:lavender;\">" + noticeType + "</td>"; 
+	 output += "<td>" + noticeCode + "</td>"; 
+	 output += "<td style=\"background-color:lavender;\">" + noticeDate + "</td>"; 
+	 output += "<td>" + noticeTopic + "</td>"; 
+	 output += "<td style=\"background-color:lavender;\">" + noticeDesc + "</td>"; 
+	 output += "<td>" + noticePerson + "</td>"; 
+	 output += "<td style=\"background-color:lavender;\">" + noticeMails + "</td></tr>"; 
+	
+	 
 	 // buttons
-	 output += "<td><input name='btnUpdate' type='button' value='Update' class='btn btn-secondary'></td>"
+	/* output += 
+			 "<td><input name='btnUpdate' type='button' value='Update' class='btn btn-secondary'></td>"
 	 + "<td><form method='post' action='items.jsp'>"+ "<input name='btnRemove' type='submit' value='Remove' class='btn btn-danger'>"
 	 + "<input name='itemID' type='hidden' value='" + noticeID 
 	 + "'>" + "</form></td></tr>"; 
+	*/ 
+	 
+	 
 	 } 
 	 
 	 con.close(); 
@@ -108,7 +138,11 @@ public class Notice {
 	 }
 	
 	
-	public String updateNotice(String ID, String type, String date, String desc) 
+	
+	
+	
+	
+	public String updateNotice(String ID, String type,String code, String date, String topic, String desc, String person,String mails) 
 
 	{ 
 		 String output = ""; 
@@ -118,14 +152,17 @@ public class Notice {
 		 if (con == null) 
 		 {return "Error while connecting to the database for updating."; } 
 		 // create a prepared statement
-		 String query = "UPDATE noticet SET noticeType=?,noticeDate=?,noticeDesc=?  WHERE noticeID=?"; 
+		 String query = "UPDATE notices SET noticeType=?,noticeCode=?,noticeDate=?,noticeTopic=?,noticeDesc=?,noticePerson=?,noticeMails=?  WHERE noticeID=?"; 
 		 PreparedStatement preparedStmt = con.prepareStatement(query); 
 		 // binding values
 		 preparedStmt.setString(1, type); 
-		 preparedStmt.setString(2, date); 
-		
-		 preparedStmt.setString(3, desc); 
-		 preparedStmt.setInt(4, Integer.parseInt(ID));
+		 preparedStmt.setString(2, code); 
+		 preparedStmt.setString(3, date); 
+		 preparedStmt.setString(4, topic); 
+		 preparedStmt.setString(5, desc);
+		 preparedStmt.setString(6, person);  
+		 preparedStmt.setString(7, mails);
+		 preparedStmt.setInt(8, Integer.parseInt(ID));
 		 
 		// execute the statement
 		 preparedStmt.execute(); 
@@ -139,6 +176,10 @@ public class Notice {
 		 } 
 		 return output; 
 		 }
+	
+	
+	
+	
 
 	
 	public String deleteNotice(String noticeID) 
@@ -150,7 +191,7 @@ public class Notice {
 	 if (con == null) 
 	 {return "Error while connecting to the database for deleting."; } 
 	 // create a prepared statement
-	 String query = "delete from noticet where noticeID=?"; 
+	 String query = "delete from notices where noticeID=?"; 
 	 PreparedStatement preparedStmt = con.prepareStatement(query); 
 	 // binding values
 	 preparedStmt.setInt(1, Integer.parseInt(noticeID)); 
