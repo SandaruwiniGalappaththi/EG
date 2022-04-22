@@ -29,7 +29,7 @@ public class AdminLoginDao {
 					+ "<th>Mobile</th>" 
 					+ "<th>Status</th>" 
 					+ "<th>Search User</th>"
-					+ "<th>Downloadt</th></tr>"; 
+					+ "<th>Download</th></tr>"; 
 			
 			PreparedStatement ps=con.prepareStatement("select * from user where email=? and password=?");
 			ps.setString(1,adminloginBean.getEmail());
@@ -60,11 +60,10 @@ public class AdminLoginDao {
 						 output += "<td>" + mobile + "</td>"; 
 						 output += "<td>" + status + "</td>"; 
 						// buttons
-						 output += "<link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC\" crossorigin=\"anonymous\">"
+						 output +="<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 								+ "<td><input name='btnUpdate' type='button' value='Search User' class='btn btn-secondary'></td>"
-						// + "<td><form method='post' action=''>"
-						 + "<td><input name='btnRemove' type='button' value='Download User' class='btn btn-secondary'></td>"
-						 + "</form></td></tr>";
+								+ "<td><input name='btnRemove' type='button' value='Download User' class='btn btn-secondary'></td>"
+								+ "</form></td></tr>";
 						
 				}
 			
