@@ -14,30 +14,13 @@ import powerCutModel.Schedule;
 public class ZoneService {
 	
 	Schedule schedule1 = new Schedule();
-	/*@GET
-	@Path("/")
-	@Produces(MediaType.TEXT_HTML) 
-	public String read(String itemData) {		
-		//Convert the input string to an XML document
-		try {
-			Document doc = Jsoup.parse(itemData, "", Parser.xmlParser()); 
-			 System.out.println("hj");
-			//Read the value from the element <billType>
-			String accountNo = doc.select("accountNo").text(); 
-			String output = schedule1.read(accountNo); 
-			return output;
-		}catch(Exception e) {
-		String output = "error";
-		return output;
-		}
-		
-	}*/
+    //function for get all zone information
 	@GET
 	@Path("/")
 	@Produces(MediaType.TEXT_HTML)
 public String readzone()
 {          
-		return schedule1.readzone();
+		return schedule1.readzone();//calling function in schedule class
 }
 
 }
