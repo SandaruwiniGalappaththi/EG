@@ -2,9 +2,12 @@ package com.jersey.loginUser;
 
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -28,7 +31,10 @@ import Login.ChangePasswordBean;
 import Login.ForgotPasswordBean;
 import Login.UserBean;
 import Login.LoginBean;
+import Login.AdminLoaginBean;
 import Login.UserOtpVerificationBean;
+
+import com.jersey.dao.AdminLoginDao;
 import com.jersey.dao.ChangePasswordDao;
 import com.jersey.dao.ForgotPasswordDao;
 import com.jersey.dao.LoginDao;
@@ -46,6 +52,9 @@ import com.jersey.dao.UserDelete;
 @Path("/user")
 public class UserServices 
 {   
+	
+	 
+	
     @Path("/register")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -56,24 +65,16 @@ public class UserServices
     	
     String str = null; 
     if(null!=userdata)   
-    {    /*
- 
-            JsonParser jsonParser = new JsonParser();
-    		JsonElement jsonElement = jsonParser.parse(userdata);
-    		if(jsonElement.isJsonObject())
-    		{
-    	JsonObject jsonObject=jsonElement.getAsJsonObject();
-    	UserBean userBean = new UserBean(jsonObject.get("name").getAsString(),jsonObject.get("email").getAsString(),jsonObject.get("password").getAsString(),jsonObject.get("mobile").getAsString());
-    	
-                     str = UserDao.registerDao(userBean);
-    		}
-    
-    	System.out.println(userdata); */
+    {   
     	
     	
     	ObjectMapper mapper = new ObjectMapper();
     	UserBean userbean = mapper.readValue(userdata, UserBean.class);
     	str = UserDao.registerDao(userbean);
+ 
+    
+    	
+    	
     	if(str.equals("already exist"))
     	{
     		return "already exist....!!!";
@@ -81,6 +82,9 @@ public class UserServices
     	else if(str.equals("success"))
     	{
     		return "Register successfully...!!!";
+    	}
+    	else if(str.equals("Invalid Email Format")) {
+    		return "Invalid Email Format...!";
     	}
     	else
     	{
@@ -332,16 +336,16 @@ public class UserServices
 	}
     
     @Path("/adminlogin")
-    @POST
+    @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
 	public String loginAdmin(String userdata) throws JsonParseException, JsonMappingException, IOException
     {
     	try {
     		ObjectMapper objectMapper = new ObjectMapper();
-    		LoginBean loginBean = objectMapper.readValue(userdata, LoginBean.class);
+    		AdminLoaginBean adminloginBean = objectMapper.readValue(userdata, AdminLoaginBean.class);
     	
-    String str = LoginDao.login(loginBean);
+    String str = AdminLoginDao.login(adminloginBean);
     
     	if(str.equals("fail")) 
     		

@@ -33,6 +33,7 @@ public class LoginDao {
 			PreparedStatement ps=con.prepareStatement("select * from user where email=? and password=?");
 			ps.setString(1,loginBean.getEmail());
 			ps.setString(2,loginBean.getPassword());
+		//	ps.setString(3,loginBean.getStatus());
 			ResultSet rs = ps.executeQuery();
 			System.out.println(loginBean.getEmail());
 			System.out.println(loginBean.getPassword());
