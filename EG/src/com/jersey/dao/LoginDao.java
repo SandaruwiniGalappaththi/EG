@@ -75,11 +75,10 @@ public class LoginDao {
 						 output += "<td>" + password + "</td>"; 
 						 output += "<td>" + mobile + "</td>"; 
 						// buttons
-						 output += "<link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC\" crossorigin=\"anonymous\">"
+						 output +="<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 								+ "<td><input name='btnUpdate' type='button' value='Update' class='btn btn-secondary'></td>"
-						// + "<td><form method='post' action=''>"
-						 + "<td><input name='btnRemove' type='button' value='Remove' class='btn btn-secondary'></td>"
-						 + "<input name='otp' type='hidden' value='" + otp + "'>" + "</form></td></tr>";
+								+ "<td><input name='btnRemove' type='button' value='Remove' class='btn btn-secondary'></td>"
+								+ "<input name='otp' type='hidden' value='" + otp + "'>" + "</form></td></tr>";
 						
 						
 						PreparedStatement ps1 = con.prepareStatement("update user set status=? where email=?");
