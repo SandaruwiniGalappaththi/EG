@@ -77,25 +77,47 @@ public class UserServices
     	
     	if(str.equals("already exist"))
     	{
-    		return "already exist....!!!";
+    		return "<html><head><title>Register Here</title>"
+    				+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+    				+ "</head><body>"
+    				+ "<div class='card'><h4 class='text-center'>Already Exist...! Please Use another Email for Registring Purpose.</h4></div>"
+    				+ "</body></html>"; 
+    				
+    				
     	}
     	else if(str.equals("success"))
     	{
-    		return "Register successfully...!!!";
+    		return "<html><head><title>Register Here</title>"
+    				+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+    				+ "</head><body>"
+    				+ "<div class='card'><h4 class='text-center'>Register Successfully...!</h4></div>"
+    				+ "</body></html>"; 
+    				
     	}
     	else if(str.equals("Invalid Email Format")) {
-    		return "Invalid Email Format...!";
+    		return "<html><head><title>Register Here</title>"
+    				+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+    				+ "</head><body>"
+    				+ "<div class='card'><h4 class='text-center'>Invalid Email Format...!</h4></div>"
+    				+ "</body></html>"; 
+    				
+    				
     	}
     	else
     	{
-    		return "register fail...!!!";
+    		return "<html><head><title>Register Here</title>"
+    				+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+    				+ "</head><body>"
+    				+ "<div class='card'><h4 class='text-center'>register fail...!!!</h4></div>"
+    				+ "</body></html>"; 
+    				
+    				
     	}
     }
-		//return str;
+		
 	return str;
 		
-		//UserBean userBean = new UserBean();
-		//String result = UserDao.u(userBean);
+		
 	}
     
     
@@ -115,7 +137,14 @@ public class UserServices
     		
     		
     	{
-    		return "Username and Password Incorrect ...!!!";
+    		return "<html><head><title>Login Here</title>"
+    				+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+    				+ "</head><body>"
+    				+ "<div class='card'><h4 class='text-center'>Username or Password Incorrect ...!!! Please Check and Log Again</h4></div>"
+    				+ "</body></html>"; 
+    				
+    				
+    				
     	}
     	else
     	{
@@ -145,23 +174,34 @@ public class UserServices
     		String str=UserOtpVerificationDao.OtpVerification(otpVerificationBean);
     		if(str.equals("success"))
     				{
-    				   return "otp verify success"	;
+    				   return "<html><head><title>Verifing Otp</title>"
+    		    				+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+    		    				+ "</head><body>"
+    		    				+ "<div class='card'><h4 class='text-center'>Otp Verify Success...!!!</h4></div>"
+    		    				+ "</body></html>"; 
+    						   
+    						   
     				}
     		else
     		{
-    			return "otp verify fail";
+    			return "<html><head><title>Verifing Otp</title>"
+	    				+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+	    				+ "</head><body>"
+	    				+ "<div class='card'><h4 class='text-center'>Otp Verify Fail...!!! Please Re-Check Your Otp</h4></div>"
+	    				+ "</body></html>"; 
+    					
+    					
     		}
     	}catch (Exception e) {
     		//TODO: handle exception
     		e.printStackTrace();
     	}
+		
     	
-    	return "otp verify fail";
+    return "otp verify fail";
     	
     	
-   // String str = "hello";
   
-	//	return str;
 	}
     
     
@@ -182,11 +222,23 @@ public class UserServices
     			
     	     if(ChangePasswordDao.checkEmailPassword(changePasswordBean) && ChangePasswordDao.changePasswordUser(changePasswordBean))
     	      {
-    	    	  return "change password successfully...!!!";
+    	    	  return  "<html><head><title>Change Password</title>"
+  	    				+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+  	    				+ "</head><body>"
+  	    				+ "<div class='card'><h4 class='text-center'>Password Changed successfully...!!!</h4></div>"
+  	    				+ "</body></html>";
+    	    			  
+    	    			 
     	      }
     	      else
     	      {
-    	    	  return "Change password fail";
+    	    	  return    "<html><head><title>Change Password</title>"
+    	    				+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+      	    				+ "</head><body>"
+      	    				+ "<div class='card'><h4 class='text-center'>Password Changed Fail...!!!</h4></div>"
+      	    				+ "</body></html>";
+    	    			  
+    	    			  
     	      }
     	      
     	} catch (Exception e) {
@@ -218,10 +270,22 @@ public class UserServices
     			
     	    if(str.equals("success"))
     	    {
-    	    	return "otp send success";
+    	    	return  "<html><head><title>Otp Mail Service</title>"
+  	    				+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+  	    				+ "</head><body>"
+  	    				+ "<div class='card'><h4 class='text-center'>Otp Send Success...!!!</h4></div>"
+  	    				+ "</body></html>";
+    	    			
+    	    			
     	    }
     	    else {
-    	    	return "otp send failed";
+    	    	return  "<html><head><title>Otp Mail Service</title>"
+  	    				+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+  	    				+ "</head><body>"
+  	    				+ "<div class='card'><h4 class='text-center'>Otp Send Failed...!!! Please Check Your Email Or Otp</h4></div>"
+  	    				+ "</body></html>";
+    	    			
+    	    			
     	    }
     	      
     	
@@ -287,11 +351,24 @@ public class UserServices
     			
     	     if(RestPassword.checkEmail(restPasswordBean) && RestPassword.restPasswordUser(restPasswordBean))
     	      {
-    	    	  return "change password successfully...!!!";
+    	    	  return    "<html><head><title>Reset Password</title>"
+    	    				+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+      	    				+ "</head><body>"
+      	    				+ "<div class='card'><h4 class='text-center'>Reset Password Successfully...!!!</h4></div>"
+      	    				+ "</body></html>";
+        	    			
+    	    			  
+    	    			  
     	      }
     	      else
     	      {
-    	    	  return "Change password fail";
+    	    	  return "<html><head><title>Reset Password</title>"
+  	    				+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+  	    				+ "</head><body>"
+  	    				+ "<div class='card'><h4 class='text-center'>Reset Password Failed...!!! Please Check Your Email. </h4></div>"
+  	    				+ "</body></html>";
+    	    			  
+    	    			 
     	      }
     	      
     	} catch (Exception e) {
@@ -319,7 +396,13 @@ public class UserServices
     		
     		
     	{
-    		return "No any User holding this mobile number ...!!!";
+    		return "<html><head><title>Search User</title>"
+	    				+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+	    				+ "</head><body>"
+	    				+ "<div class='card'><h4 class='text-center'>No Any User holding This Mobile Number ...!!!. </h4></div>"
+	    				+ "</body></html>";
+    				
+    				
     	}
     	else
     	{
@@ -351,7 +434,14 @@ public class UserServices
     		
     		
     	{
-    		return "Username and Password Incorrect ...!!!";
+    		return "<html><head><title>Admin Login</title>"
+    				+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+    				+ "</head><body>"
+    				+ "<div class='card'><h4 class='text-center'> User Name Or Password Incoorect...!!! Pleace contact EG User Manager. </h4></div>"
+    				+ "</body></html>";
+    				
+    				
+    				
     	}
     	else
     	{

@@ -21,11 +21,15 @@ public class AdminLoginDao {
 		try {
 			
 			
-			output = "<table border='1'><tr><th>Name</th>"
-					+ "<th>Email</th>" +
-					 "<th>Mobile</th>" + 
-					 "<th>Status</th>" +
-					 "<th>Search User</th><th>Download</th></tr>";
+			output = "<html><head><title>Admin Profile</title>"
+					+ "<link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC\" crossorigin=\"anonymous\">"
+					+ "</head><body><table class='table' border='1'><tr>"
+					+ "<th>Name</th>"
+					+ "<th>Email</th>" 
+					+ "<th>Mobile</th>" 
+					+ "<th>Status</th>" 
+					+ "<th>Search User</th>"
+					+ "<th>Downloadt</th></tr>"; 
 			
 			PreparedStatement ps=con.prepareStatement("select * from user where email=? and password=?");
 			ps.setString(1,adminloginBean.getEmail());
@@ -56,7 +60,8 @@ public class AdminLoginDao {
 						 output += "<td>" + mobile + "</td>"; 
 						 output += "<td>" + status + "</td>"; 
 						// buttons
-						 output += "<td><input name='btnUpdate' type='button' value='Search User' class='btn btn-secondary'></td>"
+						 output += "<link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC\" crossorigin=\"anonymous\">"
+								+ "<td><input name='btnUpdate' type='button' value='Search User' class='btn btn-secondary'></td>"
 						// + "<td><form method='post' action=''>"
 						 + "<td><input name='btnRemove' type='button' value='Download User' class='btn btn-secondary'></td>"
 						 + "</form></td></tr>";

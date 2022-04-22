@@ -16,7 +16,7 @@ import javax.mail.internet.MimeMessage;
 
 public class Mailapi {
 
-	public static boolean sendOtp(int i, String to, String value)
+	public static boolean sendOtp(int i, String to, String value, String txt)
 	{
 		//Random r = new Random();
 		//int i = r.nextInt(10000);
@@ -48,9 +48,14 @@ public class Mailapi {
 			MimeMessage message = new MimeMessage(session);
 			message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));
 			message.setSubject("otp");
-			
-			message.setContent("<center><body style=\"background: crimson;\"><h1>Welcome to EG Mail Service</body></h1><h2>Your Otp Code:</h2>"+i 
-					           +" <br><a href=''><button style=\"color:red;\">"+value+"</button></a></br></center>","text/html");
+			message.setSubject("Welcome to EG Group");
+			message.setContent( "<div style='max-width: 700px; margin:auto; border: 10px solid #ddd; padding: 50px 20px; font-size: 110%;'>"
+					       		+ "<h2 style='text-align: center; text-transform: uppercase;color: teal;'>Welcome EG Mail Serivice</h2>"
+					       		+"<center><p>" +txt+ "</p>"
+					       		+ "<h2>Your Otp Code:" +i
+								+"</h2><h2><a href=''><button style='background: crimson; text-decoration: none; color: white; padding: 10px 20px; margin: 10px 0; display: inline-block;'>" +value+ "</button></a>"
+								+"</h2><c/enter>", "text/html");
+					         
 			//send message
 			Transport.send(message);
 			System.out.println("messasge sent successfully");

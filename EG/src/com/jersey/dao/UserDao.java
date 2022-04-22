@@ -44,7 +44,7 @@ public static String registerDao(UserBean rs)
 	
 	
 	Random random = new Random();
-	int otp = random.nextInt(1234);
+	int otp = random.nextInt(123456);
 	//int otp = new Random().nextInt(345);
 	
 	Connection con=DbConnectionProvider.getConnection();
@@ -80,8 +80,9 @@ public static String registerDao(UserBean rs)
 			
 			if(i>0)	
 			{
+			    String txt="Congratulations! You're almost set to start using EG Group of Compnay. Just click the button below to verify your Otp";
 				String value = "Verify";
-				Mailapi.sendOtp(otp, mail, value);
+				Mailapi.sendOtp(otp, mail, value, txt);
 				//sendMail.sendOtp(otp);
 				return "success";
 				
