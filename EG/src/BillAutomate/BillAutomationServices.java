@@ -26,7 +26,7 @@ public class BillAutomationServices {
 	@Path("/")
 	@Produces(MediaType.TEXT_HTML) 
 	public String readPerUnit() {		
-		return bill.redPerUnit();	
+		return bill.readPerUnit();	
 	}
 	
 
