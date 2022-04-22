@@ -22,6 +22,7 @@ public class BillAutomationServices {
 	BillAutomation bill = new BillAutomation();
 	
 	
+	// read unit details
 	@GET
 	@Path("/")
 	@Produces(MediaType.TEXT_HTML) 
@@ -30,6 +31,7 @@ public class BillAutomationServices {
 	}
 	
 
+	// read per unit by search
 	@GET
 	@Path("/searchperunit")
 	@Produces(MediaType.TEXT_HTML) 
@@ -43,6 +45,7 @@ public class BillAutomationServices {
 	}
 	
 
+	// insert price per unit
 	@POST
 	@Path("/") 
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
@@ -59,6 +62,7 @@ public class BillAutomationServices {
 	}
 	
 	
+	// update price per unit
 	@PUT
 	@Path("/") 
 	@Consumes(MediaType.APPLICATION_JSON) 
@@ -80,6 +84,7 @@ public class BillAutomationServices {
 	}
 	
 	
+	// delete price per unit
 	@DELETE
 	@Path("/") 
 	@Consumes(MediaType.APPLICATION_XML) 

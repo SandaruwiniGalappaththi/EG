@@ -35,7 +35,7 @@ public class BillAutomation {
 				return "<html><head><title>Per Unit Page</title>"
 						+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 						+ "</head><body>"
-						+ "<div class='card'><h4 class='text-center'>Error while connecting to the database for reading.</h4></div>"
+						+ "<div class='card'><h4 class='text-center' style='color:brown;'>Error while connecting to the database for reading.</h4></div>"
 						+ "</body></html>";
 			} 
 				
@@ -84,7 +84,7 @@ public class BillAutomation {
 			output = "<html><head><title>Per Unit Page</title>"
 					+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 					+ "</head><body>"
-					+ "<div class='card'><h4 class='text-center'>Error while reading.</h4></div>"
+					+ "<div class='card'><h4 class='text-center' style='color:red;'>Error while reading.</h4></div>"
 					+ "</body></html>";
 			System.err.println(e.getMessage()); 
 		} 
@@ -99,7 +99,7 @@ public class BillAutomation {
 			return "<html><head><title>Per Unit Page</title>"
 					+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 					+ "</head><body>"
-					+ "<div class='card'><h4 class='text-center'>Incorrect bill type</h4></div>"
+					+ "<div class='card'><h4 class='text-center' style='color:red;'>Incorrect bill type</h4></div>"
 					+ "</body></html>"; 	
 		try { 
 			Connection con = connect(); 
@@ -107,7 +107,7 @@ public class BillAutomation {
 				return "<html><head><title>Per Unit Page</title>"
 						+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 						+ "</head><body>"
-						+ "<div class='card'><h4 class='text-center'>Error while connecting to the database for reading.</h4></div>"
+						+ "<div class='card'><h4 class='text-center' style='color:brown;'>Error while connecting to the database for reading.</h4></div>"
 						+ "</body></html>";
 			} 
 			
@@ -149,7 +149,7 @@ public class BillAutomation {
 				return "<html><head><title>Per Unit Page</title>"
 						+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 						+ "</head><body>"
-						+ "<div class='card'><h4 class='text-center'>Incorrect Bill Type</h4></div>"
+						+ "<div class='card'><h4 class='text-center' style='color:red;'>Incorrect Bill Type</h4></div>"
 						+ "</body></html>";
 			}
 			
@@ -176,7 +176,7 @@ public class BillAutomation {
 				return "<html><head><title>Per Unit Page</title>"
 						+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 						+ "</head><body>"
-						+ "<div class='card'><h4 class='text-center'>Error while connecting to the database for inserting.</h4></div>"
+						+ "<div class='card'><h4 class='text-center' style='color:brown;'>Error while connecting to the database for inserting.</h4></div>"
 						+ "</body></html>";
 			}
 			
@@ -186,7 +186,7 @@ public class BillAutomation {
 				output = "<html><head><title>Per Unit Page</title>"
 						+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 						+ "</head><body>"
-						+ "<div class='card'><h4 class='text-center'>Total Mismatch</h4></div>"
+						+ "<div class='card'><h4 class='text-center' style='color:red;'>Total Mismatch</h4></div>"
 						+ "</body></html>";
 				return output;
 			}
@@ -208,14 +208,14 @@ public class BillAutomation {
 			output = "<html><head><title>Per Unit Page</title>"
 					+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 					+ "</head><body>"
-					+ "<div class='card'><h4 class='text-center'>Inserted successfully</h4></div>"
+					+ "<div class='card'><h4 class='text-center' style='color:green;'>Inserted successfully</h4></div>"
 					+ "</body></html>"; 
 		} 
 		catch (Exception e) { 
 			output = "<html><head><title>Per Unit Page</title>"
 					+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 					+ "</head><body>"
-					+ "<div class='card'><h4 class='text-center'>Error while inserting</h4></div>"
+					+ "<div class='card'><h4 class='text-center' style='color:red;'>Error while inserting</h4></div>"
 					+ "</body></html>"; 
 			System.err.println(e.getMessage()); 
 		} 
@@ -230,7 +230,7 @@ public class BillAutomation {
 			return "<html><head><title>Per Unit Page</title>"
 					+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 					+ "</head><body>"
-					+ "<div class='card'><h4 class='text-center'>Incorrect bill type</h4></div>"
+					+ "<div class='card'><h4 class='text-center' style='color:red;'>Incorrect bill type</h4></div>"
 					+ "</body></html>"; 	
 		try { 
 			Connection con = connect(); 
@@ -238,7 +238,7 @@ public class BillAutomation {
 				return "<html><head><title>Per Unit Page</title>"
 						+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 						+ "</head><body>"
-						+ "<div class='card'><h4 class='text-center'>Error while connecting to the database for updating.</h4></div>"
+						+ "<div class='card'><h4 class='text-center' style='color:brown;'>Error while connecting to the database for updating.</h4></div>"
 						+ "</body></html>";
 			} 
 			
@@ -248,7 +248,7 @@ public class BillAutomation {
 				output = "<html><head><title>Per Unit Page</title>"
 						+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 						+ "</head><body>"
-						+ "<div class='card'><h4 class='text-center'>Total Mismatch</h4></div>"
+						+ "<div class='card'><h4 class='text-center' style='color:red;'>Total Mismatch</h4></div>"
 						+ "</body></html>";
 				return output;
 			}
@@ -272,14 +272,14 @@ public class BillAutomation {
 			output = "<html><head><title>Per Unit Page</title>"
 					+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 					+ "</head><body>"
-					+ "<div class='card'><h4 class='text-center'>Updated Successfully</h4></div>"
+					+ "<div class='card'><h4 class='text-center' style='color:blue;'>Updated Successfully</h4></div>"
 					+ "</body></html>";
 		} 
 		catch (Exception e) { 
 			output = "<html><head><title>Per Unit Page</title>"
 					+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 					+ "</head><body>"
-					+ "<div class='card'><h4 class='text-center'>Error while updating</h4></div>"
+					+ "<div class='card'><h4 class='text-center' style='color:red;'>Error while updating</h4></div>"
 					+ "</body></html>";
 			System.err.println(e.getMessage()); 
 		} 
@@ -294,7 +294,7 @@ public class BillAutomation {
 			return "<html><head><title>Per Unit Page</title>"
 					+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 					+ "</head><body>"
-					+ "<div class='card'><h4 class='text-center'>Incorrect bill type</h4></div>"
+					+ "<div class='card'><h4 class='text-center' style='color:red;'>Incorrect bill type</h4></div>"
 					+ "</body></html>"; 	
 		try { 
 			Connection con = connect(); 
@@ -302,7 +302,7 @@ public class BillAutomation {
 				return "<html><head><title>Per Unit Page</title>"
 						+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 						+ "</head><body>"
-						+ "<div class='card'><h4 class='text-center'>Error while connecting to the database for deleting.</h4></div>"
+						+ "<div class='card'><h4 class='text-center' style='color:brown;'>Error while connecting to the database for deleting.</h4></div>"
 						+ "</body></html>";
 			} 
 			
@@ -319,7 +319,7 @@ public class BillAutomation {
 			output = "<html><head><title>Per Unit Page</title>"
 					+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 					+ "</head><body>"
-					+ "<div class='card'><h4 class='text-center'>Deleted successfully</h4></div>"
+					+ "<div class='card'><h4 class='text-center' style='color:red;'>Deleted successfully</h4></div>"
 					+ "</body></html>";
 		}
 		catch (Exception e) 
@@ -327,7 +327,7 @@ public class BillAutomation {
 			output = "<html><head><title>Per Unit Page</title>"
 					+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 					+ "</head><body>"
-					+ "<div class='card'><h4 class='text-center'>Error while deleting</h4></div>"
+					+ "<div class='card'><h4 class='text-center' style='color:red;'>Error while deleting</h4></div>"
 					+ "</body></html>";
 			System.err.println(e.getMessage()); 
 		} 
@@ -344,7 +344,7 @@ public class BillAutomation {
 				return "<html><head><title>Per Unit Page</title>"
 						+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 						+ "</head><body>"
-						+ "<div class='card'><h4 class='text-center'>Error while connecting to the database for reading.</h4></div>"
+						+ "<div class='card'><h4 class='text-center' style='color:brown;'>Error while connecting to the database for reading.</h4></div>"
 						+ "</body></html>";
 			} 
 			
