@@ -70,6 +70,72 @@ public class Payment{
             } 
             return output; 
         } 
+    
+    //Read Payment
+    public String readPayment(){ 
+        String output = ""; 
+        try { 
+            Connection con = connect(); 
+            if (con == null) {
+                return "Error while connecting to the database for reading."; 
+            } 
+      
+            // Prepare the HTML table to be displayed
+            output = "<html><head><title>Payment</title>"
+                    + "<link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC\" crossorigin=\"anonymous\">"
+                    + "</head><body><table class='table' border='1'><tr>"
+                    + "<th>Name</th>"
+                    + "<th>Account Number</th>" 
+                    + "<th>CVV</th>" 
+                    + "<th>EXP_Date</th>" 
+                    + "<th>Phone</th>"
+                    + "<th>Email</th>"
+                    + "<th>Update</th>"
+                    + "<th>Remove</th></tr>"; 
+   
+            String query = "select * from Payment_details"; 
+            Statement stmt = con.createStatement(); 
+            ResultSet rs = stmt.executeQuery(query); 
+  
+            // iterate through the rows in the result set
+            while (rs.next()) { 
+                String name = rs.getString("name"); 
+                String accNumber  = rs.getString("accNumber"); 
+                String cvv     = rs.getString("cvv"); 
+                Date expDate =rs.getDate("expDate"); 
+                String phone  =rs.getString("phone"); 
+                String email= rs.getString("email"); 
+
+      
+                // Add into the HTML table
+                output += "<tr><td>"+name + "</td>"; 
+                output += "<td>"    +accNumber + "</td>"; 
+                output += "<td>"    + cvv+ "</td>"; 
+                output += "<td>"    +expDate + "</td>"; 
+                output += "<td>"    +phone + "</td>"; 
+                output += "<td>"    +email+ "</td>"; 
+                
+      
+          // buttons
+          output += "<td><input name='btnUpdate' type='button' value='Update' class='btn btn-secondary'></td>"
+                      + "<td><form method='post' action='items.jsp'>"
+                      + "<input name='btnRemove' type='submit' value='Remove' class='btn btn-danger'>"
+                      + "<input name='itemID' type='hidden' value='" + name
+                      + "'>" + "</form></td></tr>"; 
+            }     
+  
+            con.close(); 
+  
+            // Complete the HTML table
+            output += "</table></body></html>"; 
+        } 
+        catch (Exception e) { 
+            output = "Error while reading the Payments."; 
+            System.err.println(e.getMessage()); 
+        } 
+        return output;            
+      }
+
 
 
 }
