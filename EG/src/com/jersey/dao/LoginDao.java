@@ -32,7 +32,7 @@ public class LoginDao {
 					+ "<th>Name</th>"
 					+ "<th>Email</th>" 
 					+ "<th>Password</th>" 
-					+ "<th>Mobile</th>" 
+					+ "<th>Account Number</th>" 
 					+ "<th>Update Account</th>"
 					+ "<th>Remove Account</th></tr>"; 
 			
@@ -57,7 +57,7 @@ public class LoginDao {
 						jsonObject2.put("name",rs.getString(1));
 						jsonObject2.put("email",rs.getString(2));
 						jsonObject2.put("password",rs.getString(3));
-						jsonObject2.put("mobile",rs.getString(4));
+						jsonObject2.put("accountNo",rs.getString(4));
 						JSONArray jsonArray = new JSONArray();
 						jsonArray.put(jsonObject2);
 						
@@ -65,7 +65,7 @@ public class LoginDao {
 						 String name = rs.getString("name"); 
 						 String email = rs.getString("email"); 
 						 String password = rs.getString("password") ; 
-						 String mobile = rs.getString("mobile");
+						 String accountNo = rs.getString("accountNo");
 						 String otp = Integer.toString(rs.getInt("otp"));
 						
 						
@@ -73,7 +73,7 @@ public class LoginDao {
 						 output += "<tr><td>" + name + "</td>"; 
 						 output += "<td>" + email + "</td>"; 
 						 output += "<td>" + password + "</td>"; 
-						 output += "<td>" + mobile + "</td>"; 
+						 output += "<td>" + accountNo + "</td>"; 
 						// buttons
 						 output +="<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 								+ "<td><input name='btnUpdate' type='button' value='Update' class='btn btn-secondary'></td>"

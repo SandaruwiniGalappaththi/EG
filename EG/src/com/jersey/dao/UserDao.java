@@ -72,7 +72,7 @@ public static String registerDao(UserBean rs)
 			ps.setString(1, rs.getName());
 			ps.setString(2, rs.getEmail());
 			ps.setString(3, rs.getPassword());
-			ps.setString(4, rs.getMobile());
+			ps.setString(4, rs.getAccountNo());
 			ps.setInt(5, otp);
 			ps.setString(6, "inactive");
 			int i=ps.executeUpdate();  

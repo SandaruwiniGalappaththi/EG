@@ -1,21 +1,17 @@
 package Login;
 
-//package com.jersey.bean;
 
 public class UserBean {
 
-private String name, email,password,mobile;
+private String name, email,password,accountNo;
 
-/*public UserBean(String asString, String asString1, String asString2, String asString3) {
+public String getAccountNo() {
+	return accountNo;
+}
 
-	this.setName(asString);
-	this.setEmail(asString1);
-    this.setPassword(asString2);
-	this.setMobile(asString3);
-
-} */
-
-
+public void setAccountNo(String accountNo) {
+	this.accountNo = accountNo;
+}
 
 public String getName() {
 	return name;
@@ -40,15 +36,6 @@ public String getPassword() {
 public void setPassword(String password) {
 	this.password = password;
 }
-
-public String getMobile() {
-	return mobile;
-}
-
-public void setMobile(String mobile) {
-	this.mobile = mobile;
-}
-
 
 	
 }

@@ -33,10 +33,10 @@ public class SearchUser {
 					+ "<th>Payment Status</th></tr>"; 
 					
 			
-			PreparedStatement ps=con.prepareStatement("select * from user where mobile=?");
-			ps.setString(1,searchUserBean.getMobile());
+			PreparedStatement ps=con.prepareStatement("select * from user where accountNo=?");
+			ps.setString(1,searchUserBean.getAccountNo());
 			ResultSet rs = ps.executeQuery();
-			System.out.println(searchUserBean.getMobile());
+			System.out.println(searchUserBean.getAccountNo());
 			
 			if(rs.next())
 			{

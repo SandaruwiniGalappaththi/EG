@@ -26,7 +26,7 @@ public class AdminLoginDao {
 					+ "</head><body><table class='table' border='1'><tr>"
 					+ "<th>Name</th>"
 					+ "<th>Email</th>" 
-					+ "<th>Mobile</th>" 
+					+ "<th>Account Number</th>" 
 					+ "<th>Status</th>" 
 					+ "<th>Search User</th>"
 					+ "<th>Download</th></tr>"; 
@@ -41,7 +41,7 @@ public class AdminLoginDao {
 			
 			if(rs.next())
 			{
-				PreparedStatement ps2=con.prepareStatement("select name,email,mobile,status from user");
+				PreparedStatement ps2=con.prepareStatement("select name,email,accountNo,status from user");
 				ResultSet rrs = ps2.executeQuery();
 			
 				while(rrs.next()) {
@@ -49,7 +49,7 @@ public class AdminLoginDao {
 					
 					 String name = rrs.getString("name"); 
 					 String email = rrs.getString("email"); 
-					 String mobile = rrs.getString("mobile") ; 
+					 String accountNo = rrs.getString("accountNo") ; 
 					 String status = rrs.getString("status");
 //					 String otp = Integer.toString(rs.getInt("otp"));
 					 
@@ -57,7 +57,7 @@ public class AdminLoginDao {
 						// Add into the html table
 						 output += "<tr><td>" + name + "</td>"; 
 						 output += "<td>" + email + "</td>"; 
-						 output += "<td>" + mobile + "</td>"; 
+						 output += "<td>" + accountNo + "</td>"; 
 						 output += "<td>" + status + "</td>"; 
 						// buttons
 						 output +="<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
