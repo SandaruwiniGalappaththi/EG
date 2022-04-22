@@ -104,7 +104,7 @@ public class PowerCutMail {
 								String end = rs.getString("end"); 
 								String onDate = rs.getString("onDate");
 				                          //get consumer information in those locations
-										String query1 = "select * from consumerinfo where location='"+location+"'"; 
+										String query1 = "select * from consumerinfo where location='"+location+"' and alertSet=true"; 
 										Statement stmt1 = con.createStatement(); 
 										ResultSet rs1 = stmt1.executeQuery(query1); 
 									 	while(rs1.next()) {
