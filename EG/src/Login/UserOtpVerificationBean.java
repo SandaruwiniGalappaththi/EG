@@ -1,7 +1,5 @@
 package Login;
 
-//package com.jersey.bean;
-
 public class UserOtpVerificationBean {
     
 	public String getEmail() {

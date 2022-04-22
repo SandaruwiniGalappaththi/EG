@@ -2,13 +2,13 @@ package Login;
 
 public class SearchUserBean {
 
-	public String mobile;
+	public String accountNo;
 
-	public String getMobile() {
-		return mobile;
+	public String getAccountNo() {
+		return accountNo;
 	}
 
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
+	public void setAccountNo(String accountNo) {
+		this.accountNo = accountNo;
 	}
 }

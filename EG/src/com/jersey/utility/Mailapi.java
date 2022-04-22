@@ -26,8 +26,8 @@ public class Mailapi {
 		
 		try {
 			
-			final String from="saradawijesinghe@gmail.com";
-			final String fromPassword="sscsuppa123";
+			final String from="egelectromaster@gmail.com";
+			final String fromPassword="Saradasupun123456";
 		//	String to="suppa562@gmail.com";
 			
 			Properties props = new Properties();
@@ -50,10 +50,10 @@ public class Mailapi {
 			message.setSubject("otp");
 			message.setSubject("Welcome to EG Group");
 			message.setContent( "<div style='max-width: 700px; margin:auto; border: 10px solid #ddd; padding: 50px 20px; font-size: 110%;'>"
-					       		+ "<h2 style='text-align: center; text-transform: uppercase;color: teal;'>Welcome EG Mail Serivice</h2>"
+					       		+ "<h2 style='text-align: center; text-transform: uppercase;color: teal;'>Welcome To EG Mail Serivice</h2>"
 					       		+"<center><p>" +txt+ "</p>"
 					       		+ "<h2>Your Otp Code:" +i
-								+"</h2><h2><a href=''><button style='background: crimson; text-decoration: none; color: white; padding: 10px 20px; margin: 10px 0; display: inline-block;'>" +value+ "</button></a>"
+								+"</h2><h2><a href='https://courseweb.sliit.lk/login/index.php'><button style='background: crimson; text-decoration: none; color: white; padding: 10px 20px; margin: 10px 0; display: inline-block;'>" +value+ "</button></a>"
 								+"</h2><c/enter>", "text/html");
 					         
 			//send message

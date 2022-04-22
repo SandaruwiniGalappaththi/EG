@@ -6,8 +6,16 @@ public class AdminLoaginBean {
 
 	//import java.io.Serializable
 		
-		public String name,email,password,mobile,status;
+		public String name,email,password,accountNo,status;
 		
+
+		public String getAccountNo() {
+			return accountNo;
+		}
+
+		public void setAccountNo(String accountNo) {
+			this.accountNo = accountNo;
+		}
 
 		public String getName() {
 			return name;
@@ -17,14 +25,7 @@ public class AdminLoaginBean {
 			this.name = name;
 		}
 
-		public String getMobile() {
-			return mobile;
-		}
-
-		public void setMobile(String mobile) {
-			this.mobile = mobile;
-		}
-
+		
 		public String getStatus() {
 			return status;
 		}
