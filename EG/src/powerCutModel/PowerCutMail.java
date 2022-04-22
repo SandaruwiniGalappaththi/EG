@@ -5,6 +5,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -99,9 +103,7 @@ public class PowerCutMail {
 				String start = rs.getString("start");
 				String end = rs.getString("end"); 
 				String onDate = rs.getString("onDate");
-				//place = location;
-				//output +=location;
-			
+				
 				
 				
 				
@@ -110,8 +112,8 @@ public class PowerCutMail {
 				ResultSet rs1 = stmt1.executeQuery(query1); 
 			 	while(rs1.next()) {
 					String name = rs1.getString("consumerName");
+					int ID = rs1.getInt("ID");
 					String consumerEmail = rs1.getString("email");
-					//output += consumerEmail;
 					sendPowerCutMail(consumerEmail,location,start,end,onDate);	
 					output= "MAILS ARE SENT SUCCESSFULLY!!!";
 					
@@ -120,12 +122,12 @@ public class PowerCutMail {
 					 // binding values
 					 preparedStmt.setBoolean(1, status);
 					 preparedStmt.setString(2, location);
-					 
 					 // execute the statement
 					 preparedStmt.execute();
+					 String ok = "hello";
+					 insertMailData(ID,location,status);
 					 
-					 
-					
+			        	
 			 	}
 		 	}
 		 	con.close();
@@ -137,6 +139,41 @@ public class PowerCutMail {
 	  }
 	
 
+  }
+  
+  
+  
+  public void insertMailData(int consumerID1,String location1,Boolean status1) {
+	  
+	  try
+		 {
+			 	Connection con = connect();
+			 	if (con == null)
+		 {
+			 		System.out.println("Error while connecting to the database for inserting.");
+			 		}
+	  Date date = Calendar.getInstance().getTime();  
+      DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  
+      String dateAndTime = dateFormat.format(date);
+	  
+	  System.out.println("here");
+      //insert data to power cut mail alert table
+		 String query3 = "insert into powercutmailalert(ID,consumerID,location,mailSent,datetime)" + " values (?, ?, ?, ?, ?)";
+		 	PreparedStatement preparedStmt1 = con.prepareStatement(query3);
+		 		// binding values
+		 	    preparedStmt1.setInt(1,0);
+		 		preparedStmt1.setInt(2,consumerID1);
+				preparedStmt1.setString(3, location1);
+				preparedStmt1.setBoolean(4, status1);
+				preparedStmt1.setString(5, dateAndTime);
+				// execute the statement
+				preparedStmt1.executeUpdate();
+		
+		 }catch(Exception e) {
+			 System.out.println(e);
+		 }
+		
+	  
   }
 
 }

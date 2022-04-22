@@ -9,8 +9,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.parser.Parser;
 @Path("/displayBySearch")
-public class DisplayS {
-	DisplayM d = new DisplayM();
+public class TimeTableService {
+	TimeTable d = new TimeTable();
 	@GET
 	@Path("/")
 	@Produces(MediaType.TEXT_HTML)
@@ -24,13 +24,13 @@ public String readzone()
 	@GET
 	@Path("/searchAcc")
 	@Produces(MediaType.TEXT_HTML) 
-	public String read(String itemData) {		
+	public String readByAcc(String itemData) {		
 		//Convert the input string to an XML document
 		try {
 			Document doc = Jsoup.parse(itemData, "", Parser.xmlParser()); 
 			//Read the value from the element <accountNo>
 			String accountNo = doc.select("accountNo").text(); 
-			String output = d.read(accountNo); 
+			String output = d.readByAcc(accountNo); 
 			return output;
 		}catch(Exception e) {
 		String output = "error";
