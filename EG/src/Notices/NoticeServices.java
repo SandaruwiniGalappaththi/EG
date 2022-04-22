@@ -37,17 +37,24 @@ Notice noticeObj = new Notice();
 	} 
 	
 	
+	
+	
+	
+	
 	//insert data
 			@POST
 			@Path("/") 
 			@Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
 			@Produces(MediaType.TEXT_PLAIN) 
 			public String insertNotice(@FormParam("noticeType") String noticeType, 
-			 @FormParam("noticeDate") String noticeDate, 
-			 
-			 @FormParam("noticeDesc") String noticeDesc) 
+			@FormParam("noticeType") String noticeCode, 
+			@FormParam("noticeDate") String noticeDate,
+			@FormParam("noticeTopic") String noticeTopic,   
+			@FormParam("noticeDesc") String noticeDesc,
+			@FormParam("noticePerson") String noticePerson,
+			@FormParam("noticeMails") String noticeMails)
 			{ 
-			 String output = noticeObj.inserNotice(noticeType, noticeDate, noticeDesc); 
+			 String output = noticeObj.inserNotice(noticeType,noticeCode, noticeDate, noticeTopic, noticeDesc, noticePerson,noticeMails); 
 			return output; 
 			}
 	
@@ -70,10 +77,13 @@ Notice noticeObj = new Notice();
 			//Read the values from the JSON object
 			 String noticeID = noticeObject.get("noticeID").getAsString(); 
 			 String noticeType = noticeObject.get("noticeType").getAsString(); 
+			 String noticeCode = noticeObject.get("noticeType").getAsString(); 
 			 String noticeDate = noticeObject.get("noticeDate").getAsString(); 
-			 //String itemPrice = noticeObject.get("itemPrice").getAsString(); 
-			 String noticeDesc = noticeObject.get("noticeDesc").getAsString(); 
-			 String output = noticeObj.updateNotice(noticeID, noticeType, noticeDate, noticeDesc); 
+			 String noticeTopic = noticeObject.get("noticeTopic").getAsString();  
+			 String noticeDesc = noticeObject.get("noticeDesc").getAsString();
+			 String noticePerson = noticeObject.get("noticePerson").getAsString();  
+			 String noticeMails = noticeObject.get("noticeMails").getAsString();  
+			 String output = noticeObj.updateNotice(noticeID, noticeType, noticeCode, noticeDate,noticeTopic, noticeDesc, noticePerson,noticeMails); 
 			return output; 
 			}
 			
@@ -90,7 +100,7 @@ Notice noticeObj = new Notice();
 			//Convert the input string to an XML document
 			 Document doc = Jsoup.parse(noticeData, "", Parser.xmlParser()); 
 			 
-			//Read the value from the element <itemID>
+			//Read the value from the element <noticeID>
 			 String noticeID = doc.select("noticeID").text(); 
 			 String output = noticeObj.deleteNotice(noticeID); 
 			return output; 
