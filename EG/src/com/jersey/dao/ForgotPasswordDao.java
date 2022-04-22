@@ -17,7 +17,7 @@ public class ForgotPasswordDao {
 	public static String forgotpassword(ForgotPasswordBean forgotPasswordBean)
 	{
 		Random random = new Random();
-		int i = random.nextInt(1234);
+		int i = random.nextInt(123456);
 		//int otp = new Random().nextInt(345);
 		
 		Connection con=DbConnectionProvider.getConnection();
@@ -28,8 +28,9 @@ public class ForgotPasswordDao {
 			ResultSet rs =ps.executeQuery();
 			if(rs.next())
 			{
+				String txt = "Please click the button below to reset your password.";
 				String value = "Reset Password";
-				Mailapi.sendOtp(i, forgotPasswordBean.getEmail(), value);
+				Mailapi.sendOtp(i, forgotPasswordBean.getEmail(), value, txt);
 				PreparedStatement ps1=con.prepareStatement("update user set otp=? where email=?");
 				ps1.setInt(1, i);
 				ps1.setString(2, forgotPasswordBean.getEmail());

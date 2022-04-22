@@ -23,10 +23,15 @@ public class SearchUser {
 		try {
 			
 
-			output = "<table border='2'><tr><th>Name</th>" +
-					 "<th>Email</th>" +
-					 "<th>Inquiries</th><th>FeedBack</th>" +
-					 "<th>PaymentStatus</th></tr>";
+			output = "<html><head><title>Search User</title>"
+					+ "<link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC\" crossorigin=\"anonymous\">"
+					+ "</head><body><table class='table' border='1'><tr>"
+					+ "<th>Name</th>"
+					+ "<th>Email</th>" 
+					+ "<th>Inquiries</th>" 
+					+ "<th>FeddBack</th>" 
+					+ "<th>Payment Status</th></tr>"; 
+					
 			
 			PreparedStatement ps=con.prepareStatement("select * from user where mobile=?");
 			ps.setString(1,searchUserBean.getMobile());
@@ -58,14 +63,6 @@ public class SearchUser {
 						+ "<td><input name='btnPayment' type='button' value='Pament Status' class='btn btn-secondary'></td>"
 				         + "<input name='otp' type='hidden' value='" + otp + "'>" + "</form></td></tr>";
 				
-				
-				
-			//	PreparedStatement ps1 = con.prepareStatement("update user set status=? where email=?");
-			
-			//	ps1.setString(1,"Logged");
-			//	ps1.setString(2, loginBean.getEmail());
-			//	int i =ps1.executeUpdate();
-				//if(i>0)
 				
 					//return ""+jsonArray;
 				 return ""+ output + "</table>";

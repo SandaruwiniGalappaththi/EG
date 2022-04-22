@@ -21,19 +21,23 @@ public class LoginDao {
 		Connection con =DbConnectionProvider.getConnection();
 		String output= "";
 		
+		
 		try {
 			
 			
-			output = "<table border='1'><tr><th>Name</th>"
-					+ "<th>Email</th>" +
-					 "<th>Password</th>" + 
-					 "<th>Mobile</th>" +
-					 "<th>Update Account</th><th>Remove Account</th></tr>";
+			output = "<html><head><title>User Profile</title>"
+					+ "<link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC\" crossorigin=\"anonymous\">"
+					+ "</head><body><table class='table' border='2'><tr>"
+					+ "<th>Name</th>"
+					+ "<th>Email</th>" 
+					+ "<th>Password</th>" 
+					+ "<th>Mobile</th>" 
+					+ "<th>Update Account</th>"
+					+ "<th>Remove Account</th></tr>"; 
 			
 			PreparedStatement ps=con.prepareStatement("select * from user where email=? and password=?");
 			ps.setString(1,loginBean.getEmail());
 			ps.setString(2,loginBean.getPassword());
-		//	ps.setString(3,loginBean.getStatus());
 			ResultSet rs = ps.executeQuery();
 			System.out.println(loginBean.getEmail());
 			System.out.println(loginBean.getPassword());
@@ -62,7 +66,8 @@ public class LoginDao {
 				 output += "<td>" + password + "</td>"; 
 				 output += "<td>" + mobile + "</td>"; 
 				// buttons
-				 output += "<td><input name='btnUpdate' type='button' value='Update' class='btn btn-secondary'></td>"
+				 output += "<link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC\" crossorigin=\"anonymous\">"
+						+ "<td><input name='btnUpdate' type='button' value='Update' class='btn btn-secondary'></td>"
 				// + "<td><form method='post' action=''>"
 				 + "<td><input name='btnRemove' type='button' value='Remove' class='btn btn-secondary'></td>"
 				 + "<input name='otp' type='hidden' value='" + otp + "'>" + "</form></td></tr>";
