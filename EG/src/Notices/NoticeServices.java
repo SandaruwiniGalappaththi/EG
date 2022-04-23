@@ -19,13 +19,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 //import Notices.Notice;
-
 @Path("/notices")
-
 public class NoticeServices {
-	
-Notice noticeObj = new Notice(); 
-	
+	Notice noticeObj = new Notice(); 
 	//read data
 	@GET
 	@Path("/") 
@@ -35,11 +31,6 @@ Notice noticeObj = new Notice();
 			//return "Hello"; 
 			return noticeObj.readNotices();
 	} 
-	
-	
-	
-	
-	
 	
 	//insert data
 			@POST
@@ -57,21 +48,13 @@ Notice noticeObj = new Notice();
 			 String output = noticeObj.inserNotice(noticeType,noticeCode, noticeDate, noticeTopic, noticeDesc, noticePerson,noticeMails); 
 			return output; 
 			}
-	
-			
-			
-			
-		
-	
-	
 		
 		//update data
 			@PUT
 			@Path("/") 
 			@Consumes(MediaType.APPLICATION_JSON) 
 			@Produces(MediaType.TEXT_PLAIN) 
-			public String updateNotice(String noticeData) 
-			{ 
+			public String updateNotice(String noticeData) { 
 			//Convert the input string to a JSON object 
 			 JsonObject noticeObject = new JsonParser().parse(noticeData).getAsJsonObject(); 
 			//Read the values from the JSON object
@@ -87,25 +70,20 @@ Notice noticeObj = new Notice();
 			return output; 
 			}
 			
-			
-			
 			//delete data
 
 			@DELETE
 			@Path("/") 
 			@Consumes(MediaType.APPLICATION_XML) 
 			@Produces(MediaType.TEXT_PLAIN) 
-			public String deleteItem(String noticeData) 
-			{ 
-			//Convert the input string to an XML document
-			 Document doc = Jsoup.parse(noticeData, "", Parser.xmlParser()); 
+			public String deleteItem(String noticeData) { 
+				//Convert the input string to an XML document
+				Document doc = Jsoup.parse(noticeData, "", Parser.xmlParser()); 
 			 
-			//Read the value from the element <noticeID>
-			 String noticeID = doc.select("noticeID").text(); 
-			 String output = noticeObj.deleteNotice(noticeID); 
-			return output; 
+				//Read the value from the element <noticeID>
+				String noticeID = doc.select("noticeID").text(); 
+				String output = noticeObj.deleteNotice(noticeID); 
+				return output; 
 			}
 			
-			
-
 }
