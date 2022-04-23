@@ -2,7 +2,10 @@ package ContactNumbers;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -10,6 +13,9 @@ import javax.ws.rs.core.MediaType;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.parser.Parser;
+
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 @Path("/Application")
 public class ApplicationServices {
@@ -31,12 +37,35 @@ public class ApplicationServices {
 	//Convert the input string to an XML document 
 	Document doc = Jsoup.parse(itemData, "", Parser.xmlParser());  
     
-  	//Read the value from the element <ContactType> 
+  	//Read the value from the element <ServiceType> 
   	String ServiceType = doc.select("ServiceType").text();  
   	String output = apply.deletePdf(ServiceType);  
   	return output;  
   } 
+ 	/*@PUT
+	@Path("/") 
+	@Consumes(MediaType.APPLICATION_JSON) 
+	@Produces(MediaType.TEXT_PLAIN) 
+	public String updateItem(String itemData) { 
+		//Convert the input string to a JSON object 
+		JsonObject itemObject = new JsonParser().parse(itemData).getAsJsonObject(); 
+		//Read the values from the JSON object
+		String DistrictCode= itemObject.get("DistrictCode").getAsString(); 
+		String Description= itemObject.get("Description").getAsString(); 
+		String ComplainNo= itemObject.get("ComplainNo").getAsString(); 
+		String output = apply.updateContact(DistrictCode,Description,ComplainNo,CustomerServiceNo,NewConnectionsNo,EmergencyNo,Address); 
+		return output;
 	
+	 }*/
 	
-	
+	@POST
+	@Path("/") 
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
+	@Produces(MediaType.TEXT_PLAIN) 
+	public String insertContact(@FormParam("ServiceType") String ServiceType, 
+				 @FormParam("Description") String Description,
+				 @FormParam("Link") String Link) { 
+		String output = apply.insertApplication(ServiceType,Description,Link); 
+		return output; 
+	}
 }
