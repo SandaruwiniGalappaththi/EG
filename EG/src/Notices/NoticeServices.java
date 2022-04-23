@@ -86,4 +86,13 @@ public class NoticeServices {
 				return output; 
 			}
 			
+			@GET
+			@Path("/search")
+			@Produces(MediaType.TEXT_HTML)
+			public String searchNotices(String itemData) {
+				Document doc = Jsoup.parse(itemData, "", Parser.xmlParser()); 
+				String type = doc.select("type").text(); 
+				return noticeObj.searchNotices(type);
+			}
+			
 }

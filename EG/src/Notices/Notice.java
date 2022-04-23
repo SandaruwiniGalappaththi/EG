@@ -176,5 +176,58 @@ public class Notice {
 		} 
 	 return output; 
 	 }
+	
+	public String searchNotices(String type) {
+		
+		String output="";
+		try{ 
+			Connection con = connect(); 
+			if (con == null)  {
+				return "Error while connecting to the database for deleting."; } 
+				
+				output = "<html><link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css\">"
+						+"<table border='1'><tr><th  style=\"background-color:lightgreen;\">Notice Type</th>"+
+						"<th  style=\"background-color:lightgreen;\">Notice Code</th>"+
+						"<th  style=\"background-color:lightgreen;\">Released Date</th>" +
+						"<th  style=\"background-color:lightgreen;\">Notice Tpoic</th>" +
+						"<th  style=\"background-color:lightgreen;\">Notice Description</th>" +
+						"<th  style=\"background-color:lightgreen;\">Published by</th>" +
+						"<th  style=\"background-color:lightgreen;\">Mails</th></tr>"; 
+
+			// create a prepared statement
+			String query = "select * from notices where noticeType='"+type+"'"; 
+			Statement stmt = con.createStatement(); 
+		 	ResultSet rs = stmt.executeQuery(query);
+		 	while(rs.next()) {
+		 		String code = rs.getString("noticeCode"); 
+		 		String date = rs.getString("noticeDate"); 
+				String topic = rs.getString("noticeTopic");
+				String desc = rs.getString("noticeDesc"); 
+				String person = rs.getString("noticePerson");
+				String mails = rs.getString("noticeMails");
+				
+				output += "<td style=\"background-color:lavender;\">" + type + "</td>"; 
+ 				output += "<td>" + code + "</td>"; 
+ 				output += "<td style=\"background-color:lavender;\">" + date + "</td>"; 
+ 				output += "<td>" + topic + "</td>"; 
+ 				output += "<td style=\"background-color:lavender;\">" + desc + "</td>"; 
+ 				output += "<td>" + person + "</td>"; 
+ 				output += "<td style=\"background-color:lavender;\">" + mails + "</td></tr>"; 
+
+				
+		 	}
+			
+			con.close(); 
+	 
+				output += "</table></html>"; 
+
+		} 
+		catch (Exception e) { 
+			output = "Error while searching"; 
+			System.err.println(e.getMessage()); 
+		} 
+		return output;
+		
+	}
 
 }
