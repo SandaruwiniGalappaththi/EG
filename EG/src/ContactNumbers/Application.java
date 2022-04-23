@@ -73,7 +73,9 @@ public class Application {
       }
      
       
-     	//Delete upoaded PDF
+     
+    
+       //Delete upoaded PDF
     	public String deletePdf(String ServiceType){  
     		String output = "";  
     			try {  
@@ -117,40 +119,44 @@ public class Application {
     			
     			
     			
-    	}			
-    			//Insert Application
-				public String insertApplication(String ServiceType, String Description, String Link) { 
-					      String output = ""; 
-					        try { 
-					        	Connection con = connect(); 
-					        	if (con == null) {
-					        		return "<html><head><title>Application Page</title>"
-					        				+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
-					        				+ "</head><body>"
-					        				+ "<div class='card'><h4 class='text-center'><marquee>Error while connecting to the database for inserting.</marquee></h4></div>"
-					        				+ "</body></html>";
-					        	}
+    	}	
+    	
+    	
+    	
+    	
+    	//Insert Application
+		public String insertApplication(String ServiceType, String Description, String Link) { 
+		      String output = ""; 
+		        try { 
+		        	Connection con = connect(); 
+		        	if (con == null) {
+	        		return "<html><head><title>Application Page</title>"
+	        				+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+	        				+ "</head><body>"
+	        				+ "<div class='card'><h4 class='text-center'><marquee>Error while connecting to the database for inserting.</marquee></h4></div>"
+	        				+ "</body></html>";
+		        	 }
 						
 
-						// create a prepared statement
-						String query = "insert into application(ServiceType,Description,Link)" + " values(?, ?, ?)"; 
-						PreparedStatement preparedStmt = con.prepareStatement(query); 
-							// binding values
-							preparedStmt.setString(1,ServiceType); 
-							preparedStmt.setString(2,Description); 
-							preparedStmt.setString(3,Link); 
+					// create a prepared statement
+					String query = "insert into application(ServiceType,Description,Link)" + " values(?, ?, ?)"; 
+					PreparedStatement preparedStmt = con.prepareStatement(query); 
+						// binding values
+						preparedStmt.setString(1,ServiceType); 
+						preparedStmt.setString(2,Description); 
+						preparedStmt.setString(3,Link); 
 
 						
-							// execute the statement
-							preparedStmt.execute(); 
-							con.close(); 
-							output = "<html><head><title>Per Unit Page</title>"
-									+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
-									+ "</head><body>"
-									+ "<div class='card'><h4 class='text-center' style=\\\"color: red;\\>Inserted successfully</h4></div>"
-									+ "</body></html>"; 
+						// execute the statement
+						preparedStmt.execute(); 
+						con.close(); 
+						output = "<html><head><title>Per Unit Page</title>"
+							   + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+							   + "</head><body>"
+							   + "<div class='card'><h4 class='text-center' style=\\\"color: red;\\>Inserted successfully</h4></div>"
+							   + "</body></html>"; 
 						} 
-						catch (Exception e) { 
+				catch (Exception e) { 
 							output = "<html><head><title>Per Unit Page</title>"
 									+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 									+ "</head><body>"
@@ -160,8 +166,58 @@ public class Application {
 						} 
 						return output; 
 					
-    }  
+      }  
     
+		//Update Apply
+		public String updateApply(String ServiceType, String Description, String Link ) { 
+					String output = ""; 
+					try { 
+						Connection con = connect(); 
+							if (con == null) {
+								return "<html><head><title>Update Page</title>"
+								+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+								+ "</head><body>"
+								+ "<div class='card'><h4 class='text-center'>Error while connecting to the database for updating.</h4></div>"
+								+ "</body></html>";
+							} 
+											
+
+							// create a prepared statement
+							String query = "UPDATE application SET Description=?, Link=? WHERE ServiceType=?"; 
+							PreparedStatement preparedStmt = con.prepareStatement(query); 
+										
+											
+							// binding values		
+						
+							preparedStmt.setString(1,Description); 
+							preparedStmt.setString(2,Link); 
+							preparedStmt.setString(3,ServiceType); 
+				
+											
+							// execute the statement
+							preparedStmt.execute(); 
+							con.close(); 
+		                                     
+							output = "<html><head><title>Contact Page</title>"
+									+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+									+ "</head><body>"
+									+ "<div class='card'><h4 class='text-center' style=\"color: red;\"> Updated Successfully</h4></div>"
+									+ "</body></html>";
+					
+							} 
+						
+							catch (Exception e) { 
+										output = "<html><head><title>Contact Page</title>"
+												+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+												+ "</head><body>"
+											    + "<div class='card'><h4 class='text-center'>Error while updating</h4></div>"
+												+ "</body></html>";
+											System.err.println(e.getMessage()); 
+										} 
+										return output; 
+									}
+							
+		   } 
+				
      
-     
-}
+

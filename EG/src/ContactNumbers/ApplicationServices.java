@@ -29,11 +29,12 @@ public class ApplicationServices {
 	return apply.getPdf();	
 	}
 	
+	
  	@DELETE 
  	@Path("/")  
  	@Consumes(MediaType.APPLICATION_XML)  
  	@Produces(MediaType.TEXT_PLAIN)  
- 	public String deleteNo(String itemData) {  
+ 	public String deletePdf(String itemData) {  
 	//Convert the input string to an XML document 
 	Document doc = Jsoup.parse(itemData, "", Parser.xmlParser());  
     
@@ -41,22 +42,24 @@ public class ApplicationServices {
   	String ServiceType = doc.select("ServiceType").text();  
   	String output = apply.deletePdf(ServiceType);  
   	return output;  
-  } 
- 	/*@PUT
+    } 
+ 	
+ 	
+    @PUT
 	@Path("/") 
 	@Consumes(MediaType.APPLICATION_JSON) 
 	@Produces(MediaType.TEXT_PLAIN) 
-	public String updateItem(String itemData) { 
+	public String updateApply(String itemData) { 
 		//Convert the input string to a JSON object 
 		JsonObject itemObject = new JsonParser().parse(itemData).getAsJsonObject(); 
 		//Read the values from the JSON object
-		String DistrictCode= itemObject.get("DistrictCode").getAsString(); 
+		String ServiceType= itemObject.get("ServiceType").getAsString(); 
 		String Description= itemObject.get("Description").getAsString(); 
-		String ComplainNo= itemObject.get("ComplainNo").getAsString(); 
-		String output = apply.updateContact(DistrictCode,Description,ComplainNo,CustomerServiceNo,NewConnectionsNo,EmergencyNo,Address); 
+		String Link= itemObject.get("Link").getAsString(); 
+		String output = apply.updateApply(ServiceType,Description,Link); 
 		return output;
 	
-	 }*/
+	 }
 	
 	@POST
 	@Path("/") 

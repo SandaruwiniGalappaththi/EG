@@ -20,7 +20,6 @@ import com.google.gson.JsonParser;
  
 
 
-
 @Path("/Contacts")
 public class ContactServices {
 	
