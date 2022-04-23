@@ -131,12 +131,12 @@ public class Contacts {
 					
 		        			  // Add into the HTML table
 		        			  output += "<tr><td>"+DistrictCode + "</td>"; 
-			        		  output += "<td>"    +Description + "</td>"; 
-							  output += "<td>"    + ComplainNo+ "</td>"; 
-							  output += "<td>"    +CustomerServiceNo + "</td>"; 
-							  output += "<td>"    +NewConnectionsNo + "</td>"; 
-							  output += "<td>"    +EmergencyNo+ "</td>"; 
-							  output += "<td>"    +Address+ "</td>"; 
+			        		  output += "<td>"+Description + "</td>"; 
+							  output += "<td>"+ ComplainNo+ "</td>"; 
+							  output += "<td>"+CustomerServiceNo + "</td>"; 
+							  output += "<td>"+NewConnectionsNo + "</td>"; 
+							  output += "<td>"+EmergencyNo+ "</td>"; 
+							  output += "<td>"+Address+ "</td>"; 
 					
 						// buttons
 						output += "<td><input name='btnUpdate' type='button' value='Update' class='btn btn-secondary'></td>"

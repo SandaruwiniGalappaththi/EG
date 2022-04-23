@@ -55,13 +55,13 @@ public class ContactServices {
 	 	@Consumes(MediaType.APPLICATION_XML)  
 	 	@Produces(MediaType.TEXT_PLAIN)  
 	 	public String deleteNo(String itemData) {  
-		//Convert the input string to an XML document 
-		Document doc = Jsoup.parse(itemData, "", Parser.xmlParser());  
+	 		//Convert the input string to an XML document 
+	 		Document doc = Jsoup.parse(itemData, "", Parser.xmlParser());  
 	    
-	  	//Read the value from the element <billType> 
-	  	String DistrictCode = doc.select("DistrictCode").text();  
-	  	String output = contact.deleteContact(DistrictCode);  
-	  	return output;  
+	 		//Read the value from the element <billType> 
+	 		String DistrictCode = doc.select("DistrictCode").text();  
+	 		String output = contact.deleteContact(DistrictCode);  
+	 		return output;  
 	  } 
 	
 
@@ -71,12 +71,12 @@ public class ContactServices {
 		@Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
 		@Produces(MediaType.TEXT_PLAIN) 
 		public String insertContact(@FormParam("DistrictCode") String DistrictCode, 
-								 @FormParam("Description") String Description, 
-								 @FormParam("ComplainNo") String ComplainNo,
-								 @FormParam("CustomerServiceNo") String CustomerServiceNo, 
-								 @FormParam("NewConnectionsNo") String NewConnectionsNo, 
-								 @FormParam("EmergencyNo") String EmergencyNo,
-								 @FormParam("Address") String Address) { 
+					 @FormParam("Description") String Description, 
+					 @FormParam("ComplainNo") String ComplainNo,
+					 @FormParam("CustomerServiceNo") String CustomerServiceNo, 
+					 @FormParam("NewConnectionsNo") String NewConnectionsNo, 
+					 @FormParam("EmergencyNo") String EmergencyNo,
+					 @FormParam("Address") String Address) { 
 			String output = contact.insertContact(DistrictCode,Description,ComplainNo,CustomerServiceNo,NewConnectionsNo,EmergencyNo,Address); 
 			return output; 
 		}
@@ -88,16 +88,16 @@ public class ContactServices {
 		public String updateItem(String itemData) { 
 			//Convert the input string to a JSON object 
 			JsonObject itemObject = new JsonParser().parse(itemData).getAsJsonObject(); 
-		//Read the values from the JSON object
-		String DistrictCode= itemObject.get("DistrictCode").getAsString(); 
-		String Description= itemObject.get("Description").getAsString(); 
-		String ComplainNo= itemObject.get("ComplainNo").getAsString(); 
-		String CustomerServiceNo= itemObject.get("CustomerServiceNo").getAsString(); 
-		String NewConnectionsNo= itemObject.get("NewConnectionsNo").getAsString(); 
-		String EmergencyNo= itemObject.get("EmergencyNo").getAsString(); 
-		String Address= itemObject.get("Address").getAsString();
-		String output = contact.updateContact(DistrictCode,Description,ComplainNo,CustomerServiceNo,NewConnectionsNo,EmergencyNo,Address); 
-		return output;
+			//Read the values from the JSON object
+			String DistrictCode= itemObject.get("DistrictCode").getAsString(); 
+			String Description= itemObject.get("Description").getAsString(); 
+			String ComplainNo= itemObject.get("ComplainNo").getAsString(); 
+			String CustomerServiceNo= itemObject.get("CustomerServiceNo").getAsString(); 
+			String NewConnectionsNo= itemObject.get("NewConnectionsNo").getAsString(); 
+			String EmergencyNo= itemObject.get("EmergencyNo").getAsString(); 
+			String Address= itemObject.get("Address").getAsString();
+			String output = contact.updateContact(DistrictCode,Description,ComplainNo,CustomerServiceNo,NewConnectionsNo,EmergencyNo,Address); 
+			return output;
 		
 		 }
 	
