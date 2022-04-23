@@ -70,7 +70,7 @@ public class SearchUser {
 				
 				
 			
-			else 
+			else    
 			{
 				return "fail";
 			}
