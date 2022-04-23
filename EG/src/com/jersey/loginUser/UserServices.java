@@ -34,14 +34,14 @@ import Login.LoginBean;
 import Login.AdminLoaginBean;
 import Login.UserOtpVerificationBean;
 
-import com.jersey.dao.AdminLoginDao;
-import com.jersey.dao.ChangePasswordDao;
-import com.jersey.dao.ForgotPasswordDao;
-import com.jersey.dao.LoginDao;
+import com.jersey.dao.AdminLogin;
+import com.jersey.dao.ChangePassword;
+import com.jersey.dao.ForgotPassword;
+import com.jersey.dao.Login;
 import com.jersey.dao.RestPassword;
 import com.jersey.dao.SearchUser;
-import com.jersey.dao.UserDao;
-import com.jersey.dao.UserOtpVerificationDao;
+import com.jersey.dao.UserRegister;
+import com.jersey.dao.UserOtpVerification;
 import Login.RestPasswordBean;
 import Login.SearchUserBean;
 
@@ -70,7 +70,7 @@ public class UserServices
     	
     	ObjectMapper mapper = new ObjectMapper();
     	UserBean userbean = mapper.readValue(userdata, UserBean.class);
-    	str = UserDao.registerDao(userbean);
+    	str = UserRegister.registerDao(userbean);
  
     
     	
@@ -131,7 +131,7 @@ public class UserServices
     		ObjectMapper objectMapper = new ObjectMapper();
     		LoginBean loginBean = objectMapper.readValue(userdata, LoginBean.class);
     	
-    String str = LoginDao.login(loginBean);
+    String str = Login.login(loginBean);
     
     	if(str.equals("Please Verify Your Otp Number.")){
     		
@@ -184,7 +184,7 @@ public class UserServices
     		
     		ObjectMapper objectMapper = new ObjectMapper();
     		UserOtpVerificationBean otpVerificationBean=objectMapper.readValue(userdata,UserOtpVerificationBean.class);
-    		String str=UserOtpVerificationDao.OtpVerification(otpVerificationBean);
+    		String str=UserOtpVerification.OtpVerification(otpVerificationBean);
     		if(str.equals("success"))
     				{
     				   return "<html><head><title>Verifing Otp</title>"
@@ -233,7 +233,7 @@ public class UserServices
     		//boolean str1=ChangePasswordDao.changePasswordUser(changePasswordBean);
     		//if(str==true && str1==false)
     			
-    	     if(ChangePasswordDao.checkEmailPassword(changePasswordBean) && ChangePasswordDao.changePasswordUser(changePasswordBean))
+    	     if(ChangePassword.checkEmailPassword(changePasswordBean) && ChangePassword.changePasswordUser(changePasswordBean))
     	      {
     	    	  return  "<html><head><title>Change Password</title>"
   	    				+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
@@ -275,7 +275,7 @@ public class UserServices
     		
     		ForgotPasswordBean forgotPasswordBean=new ForgotPasswordBean();
     		forgotPasswordBean.setEmail((String)jsonObject.get("email"));
-    		String str = ForgotPasswordDao.forgotpassword(forgotPasswordBean);
+    		String str = ForgotPassword.forgotpassword(forgotPasswordBean);
     		
     		//boolean str=ChangePasswordDao.checkEmailPassword(changePasswordBean);
     		//boolean str1=ChangePasswordDao.changePasswordUser(changePasswordBean);
@@ -441,7 +441,7 @@ public class UserServices
     		ObjectMapper objectMapper = new ObjectMapper();
     		AdminLoaginBean adminloginBean = objectMapper.readValue(userdata, AdminLoaginBean.class);
     	
-    String str = AdminLoginDao.login(adminloginBean);
+    String str = AdminLogin.login(adminloginBean);
     
     	if(str.equals("fail")) 
     		
