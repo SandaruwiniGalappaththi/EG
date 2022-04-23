@@ -26,35 +26,34 @@ public class ContactServices {
 	
 	Contacts contact = new Contacts();
 	
-		@GET
-		@Path("/")
-		@Produces(MediaType.TEXT_HTML) 
-		public String getContact() {		
+	@GET
+	@Path("/")
+	@Produces(MediaType.TEXT_HTML) 
+	public String getContact() {		
 		return contact.readContact();	
-		}
+	}
 	
 	
 
-		@GET
-		@Path("/searchcontact")
-		@Produces(MediaType.TEXT_HTML) 
-		public String readContact(String itemData) {		
+	@GET
+	@Path("/searchcontact")
+	@Produces(MediaType.TEXT_HTML) 
+	public String readContact(String itemData) {		
 			//Convert the input string to an XML document
 			Document doc = Jsoup.parse(itemData, "", Parser.xmlParser()); 
 			//Read the value from the element <ContactType>
 			String ContactType = doc.select("DistrictCode").text(); 
 			String output = contact.readContact(ContactType); 
 			return output; 	
-		}
+	 }
 		
 		
 		
-		
-	 	@DELETE 
-	 	@Path("/")  
-	 	@Consumes(MediaType.APPLICATION_XML)  
-	 	@Produces(MediaType.TEXT_PLAIN)  
-	 	public String deleteNo(String itemData) {  
+	@DELETE 
+ 	@Path("/")  
+ 	@Consumes(MediaType.APPLICATION_XML)  
+ 	@Produces(MediaType.TEXT_PLAIN)  
+ 	public String deleteNo(String itemData) {  
 	 		//Convert the input string to an XML document 
 	 		Document doc = Jsoup.parse(itemData, "", Parser.xmlParser());  
 	    
@@ -66,26 +65,26 @@ public class ContactServices {
 	
 
 
-		@POST
-		@Path("/") 
-		@Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
-		@Produces(MediaType.TEXT_PLAIN) 
-		public String insertContact(@FormParam("DistrictCode") String DistrictCode, 
-					 @FormParam("Description") String Description, 
-					 @FormParam("ComplainNo") String ComplainNo,
-					 @FormParam("CustomerServiceNo") String CustomerServiceNo, 
-					 @FormParam("NewConnectionsNo") String NewConnectionsNo, 
-					 @FormParam("EmergencyNo") String EmergencyNo,
-					 @FormParam("Address") String Address) { 
+	@POST
+	@Path("/") 
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
+	@Produces(MediaType.TEXT_PLAIN) 
+	public String insertContact(@FormParam("DistrictCode") String DistrictCode, 
+				 			@FormParam("Description") String Description, 
+				 			@FormParam("ComplainNo") String ComplainNo,
+				 			@FormParam("CustomerServiceNo") String CustomerServiceNo, 
+				 			@FormParam("NewConnectionsNo") String NewConnectionsNo, 
+				 			@FormParam("EmergencyNo") String EmergencyNo,
+				 			@FormParam("Address") String Address) { 
 			String output = contact.insertContact(DistrictCode,Description,ComplainNo,CustomerServiceNo,NewConnectionsNo,EmergencyNo,Address); 
 			return output; 
-		}
+	}
 		
-		@PUT
-		@Path("/") 
-		@Consumes(MediaType.APPLICATION_JSON) 
-		@Produces(MediaType.TEXT_PLAIN) 
-		public String updateItem(String itemData) { 
+	@PUT
+	@Path("/") 
+	@Consumes(MediaType.APPLICATION_JSON) 
+	@Produces(MediaType.TEXT_PLAIN) 
+	public String updateItem(String itemData) { 
 			//Convert the input string to a JSON object 
 			JsonObject itemObject = new JsonParser().parse(itemData).getAsJsonObject(); 
 			//Read the values from the JSON object
