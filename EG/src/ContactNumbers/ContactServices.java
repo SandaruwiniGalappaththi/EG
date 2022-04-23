@@ -42,7 +42,7 @@ public class ContactServices {
 			Document doc = Jsoup.parse(itemData, "", Parser.xmlParser()); 
 			//Read the value from the element <ContactType>
 			String ContactType = doc.select("DistrictCode").text(); 
-			String output = contact.readContact(ContactType); 
+			String output = contact.searchContact(ContactType); 
 			return output; 	
 	 }
 		
