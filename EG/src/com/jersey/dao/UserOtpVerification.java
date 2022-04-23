@@ -11,7 +11,7 @@ import com.jersey.utility.Mailapi;
 
 import Login.UserOtpVerificationBean;
 
-public class UserOtpVerificationDao {
+public class UserOtpVerification {
 
 
 	public static String OtpVerification(UserOtpVerificationBean otpVerficationBean)

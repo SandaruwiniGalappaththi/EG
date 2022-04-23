@@ -10,7 +10,7 @@ import com.jersey.dbconn.DbConnectionProvider;
 
 import Login.ChangePasswordBean;
 
-public class ChangePasswordDao {
+public class ChangePassword {
 
 	public static boolean checkEmailPassword(ChangePasswordBean changePasswordBean)
 	{

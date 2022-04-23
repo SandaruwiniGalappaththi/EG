@@ -15,7 +15,7 @@ import com.jersey.utility.Mailapi;
 import Login.UserBean;
 
 
-public class UserDao {
+public class UserRegister {
 	
 	
 	public static boolean testUsingSimpleRegex(String email) {

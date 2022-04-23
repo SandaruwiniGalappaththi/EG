@@ -12,7 +12,7 @@ import com.jersey.utility.Mailapi;
 
 import Login.ForgotPasswordBean;
 
-public class ForgotPasswordDao {
+public class ForgotPassword {
 
 	public static String forgotpassword(ForgotPasswordBean forgotPasswordBean)
 	{

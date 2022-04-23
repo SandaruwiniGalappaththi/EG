@@ -11,7 +11,7 @@ import com.jersey.dbconn.DbConnectionProvider;
 import Login.AdminLoaginBean;
 
 
-public class AdminLoginDao {
+public class AdminLogin {
 
 	public static String login(AdminLoaginBean adminloginBean) 
 	{
