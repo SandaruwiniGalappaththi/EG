@@ -25,7 +25,7 @@ public class Contacts {
 	         
 	         
 	 //Search Contact
-	 public String readContact(String DistrictCode) { 
+	 public String searchContact(String DistrictCode) { 
 	     	String output = ""; 
 	     	try { 
 	     		Connection con = connect(); 
@@ -160,7 +160,7 @@ public class Contacts {
 		          return output; 			
 		      }
 		
-        //Delete Contact
+      //Delete Contact
 	  public String deleteContact(String DistrictCode){  
     		String output = "";  
 			try {  
@@ -204,7 +204,7 @@ public class Contacts {
 	   }  
 				    
 				    
-					//Insert Contact
+	//Insert Contact
 	 public String insertContact(String DistrictCode, String Description, String ComplainNo, String CustomerServiceNo, String NewConnectionsNo, String EmergencyNo, String Address) { 
 	      String output = ""; 
           try { 
