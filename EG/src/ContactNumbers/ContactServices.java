@@ -41,7 +41,7 @@ public class ContactServices {
 		public String readContact(String itemData) {		
 			//Convert the input string to an XML document
 			Document doc = Jsoup.parse(itemData, "", Parser.xmlParser()); 
-			//Read the value from the element <billType>
+			//Read the value from the element <ContactType>
 			String ContactType = doc.select("DistrictCode").text(); 
 			String output = contact.readContact(ContactType); 
 			return output; 	

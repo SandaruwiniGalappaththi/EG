@@ -73,7 +73,49 @@ public class Application {
       }
      
       
+  //Delete upoaded PDF
+    public String deletePdf(String ServiceType){  
+    		String output = "";  
+    			try {  
+    				Connection con = connect();  
+    				if (con == null) { 
+    					return "<html><head><title>Contact Page</title>" 
+    							+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>" 
+    							+ "</head><body>" 
+    							+ "<div class='card'><h4 class='text-center'><marquee>Error while connecting to the database for deleting.</marquee></h4></div>" 
+    							+ "</body></html>"; 
+     }  
+      
+    				// create a prepared statement 
+    				String query = "delete from application where ServiceType=?";  
+    				PreparedStatement preparedStmt = con.prepareStatement(query); 
+      
+    				// binding
+    				preparedStmt.setString(1,ServiceType); 
      
+    				// execute the statement 
+    				preparedStmt.execute();  
+    				con.close();  
+					output = "<html><head><title>Contact Page</title>"
+							+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+							+ "</head><body>"
+							+ "<div class='card'><h4 class='text-center' style=\"color: red;\"> Deleted Successfully</h4></div>"
+							+ "</body></html>";
+
+      
+    			} 
+    			catch (Exception e)  
+    			{  
+    				output = "<html><head><title>Applications Page</title>" 
+    						+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>" 
+    						+ "</head><body>" 
+    						+ "<div class='card'><h4 class='text-center'><marquee>Error while deleting</marquee></h4></div>" 
+    						+ "</body></html>"; 
+    						System.err.println(e.getMessage());  
+    			}  
+    			return output;  
+    }  
+    
      
      
 }
