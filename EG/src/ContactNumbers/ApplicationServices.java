@@ -29,7 +29,19 @@ public class ApplicationServices {
 	return apply.getPdf();	
 	}
 	
-	
+	@GET
+	@Path("/searchapply")
+	@Produces(MediaType.TEXT_HTML) 
+	public String searchApply(String itemData) {		
+			//Convert the input string to an XML document
+			Document doc = Jsoup.parse(itemData, "", Parser.xmlParser()); 
+			//Read the value from the element <ServiceType>
+			String serviceType = doc.select("serviceType").text(); 
+			
+			String output = apply.searchApply(serviceType); 
+			return output; 	
+	 }
+		
  	@DELETE 
  	@Path("/")  
  	@Consumes(MediaType.APPLICATION_XML)  
