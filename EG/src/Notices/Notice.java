@@ -183,7 +183,8 @@ public class Notice {
 		try{ 
 			Connection con = connect(); 
 			if (con == null)  {
-				return "Error while connecting to the database for deleting."; } 
+				return "Error while connecting to the database";
+				} 
 				
 				output = "<html><link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css\">"
 						+"<table border='1'><tr><th  style=\"background-color:lightgreen;\">Notice Type</th>"+

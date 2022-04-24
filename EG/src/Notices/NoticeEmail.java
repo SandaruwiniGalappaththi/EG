@@ -66,7 +66,7 @@ public class NoticeEmail {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(myAccountEmail));
 			message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
-			String txt = "<html><p style=\"background-color:red;color:white;\">Special Notice</p><p><h2> Date : "+ date + "</h2></p><h3> There is a power failure from <b><font style=\"color:red;\">"+ topic + "  </font></b>to<b><font style=\"color:red;\">  "+desc+" </font></b>on<b><font style=\"color:red;\"> "+person+ "</font></b></h3></html>";
+			String txt = "<html><p style=\"background-color:red;color:white;\">Special Notice</p><p><h2> Date : "+ date + "</h2></p><h3> Topic : <b><font style=\"color:red;\">"+ topic + "  </font></b><p>  </p><b><font style=\"color:black;\">  "+desc+" </font><p> </p></b>by<b><font style=\"color:red;\"> "+person+ "</font></b></h3></html>";
 			message.setSubject("Special Notice");
 			message.setContent(txt,"text/html");
 			return message;
