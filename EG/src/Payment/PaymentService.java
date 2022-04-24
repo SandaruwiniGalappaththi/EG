@@ -22,6 +22,7 @@ import com.google.gson.JsonParser;
 public class PaymentService {
 	
 	Payment payment_obj = new Payment();
+	Online_payment onlinepay = new Online_payment();
 	
 	@POST
 	@Path("/") 
@@ -82,6 +83,31 @@ public class PaymentService {
   	String output = payment_obj.deletePaymentDetails(PaymentID);  
   	return output;  
   } 
+	
+	@POST
+ 	@Path("/online")  
+ 	@Consumes(MediaType.APPLICATION_XML)  
+ 	@Produces(MediaType.TEXT_PLAIN)  
+ 	public String payOnline(String paymentData) {  
+	//Convert the input string to an XML document 
+	Document doc = Jsoup.parse(paymentData, "", Parser.xmlParser());  
+    
+  	//Read the value from the element <billType> 
+  	String cusID = doc.select("cusID").text();  
+  	String accNo = doc.select("accNo").text(); 
+  	String amount = doc.select("amount").text(); 
+  	int CUSID = Integer.parseInt(cusID);
+  	int ACCNO = Integer.parseInt(accNo);
+ 
+  	String output = onlinepay.payOnline(CUSID,ACCNO,amount);  
+  	return output;  
+  }
+
+
+	private int parseInt(String cusID) {
+		// TODO Auto-generated method stub
+		return 0;
+	} 
 	
 	/*
 	//online bill payment service

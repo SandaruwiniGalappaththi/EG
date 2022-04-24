@@ -48,11 +48,19 @@ public class Schedule {
 								// execute the statement
 									preparedStmt.execute();
 									con.close();
-									output = "Inserted schedule successfully";
+									output =  "<html><head><title>Payment Page</title>"
+				                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+				                            + "</head><body>"
+				                            + "<div class='card'><h4 class='text-center'>Inserted schedule successfully</h4></div>"
+				                            + "</body></html>";
 					 }
 					 catch (Exception e)
 					 {
-						 	output = "Error while inserting the item.";
+						 	output = "<html><head><title>Payment Page</title>"
+		                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+		                            + "</head><body>"
+		                            + "<div class='card'><h4 class='text-center'>Error while inserting the item.</h4></div>"
+		                            + "</body></html>";
 						 	System.err.println(e.getMessage());
 					 }
 					 return output;
@@ -182,10 +190,18 @@ public class Schedule {
 							 preparedStmt.execute();
 							 con.close();
 							 
-							 output = "Updated schedule successfully";
+							 output = "<html><head><title>Payment Page</title>"
+			                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+			                            + "</head><body>"
+			                            + "<div class='card'><h4 class='text-center'>Updated schedule successfully</h4></div>"
+			                            + "</body></html>";
 				    }catch (Exception e)
 				     {
-					 	output = "Error while updating the item.";
+					 	output = "<html><head><title>Payment Page</title>"
+	                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+	                            + "</head><body>"
+	                            + "<div class='card'><h4 class='text-center'>Error while updating the item.</h4></div>"
+	                            + "</body></html>";
 					 	System.err.println(e.getMessage());
 				      }
 				return output;
@@ -217,12 +233,20 @@ public class Schedule {
 							 // execute the statement
 							 preparedStmt.execute();
 							 con.close();
-							 output = "Deleted schedule successfully";
+							 output ="<html><head><title>Payment Page</title>"
+			                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+			                            + "</head><body>"
+			                            + "<div class='card'><h4 class='text-center'>Deleted schedule successfully</h4></div>"
+			                            + "</body></html>";
 						}catch (Exception e)
 			    
 						
 						{
-				 output = "Error while deleting the item.";
+				 output = "<html><head><title>Payment Page</title>"
+                         + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+                         + "</head><body>"
+                         + "<div class='card'><h4 class='text-center'>Error while deleting the item.</h4></div>"
+                         + "</body></html>";
 				 System.err.println(e.getMessage());
 					}
 			 return output;
