@@ -2,13 +2,15 @@ package Login;
 
 public class SearchUserBean {
 
-	public String accountNo;
 
-	public String getAccountNo() {
+	public int getAccountNo() {
 		return accountNo;
 	}
-
-	public void setAccountNo(String accountNo) {
+	
+	public void setAccountNo(int accountNo) {
 		this.accountNo = accountNo;
+		
 	}
+	
+	private int accountNo;
 }

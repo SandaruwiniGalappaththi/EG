@@ -10,7 +10,7 @@ import com.jersey.dbconn.DbConnectionProvider;
 public class UserDelete {
 
 	
-	public String deleteUser(String otp) 
+	public String deleteUser(String accountNo) 
 	 { 
 	 String output = ""; 
 	 try
@@ -19,11 +19,11 @@ public class UserDelete {
 	 if (con == null) 
 	 {return "Error while connecting to the database for deleting."; } 
 	 // create a prepared statement
-	 String query = "delete from user where otp=?"; 
+	 String query = "delete from user where accountNO=?"; 
 	 PreparedStatement preparedStmt = con.prepareStatement(query); 
 	 // binding values
 	 
-	 preparedStmt.setInt(1, Integer.parseInt(otp));                 
+	 preparedStmt.setInt(1, Integer.parseInt(accountNo));                 
 	 // execute the statement
 	 preparedStmt.execute(); 
 	 con.close(); 

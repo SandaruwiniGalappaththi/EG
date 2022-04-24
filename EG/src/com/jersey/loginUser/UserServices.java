@@ -218,7 +218,7 @@ public class UserServices
 	}
     
     
-    @Path("/changepassword")
+    @Path("/changePassword")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -262,7 +262,7 @@ public class UserServices
     
     }
     
-    @Path("/forgotpassword")
+    @Path("/forgotPassword")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -320,17 +320,17 @@ public class UserServices
      String email = updateUser.get("email").getAsString(); 
      String password = updateUser.get("password").getAsString(); 
      String accountNo = updateUser.get("accountNo").getAsString(); 
-     String otp = updateUser.get("otp").getAsString();
+    // String otp = updateUser.get("otp").getAsString();
      
      UpdateUser updateU =new UpdateUser();
    
-     String output = updateU.updateUser(name, email, password, accountNo,otp); 
+     String output = updateU.updateUser(name, email, password, accountNo); 
     return output; 
     }
     
     
     @DELETE
-    @Path("/deleteUser") 
+    @Path("/delete") 
     @Consumes(MediaType.APPLICATION_XML) 
     @Produces(MediaType.TEXT_PLAIN) 
     public String DeleteUser(String userdata) 
@@ -347,7 +347,7 @@ public class UserServices
     }
     
     
-    @Path("/resetpassword")
+    @Path("/resetPassword")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -393,8 +393,8 @@ public class UserServices
     }
     
     
-    @Path("/searchuser")
-    @POST
+    @Path("/searchUser")
+    @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
 	public String serachUser(String userdata) throws JsonParseException, JsonMappingException, IOException
@@ -431,7 +431,7 @@ public class UserServices
 	
 	}
     
-    @Path("/adminlogin")
+    @Path("/adminLogin")
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)

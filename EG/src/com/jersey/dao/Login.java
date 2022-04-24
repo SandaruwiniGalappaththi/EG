@@ -53,19 +53,19 @@ public class Login {
 					}
 					else {
 						
-						JSONObject jsonObject2=new JSONObject();
+					/*	JSONObject jsonObject2=new JSONObject();
 						jsonObject2.put("name",rs.getString(1));
 						jsonObject2.put("email",rs.getString(2));
 						jsonObject2.put("password",rs.getString(3));
-						jsonObject2.put("accountNo",rs.getString(4));
+						jsonObject2.put("accountNo",Integer.toString(rs.getInt(4));
 						JSONArray jsonArray = new JSONArray();
-						jsonArray.put(jsonObject2);
+						jsonArray.put(jsonObject2);   */
 						
 						  
 						 String name = rs.getString("name"); 
 						 String email = rs.getString("email"); 
 						 String password = rs.getString("password") ; 
-						 String accountNo = rs.getString("accountNo");
+						 String accountNo = Integer.toString(rs.getInt("accountNo")); 
 						 String otp = Integer.toString(rs.getInt("otp"));
 						
 						

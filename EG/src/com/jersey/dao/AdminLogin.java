@@ -49,7 +49,7 @@ public class AdminLogin {
 					
 					 String name = rrs.getString("name"); 
 					 String email = rrs.getString("email"); 
-					 String accountNo = rrs.getString("accountNo") ; 
+					 String accountNo = Integer.toString(rrs.getInt("accountNo")); 
 					 String status = rrs.getString("status");
 //					 String otp = Integer.toString(rs.getInt("otp"));
 					 
