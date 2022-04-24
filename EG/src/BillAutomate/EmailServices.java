@@ -49,7 +49,7 @@ public class EmailServices {
 	@Path("/") 
 	@Consumes(MediaType.APPLICATION_JSON) 
 	@Produces(MediaType.TEXT_PLAIN) 
-	public String updateItem(String itemData) { 
+	public String updateRates(String itemData) { 
 		//Convert the input string to a JSON object 
 		JsonObject itemObject = new JsonParser().parse(itemData).getAsJsonObject(); 
 		

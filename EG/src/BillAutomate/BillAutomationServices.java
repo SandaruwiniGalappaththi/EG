@@ -67,7 +67,7 @@ public class BillAutomationServices {
 	@Path("/") 
 	@Consumes(MediaType.APPLICATION_JSON) 
 	@Produces(MediaType.TEXT_PLAIN) 
-	public String updateItem(String itemData) { 
+	public String updatePerUnit(String itemData) { 
 		//Convert the input string to a JSON object 
 		JsonObject itemObject = new JsonParser().parse(itemData).getAsJsonObject(); 
 		
@@ -89,7 +89,7 @@ public class BillAutomationServices {
 	@Path("/") 
 	@Consumes(MediaType.APPLICATION_XML) 
 	@Produces(MediaType.TEXT_PLAIN) 
-	public String deleteItem(String itemData) { 
+	public String deletePerUnit(String itemData) { 
 		//Convert the input string to an XML document
 		Document doc = Jsoup.parse(itemData, "", Parser.xmlParser()); 
 		 
