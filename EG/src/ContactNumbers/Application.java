@@ -22,7 +22,7 @@ public class Application {
 	 	} 
 	 	return con; 
  	 } 
- 
+     
     public String getPdf(){ 
   	   String output = ""; 
   	   try { 
@@ -72,7 +72,63 @@ public class Application {
   	  return output; 			
       }
      
-      
+	 //Search Contact
+	 public String searchApply(String ServiceType) { 
+	     	String output = ""; 
+	     	try { 
+	     		Connection con = connect(); 
+	     		if (con == null) {
+	     			return "<html><head><title>Contact Page</title>"
+	     				   + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+	     				   + "</head><body>"
+	     				   + "<div class='card'><h4 class='text-center'>Error while connecting to the database for reading.</h4></div>"
+	     				   + "</body></html>";
+	     			} 
+	     			
+	     		// Prepare the HTML table to be displayed
+	     		output = "<html><head><title>Contact Page</title>"
+	     				+ "<link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC\" crossorigin=\"anonymous\">"
+	     				+ "</head><body><table class='table' border='1'><tr>"
+	     				+ "<th>ServiceType</th>"
+	     				+ "<th>Description</th>" 
+	     				+ "<th>Link/th>"; 
+	   
+	     		String query = "select * from application where ServiceType='" + ServiceType + "'"; 
+	     		Statement stmt = con.createStatement(); 
+	     		ResultSet rs = stmt.executeQuery(query); 
+	     		
+	     		// iterate through the rows in the result set
+	     		while (rs.next()) { 
+	     			     String ServiceType1 = rs.getString("ServiceType"); 
+	        			 String Description  = rs.getString("Description"); 
+	        			 String Link    = rs.getString("Link"); 
+
+	     				
+	     				// Add into the HTML table
+	     				output += "<tr><td>"+ServiceType1 + "</td>"; 
+	     				output += "<td>" +Description + "</td>"; 
+	     				output += "<td>" +Link  + "</td>"; 
+	     				
+
+						output += "<td><input name='btnUpdate' type='button' value='Update' class='btn btn-secondary'></td>"
+									+ "<td><form method='post' action='items.jsp'>"
+									+ "<input name='btnRemove' type='submit' value='Remove' class='btn btn-danger'>"
+									+ "<input name='itemID' type='hidden' value='" +ServiceType1
+									+ "'>" + "</form></td></tr>"; 
+	     					
+	     				} 
+	     			
+	     				con.close(); 
+	     			
+	     				// Complete the HTML table
+	     				output += "</table></body></html>"; 
+	     				} 
+	       catch (Exception e) { 
+	     				output = "Error while reading the items."; 
+	     				System.err.println(e.getMessage()); 
+	     				} 
+	     				return output; 
+	        } 
      
     
        //Delete upoaded PDF

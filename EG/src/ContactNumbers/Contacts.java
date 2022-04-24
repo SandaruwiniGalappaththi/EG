@@ -37,42 +37,43 @@ public class Contacts {
 	     				   + "</body></html>";
 	     			} 
 	     			
-	     			// Prepare the HTML table to be displayed
-	     			output = "<html><head><title>Contact Page</title>"
-	     					+ "<link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC\" crossorigin=\"anonymous\">"
-	     					+ "</head><body><table class='table' border='1'><tr>"
-	     					+ "<th>DistrictCode</th>"
-	     					+ "<th>Description</th>" 
-	     					+ "<th>ComplainNo</th>" 
-	     					+ "<th>CustomerServiceNo</th>" 
-	     					+ "<th>NewConnectionsNo</th>"
-	     					+ "<th>EmergencyNo</th>"
-	     					+ "<th>Address</th></tr>"; 
+	     		// Prepare the HTML table to be displayed
+	     		output = "<html><head><title>Contact Page</title>"
+	     				+ "<link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC\" crossorigin=\"anonymous\">"
+	     				+ "</head><body><table class='table' border='1'><tr>"
+	     				+ "<th>DistrictCode</th>"
+	     				+ "<th>Description</th>" 
+	     				+ "<th>ComplainNo</th>" 
+	     				+ "<th>CustomerServiceNo</th>" 
+	     				+ "<th>NewConnectionsNo</th>"
+	     				+ "<th>EmergencyNo</th>"
+	     				+ "<th>Address</th></tr>"; 
 	     			 
-	     			String query = "select * from contact where DistrictCode='" + DistrictCode + "'"; 
-	     			Statement stmt = con.createStatement(); 
-	     			ResultSet rs = stmt.executeQuery(query); 
-	     			
-	     			// iterate through the rows in the result set
-	     			while (rs.next()) { 
-	        			  String Districtcode= rs.getString("DistrictCode"); 
-	        			  String Description  = rs.getString("Description"); 
-	        			  String ComplainNo     = rs.getString("ComplainNo"); 
-	        			  String CustomerServiceNo =rs.getString("CustomerServiceNo"); 
-	        			  String NewConnectionsNo  =rs.getString("NewConnectionsNo"); 
-	        			  String EmergencyNo= rs.getString("EmergencyNo"); 
-	        			  String Address = rs.getString("Address");
+	     		String query = "select * from contact where DistrictCode='" + DistrictCode + "'"; 
+	     		Statement stmt = con.createStatement(); 
+	     		ResultSet rs = stmt.executeQuery(query); 
+	     		
+	     		// iterate through the rows in the result set
+	     		while (rs.next()) { 
+	        			 String Districtcode= rs.getString("DistrictCode"); 
+	        			 String Description  = rs.getString("Description"); 
+	        			 String ComplainNo     = rs.getString("ComplainNo"); 
+	        			 String CustomerServiceNo =rs.getString("CustomerServiceNo"); 
+	        			 String NewConnectionsNo  =rs.getString("NewConnectionsNo"); 
+	        			 String EmergencyNo= rs.getString("EmergencyNo"); 
+	        			 String Address = rs.getString("Address");
 	     				
-	     					// Add into the HTML table
-	     					output += "<tr><td>" +Districtcode + "</td>"; 
-	     					output += "<td>" +Description + "</td>"; 
-	     					output += "<td>" +ComplainNo  + "</td>"; 
-	     					output += "<td>" +CustomerServiceNo + "</td>"; 
-	     					output += "<td>" +NewConnectionsNo + "</td>"; 
-	     					output += "<td>" +EmergencyNo + "</td>"; 
-	     					output += "<td>" +Address  + "</td>"; 
+	        			 System.out.println("Hello");
+	     				// Add into the HTML table
+	     				output += "<tr><td>"+Districtcode + "</td>"; 
+	     				output += "<td>" +Description + "</td>"; 
+	     				output += "<td>" +ComplainNo  + "</td>"; 
+	     				output += "<td>" +CustomerServiceNo + "</td>"; 
+	     				output += "<td>" +NewConnectionsNo + "</td>"; 
+	     				output += "<td>" +EmergencyNo + "</td>"; 
+	     				output += "<td>" +Address  + "</td>"; 
 	     					
-							output += "<td><input name='btnUpdate' type='button' value='Update' class='btn btn-secondary'></td>"
+						output += "<td><input name='btnUpdate' type='button' value='Update' class='btn btn-secondary'></td>"
 									+ "<td><form method='post' action='items.jsp'>"
 									+ "<input name='btnRemove' type='submit' value='Remove' class='btn btn-danger'>"
 									+ "<input name='itemID' type='hidden' value='" + DistrictCode
@@ -236,7 +237,7 @@ public class Contacts {
 						output = "<html><head><title>Per Unit Page</title>"
 								+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 								+ "</head><body>"
-								+ "<div class='card'><h4 class='text-center' style=\\\"color: red;\\>Inserted successfully</h4></div>"
+								+ "<div class='card'><h4 class='text-center' style=\\\"color: red;\\>Inserted Contact  successfully</h4></div>"
 								+ "</body></html>"; 
 			 } 
 			catch (Exception e) { 
