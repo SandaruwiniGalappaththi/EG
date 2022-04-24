@@ -111,7 +111,7 @@ public class PowerCutMail {
 											int ID = rs1.getInt("ID");
 											String consumerEmail = rs1.getString("email");//getting email address of those consumers
 											sendPowerCutMail(consumerEmail,location,start,end,onDate);	//sent mails 
-											output= "MAILS ARE SENT SUCCESSFULLY!!!";
+											output= "Mails are sent successfully";
 					
 														 String query2 = "UPDATE schedules SET mailsSent=? WHERE location=?";
 														 PreparedStatement preparedStmt = con.prepareStatement(query2);

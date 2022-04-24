@@ -11,7 +11,7 @@ import javax.ws.rs.core.MediaType;
 @Path("/setAlerts")
 public class AlertService {
 	
-	Alerts alert = new Alerts();
+	Alert alert = new Alert();
 	//function to set alerts
 	@POST
 	@Path("/")
