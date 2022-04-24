@@ -60,7 +60,7 @@ public class NoticeEmail {
 	}
 	
 	
-	// preparing email message
+	// preparing  message of email
 	private static Message prepareMessage(Session session, String myAccountEmail, String recepient, String date, String topic, String desc, String person) {		
 		try {
 			Message message = new MimeMessage(session);
