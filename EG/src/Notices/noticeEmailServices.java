@@ -12,7 +12,7 @@ import org.jsoup.parser.Parser;
 @Path("/Noticemail")
 public class noticeEmailServices {
 	NoticeEmail m = new NoticeEmail();
-	
+	//function to send special notices and remainders through mails for registered users 
 	@GET
 	@Path("/all")
 	@Produces(MediaType.TEXT_HTML)
