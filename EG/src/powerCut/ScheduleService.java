@@ -67,7 +67,7 @@ public class ScheduleService {
 							}catch(DateTimeParseException|NullPointerException e) {
     	                        //if start time is invalid, give error message to use correct format
 					        	System.out.println("Invalid time string: " + start);
-					        	output = "INCORRECT TIME FORMAT.PLEASE USE HH:MM FORMAT";
+					        	output = "Incorrect time format.Please use HH:MM format";
 							}
 	
 							try{//check input end time is valid time
@@ -77,7 +77,7 @@ public class ScheduleService {
 							}catch(DateTimeParseException|NullPointerException e) {
 								//if end time is invalid, give error message to use correct format
 					        	System.out.println("Invalid time string: " + end);
-					        	output = "INCORRECT TIME FORMAT.PLEASE USE HH:MM FORMAT";
+					        	output = "Incorrect time format.Please use HH:MM format";
 							}	
 	
 	
@@ -99,7 +99,7 @@ public class ScheduleService {
 		    				{       
 								   // if date format is invalid, give error message to use correct format
 							        System.out.println(onDate+" is Invalid Date format");
-							        output = "INCORRECT DATE FORMAT.PLEASE USE DD/MM/YYYY FORMAT";
+							        output = "Incorrect date format.Please use DD/MM/YYYY format";
 	       
 		    				}
 		    				try {  //getting the time duration
@@ -108,7 +108,7 @@ public class ScheduleService {
 							    	if(timeElapsed.toMinutes() < 0) {//checking start time is greater than end time
 							    	  	startOk = false;
 							    	 	endOk = false;
-							    	 	output = "START TIME IS GREATER THAN END TIME";
+							    	 	output = "Start time is greater than end time";
 							    		}
 		    				}catch(DateTimeParseException|NullPointerException e) {
 	    	
@@ -119,7 +119,7 @@ public class ScheduleService {
 		    				try {//checking input location is available location
 		    					 locationOk = schedule.findLocation(location);//find location is a valid one using findLocation function in Schedule class
 		    					if(locationOk == false) {
-		    						output = "ENTER VALID LOCATION";//otherwise give error message
+		    						output = "Enter valid location";//otherwise give error message
 		    					}
 		    					
 		    				}catch(Exception e) {
@@ -167,7 +167,7 @@ public class ScheduleService {
 					 }catch (DateTimeParseException|NullPointerException e) {
 						  //if start time is invalid, give error message to use correct format
 					        System.out.println("Invalid time string: " + start);
-					        output = "INCORRECT TIME FORMAT.PLEASE USE HH:MM FORMAT";
+					        output = "Incorrect time format.Please use HH:MM format";
 					 }
 				
 					try{  //check input end time is valid time
@@ -178,7 +178,7 @@ public class ScheduleService {
 					}catch (DateTimeParseException|NullPointerException e) {
 						//if end time is invalid, give error message to use correct format
 					        System.out.println("Invalid time string: " + end);
-					        output = "INCORRECT TIME FORMAT.PLEASE USE HH:MM FORMAT";
+					        output = "Incorrect time format.Please use HH:MM format";
 					}
 				
 				
@@ -200,7 +200,7 @@ public class ScheduleService {
 				    }catch (ParseException e)
 				    {           // if date format is invalid, give error message to use correct format
 						        System.out.println(onDate+" is Invalid Date format");
-						        output = "INCORRECT DATE FORMAT.PLEASE USE DD/MM/YYYY FORMAT";
+						        output = "Incorrect time format.Please use HH:MM format";
 				       
 				    }
 				    try {      //getting the time duration
@@ -209,7 +209,7 @@ public class ScheduleService {
 						    	if(timeElapsed.toMinutes() < 0) {//checking start time is greater than end time
 						    	  	startOk = false;
 						    	 	endOk = false;
-						    	 	output = "START TIME IS GREATER THAN END TIME";
+						    	 	output = "Start time is greater than end time";
 						    	    }
 				    }catch(DateTimeParseException|NullPointerException e) {
 				    	
@@ -219,7 +219,7 @@ public class ScheduleService {
 				    try {//checking input location is available location
    					 			locationOk = schedule.findLocation(location);//find location is a valid one using findLocation function in Schedule class
    					 			if(locationOk == false) {
-   					 				output = "ENTER VALID LOCATION";//otherwise give error message
+   					 				output = "Enter valid location";//otherwise give error message
    					}
    					
 				    }catch(Exception e) {
@@ -245,7 +245,7 @@ public class ScheduleService {
 		@Path("/")
 		@Consumes(MediaType.APPLICATION_XML)
 		@Produces(MediaType.TEXT_PLAIN)
-		public String deletetimes(String itemData)
+		public String deleteSchedule(String itemData)
 		{
 					//Convert the input string to an XML document
 					 Document doc = Jsoup.parse(itemData, "", Parser.xmlParser());

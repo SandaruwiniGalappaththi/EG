@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 
 
-public class Alerts {
+public class Alert {
 			//A common method to connect to the DB
 			private Connection connect()
 					 {
@@ -48,7 +48,7 @@ public class Alerts {
 			        Matcher matcher = pattern.matcher(email);  
 			        //if email format is incorrect 
 			        if(matcher.matches()== false) {
-			        	output = "E-MAIL ADDRESS IS NOT IN CORRECT FORMAT!!!!";
+			        	output = "E-mail address is not in correct format";
 				 		return output;
 			        }
 			 	
@@ -73,7 +73,7 @@ public class Alerts {
 		 	}
 		 	
 		 	if(mailOk== true && accountOk ==true) {//mail and account matched set power cut alert
-		 		output = "ALERT SET SUCCESSFULLY!!!!";
+		 		output = "Alert set successfully";
 		 	// create a prepared statement
 				 String query1 = "UPDATE consumerinfo SET alertSet=? WHERE accountNo=?";//update alertSet column in consumerinfo table
 				 PreparedStatement preparedStmt = con.prepareStatement(query1);
@@ -87,7 +87,7 @@ public class Alerts {
 		 		return output;
 				
 			}else if(mailOk == false) {//if email not match with account number
-				output = "E-MAIL ADDRESS MISMATCH!!!!";
+				output = "E-mail address mismatch";
 				return output;
 				
 			} 
@@ -95,7 +95,7 @@ public class Alerts {
 		 
 		 			
 		 if(accountOk == false) {//if account number is invalid
-			   output = "ACCOUNT NUMBER MISMATCH!!!!";
+			   output = "Account number mismatch";
 			   return output;
 		}
 		 			

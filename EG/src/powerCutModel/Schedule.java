@@ -48,7 +48,7 @@ public class Schedule {
 								// execute the statement
 									preparedStmt.execute();
 									con.close();
-									output = "Inserted successfully";
+									output = "Inserted schedule successfully";
 					 }
 					 catch (Exception e)
 					 {
@@ -159,6 +159,10 @@ public class Schedule {
 				 	String output = "";
 				 		try
 				 {
+				 			Boolean num =onlyDigits(ID1);
+							 if(num == false) {
+								 return "Enter valid ID";
+							 }
 				 				Connection con = connect();
 				 				if (con == null)
 				 				{	
@@ -178,7 +182,7 @@ public class Schedule {
 							 preparedStmt.execute();
 							 con.close();
 							 
-							 output = "Updated successfully";
+							 output = "Updated schedule successfully";
 				    }catch (Exception e)
 				     {
 					 	output = "Error while updating the item.";
@@ -201,6 +205,10 @@ public class Schedule {
 								{
 									return "Error while connecting to the database for deleting."; 
 									}
+								 Boolean num =onlyDigits(ID1);
+								 if(num == false) {
+									 return "Enter valid ID";
+								 }
 							 // create a prepared statement
 							 String query = "delete from schedules where ID=?";
 							 PreparedStatement preparedStmt = con.prepareStatement(query);
@@ -209,7 +217,7 @@ public class Schedule {
 							 // execute the statement
 							 preparedStmt.execute();
 							 con.close();
-							 output = "Deleted successfully";
+							 output = "Deleted schedule successfully";
 						}catch (Exception e)
 			    
 						
@@ -252,4 +260,24 @@ public class Schedule {
 				return false;
 				
         }
+			public static boolean onlyDigits(String str)
+		    {
+				
+		        for (int i = 0; i < str.length();i++) {
+		  
+		            // Check if character is
+		            // digit from 0-9
+		            // then return true
+		            // else false
+		            if (str.charAt(i) >= '0'
+		                && str.charAt(i) <= '9') {
+		                return true;
+		            }
+		            else {
+		                return false;
+		            }
+		        }
+		        return false;
+		    }
+		  
 }

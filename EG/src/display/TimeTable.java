@@ -89,10 +89,10 @@ public class TimeTable {
 								con.close();
 								output += "</table>";
 							 		if(existacc == false) {//if user input account number is not included in database, it will give error as invalid account 
-							 			return output = "INVALID ACCOUNT NUMBER!!!  PLEASE RECHECK"; 
+							 			return output = "Invalid account number. Please recheck"; 
 							 		}	
 							 		if(existschedule == false) {//if user's location has no schedules assigned, it will inform 
-							 			return output = "NO SCHEDULE ADDED YET FOR YOUR AREA!!!"; 
+							 			return output = "No schedule added yet for your area"; 
 							 		}	
 			
 							 		return output;
@@ -157,10 +157,10 @@ public class TimeTable {
 							 	con.close();
 								output += "</table>";
 								if(existzone == false) {//if user input zone is not between A-Z, it will give error as not available zone 
-									return output = "REQUESTED ZONE IS NOT AN AVAILABLE ZONE!!!  PLEASE ENTER ZONE BETWEEN A-Z"; 
+									return output = "Requested zone is not an available zone. Please enter letter between A-Z"; 
 								}	
 								if(existschedule == false) {//if user's location has no schedules assigned, it will inform 
-									return output = "NO SCHEDULE ADDED YET FOR YOUR AREA!!!"; 
+									return output = "No schedule added yet for requested zone"; 
 								}	
 								return output;
 						}catch(Exception e) {
@@ -222,10 +222,10 @@ public class TimeTable {
 						 	con.close();
 							output += "</table>";
 							if(existlocation== false) {//if user input location is incorrect, it will give error as not available location
-								return output = "REQUESTED LOCATION IS NOT AN AVAILABLE LOCATION!!!"; 
+								return output = "Requested location is not an available location"; 
 							}	
 							if(existschedule == false) {//if user's location has no schedules assigned, it will inform 
-								return output = "NO SCHEDULE ADDED YET FOR REQUESTED AREA!!!"; 
+								return output = "No schedule added yet for requested area"; 
 							}	
 							return output;
 
