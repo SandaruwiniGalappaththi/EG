@@ -34,7 +34,7 @@ public class SearchUser {
 					
 			
 			PreparedStatement ps=con.prepareStatement("select * from user where accountNo=?");
-			ps.setString(1,searchUserBean.getAccountNo());
+			ps.setInt(1,searchUserBean.getAccountNo());
 			ResultSet rs = ps.executeQuery();
 			System.out.println(searchUserBean.getAccountNo());
 			
