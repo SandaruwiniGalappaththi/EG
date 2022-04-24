@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class Notice {
+	//A common method to connect to the DB
 	private Connection connect(){ 
 		Connection con = null; 
 		try{ 
@@ -21,7 +22,7 @@ public class Notice {
 		return con; 
 	 } 
 	
-
+	//method for insert notices and remainders
 	public String inserNotice(String type,String code, String date, String topic, String desc, String person, String mail) { 
 		String output = ""; 
 		try{ 
@@ -56,7 +57,7 @@ public class Notice {
 	 }
 	
 	
-	
+	//method for read all notices and remainders
 	public String readNotices() { 
 		String output = ""; 
 	 		try{ 
@@ -116,7 +117,7 @@ public class Notice {
 	
 	
 	
-	
+	//method for update notices
 	public String updateNotice(String ID, String type,String code, String date, String topic, String desc, String person,String mails) { 
 		 String output = ""; 
 		 	try{ 
@@ -152,7 +153,7 @@ public class Notice {
 	
 	
 
-	
+	//method for delete notices
 	public String deleteNotice(String noticeID) { 
 		String output = ""; 
 		try{ 
@@ -177,6 +178,7 @@ public class Notice {
 	 return output; 
 	 }
 	
+	//method for search notices and remainders by type
 	public String searchNotices(String type) {
 		
 		String output="";
