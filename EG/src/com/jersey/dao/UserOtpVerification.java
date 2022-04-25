@@ -12,23 +12,26 @@ public class UserOtpVerification {
 
 	public static String OtpVerification(UserOtpVerificationBean otpVerficationBean) {
 		
+		//create db connection
 		Connection con = DbConnectionProvider.getConnection();
 		
 		try {
 			
+			//create prepared statement
 			PreparedStatement ps = con.prepareStatement("select * from user where email =? and otp=?");
 			ps.setString(1, otpVerficationBean.getEmail());
 			ps.setInt(2, otpVerficationBean.getOtp());
 			System.out.println(otpVerficationBean.getEmail());
 			System.out.println(otpVerficationBean.getOtp());
-	 		ResultSet rs=ps.executeQuery();
+	 		ResultSet rs=ps.executeQuery(); //execute the statement
 				
 			if(rs.next()) {
 				
+				//create a prepared statement
 				PreparedStatement ps1 = con.prepareStatement("update user set status=? where email=?");
 				ps1.setString(1, "active");
 				ps1.setString(2, otpVerficationBean.getEmail());
-				int i = ps1.executeUpdate();
+				int i = ps1.executeUpdate(); //execute the statement
 				if(i>0) {
 					
 							return "success";

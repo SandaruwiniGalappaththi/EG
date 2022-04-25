@@ -11,24 +11,31 @@ import Login.ForgotPasswordBean;
 public class ForgotPassword {
 
 		public static String forgotpassword(ForgotPasswordBean forgotPasswordBean) {
+		
+		//create randomly generate otp number	
 		Random random = new Random();
 		int i = random.nextInt(123456);
 		
+		//crate db connection
 	    Connection con=DbConnectionProvider.getConnection();
 		
 		try {
+			    //create prepared statement
 				PreparedStatement ps=con.prepareStatement("select * from user where email=?");
 				ps.setString(1, forgotPasswordBean.getEmail());
-				ResultSet rs =ps.executeQuery();
+				ResultSet rs =ps.executeQuery(); // execute the statement
 				if(rs.next()) {
 					
+					//create mail service for forgot password
 					String txt = "Please click the button below to reset your password.";
 					String value = "Reset Password";
 					Mailapi.sendOtp(i, forgotPasswordBean.getEmail(), value, txt);
+					
+					//create prepared statement
 					PreparedStatement ps1=con.prepareStatement("update user set otp=? where email=?");
 					ps1.setInt(1, i);
 					ps1.setString(2, forgotPasswordBean.getEmail());
-					int ii = ps1.executeUpdate();
+					int ii = ps1.executeUpdate(); //execute the statement
 					if(ii>0) {
 						
 						return "success";

@@ -12,12 +12,13 @@ import Login.SearchUserBean;
 public class SearchUser {
 	 public static String search(SearchUserBean searchUserBean) 
 	 {
+		 //create db connection
 		 Connection con =DbConnectionProvider.getConnection();
 		 String output= "";
 		
 		 try {
 			
-
+                    //build a table
 			 output = "<html><head><title>Search User</title>"
 					+ "<link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC\" crossorigin=\"anonymous\">"
 					+ "</head><body><table class='table' border='1'><tr>"
@@ -27,9 +28,9 @@ public class SearchUser {
 					+ "<th>FeddBack</th>" 
 					+ "<th>Payment Status</th></tr>"; 
 					
-			
+			//create a prepared statement
 			 PreparedStatement ps=con.prepareStatement("select * from user where accountNo=?");
-			 ps.setInt(1,searchUserBean.getAccountNo());
+			 ps.setString(1,searchUserBean.getAccountNo());
 			 ResultSet rs = ps.executeQuery();
 			 System.out.println(searchUserBean.getAccountNo());
 			
@@ -55,8 +56,7 @@ public class SearchUser {
 						  	+ "<td><input name='btnPayment' type='button' value='Pament Status' class='btn btn-secondary'></td>"
 						  	+ "<input name='otp' type='hidden' value='" + otp + "'>" + "</form></td></tr>";
 				
-				
-					//return ""+jsonArray;
+				       //complete the html table
 				 		return ""+ output + "</table>";
 			 		}
 			 		else    

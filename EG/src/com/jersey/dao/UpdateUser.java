@@ -10,7 +10,8 @@ public class UpdateUser {
 	public String updateUser(String name, String email, String password, String accountNo) { 
 	 
 			String output = ""; 
-			try { 
+			try {   
+				    //create db connection
 					Connection con = DbConnectionProvider.getConnection(); 
 					if (con == null) 
 					{return "Error while connecting to the database for updating."; } 
@@ -23,7 +24,7 @@ public class UpdateUser {
 					preparedStmt.setString(1, name); 
 					preparedStmt.setString(2, email); 
 					preparedStmt.setString(3, password); 
-					preparedStmt.setInt(4, Integer.parseInt(accountNo)); 
+					preparedStmt.setString(4, accountNo); 
 					
 					// execute the statement
 					preparedStmt.execute(); 

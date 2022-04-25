@@ -11,15 +11,17 @@ public class ChangePassword {
 
 		public static boolean checkEmailPassword(ChangePasswordBean changePasswordBean) {
 		boolean output;
+		
+		//create db connection
 		Connection con=DbConnectionProvider.getConnection();
 		
 		try {
 			
-			
+			    //create prepared statement
 				PreparedStatement ps=con.prepareStatement("select * from user where email=? and password=?");
 				ps.setString(1, changePasswordBean.getEmail());
 				ps.setString(2, changePasswordBean.getPassword());
-				ResultSet rs = ps.executeQuery();
+				ResultSet rs = ps.executeQuery(); // execute statement
 				if(rs.next()) {
 					output = true;
 				}
@@ -47,15 +49,16 @@ public class ChangePassword {
 	public static boolean changePasswordUser(ChangePasswordBean changePasswordBean) {
 		
 		boolean output;
+		//create db connection
 		Connection con=DbConnectionProvider.getConnection();
 		
 		try {
 			
-			
+			    //create prepared statement
 				PreparedStatement ps=con.prepareStatement("update user set password=? where email=?");
 				ps.setString(1, changePasswordBean.getNewPassword());
 				ps.setString(2, changePasswordBean.getEmail());
-				int i  = ps.executeUpdate();
+				int i  = ps.executeUpdate();  //execute statement
 				if(i>0) {
 				output = true;
 				}
