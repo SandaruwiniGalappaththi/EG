@@ -18,8 +18,8 @@ public class Online_payment {
             
             String url = "jdbc:mysql://127.0.0.1:3306/Payment";
             String user = "root";
-            String password = "sandaru@1S";
-            con = DriverManager.getConnection(url, user, password); 
+            String password = "n2G0u2B0i@N#u";
+            con = DriverManager.getConnection(url, user, password);
         } 
         catch (Exception e) {
             e.printStackTrace();
