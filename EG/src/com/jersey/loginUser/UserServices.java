@@ -265,7 +265,7 @@ public class UserServices {
     
     
     
-    @PUT
+    @PUT 
     @Path("/update") 
     @Consumes(MediaType.APPLICATION_JSON) 
     @Produces(MediaType.TEXT_PLAIN) 
