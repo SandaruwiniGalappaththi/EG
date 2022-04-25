@@ -89,10 +89,18 @@ public class TimeTable {
 								con.close();
 								output += "</table>";
 							 		if(existacc == false) {//if user input account number is not included in database, it will give error as invalid account 
-							 			return output = "Invalid account number. Please recheck"; 
+							 			return output =  "<html><head><title>Payment Page</title>"
+					                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+					                            + "</head><body>"
+					                            + "<div class='card'><h4 class='text-center'>Invalid account number. Please recheck</h4></div>"
+					                            + "</body></html>";//otherwise give error message 
 							 		}	
 							 		if(existschedule == false) {//if user's location has no schedules assigned, it will inform 
-							 			return output = "No schedule added yet for your area"; 
+							 			return output = "<html><head><title>Payment Page</title>"
+					                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+					                            + "</head><body>"
+					                            + "<div class='card'><h4 class='text-center'>No schedule added yet for your area</h4></div>"
+					                            + "</body></html>";//otherwise give error message
 							 		}	
 			
 							 		return output;
@@ -157,10 +165,18 @@ public class TimeTable {
 							 	con.close();
 								output += "</table>";
 								if(existzone == false) {//if user input zone is not between A-Z, it will give error as not available zone 
-									return output = "Requested zone is not an available zone. Please enter letter between A-Z"; 
+									return output ="<html><head><title>Payment Page</title>"
+				                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+				                            + "</head><body>"
+				                            + "<div class='card'><h4 class='text-center'>Requested zone is not an available zone. Please enter letter between A-Z</h4></div>"
+				                            + "</body></html>";//otherwise give error message 
 								}	
 								if(existschedule == false) {//if user's location has no schedules assigned, it will inform 
-									return output = "No schedule added yet for requested zone"; 
+									return output ="<html><head><title>Payment Page</title>"
+				                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+				                            + "</head><body>"
+				                            + "<div class='card'><h4 class='text-center'>No schedule added yet for requested zone</h4></div>"
+				                            + "</body></html>";//otherwise give error message 
 								}	
 								return output;
 						}catch(Exception e) {
@@ -222,10 +238,18 @@ public class TimeTable {
 						 	con.close();
 							output += "</table>";
 							if(existlocation== false) {//if user input location is incorrect, it will give error as not available location
-								return output = "Requested location is not an available location"; 
+								return output = "<html><head><title>Payment Page</title>"
+			                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+			                            + "</head><body>"
+			                            + "<div class='card'><h4 class='text-center'>Requested location is not an available location</h4></div>"
+			                            + "</body></html>";//otherwise give error message "Requested location is not an available location"; 
 							}	
 							if(existschedule == false) {//if user's location has no schedules assigned, it will inform 
-								return output = "No schedule added yet for requested area"; 
+								return output =  "<html><head><title>Payment Page</title>"
+			                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+			                            + "</head><body>"
+			                            + "<div class='card'><h4 class='text-center'>No schedule added yet for requested area</h4></div>"
+			                            + "</body></html>";
 							}	
 							return output;
 
