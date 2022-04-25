@@ -68,6 +68,8 @@ public class ApplicationServices {
 		String ServiceType= itemObject.get("ServiceType").getAsString(); 
 		String Description= itemObject.get("Description").getAsString(); 
 		String Link= itemObject.get("Link").getAsString(); 
+		if(ServiceType.isEmpty() || Description.isEmpty()||Link.isEmpty() )
+			  return "complain fields must be filled out";
 		String output = apply.updateApply(ServiceType,Description,Link); 
 		return output;
 	
@@ -80,6 +82,8 @@ public class ApplicationServices {
 	public String insertApply(@FormParam("ServiceType") String ServiceType, 
 				 @FormParam("Description") String Description,
 				 @FormParam("Link") String Link) { 
+		if(ServiceType.isEmpty() || Description.isEmpty()||Link.isEmpty() )
+			  return "complain fields must be filled out";
 		String output = apply.insertApplication(ServiceType,Description,Link); 
 		return output; 
 	}
