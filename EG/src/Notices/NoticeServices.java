@@ -18,21 +18,21 @@ import org.jsoup.parser.Parser;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-//import Notices.Notice;
+
 @Path("/notices")
 public class NoticeServices {
 	Notice noticeObj = new Notice(); 
-	//read data
+	//function to read notification and remainder data
 	@GET
 	@Path("/") 
 	@Produces(MediaType.TEXT_HTML)
 	public String readItems() 
 	{ 
-			//return "Hello"; 
+			//calling readNotice function in Notice class
 			return noticeObj.readNotices();
 	} 
 	
-	//insert data
+			//function to insert notification and remainders
 			@POST
 			@Path("/") 
 			@Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
@@ -49,7 +49,7 @@ public class NoticeServices {
 			return output; 
 			}
 		
-		//update data
+			//function to update notice and remainders 
 			@PUT
 			@Path("/") 
 			@Consumes(MediaType.APPLICATION_JSON) 
@@ -70,8 +70,7 @@ public class NoticeServices {
 			return output; 
 			}
 			
-			//delete data
-
+			//Function to delete notice and remainder data
 			@DELETE
 			@Path("/") 
 			@Consumes(MediaType.APPLICATION_XML) 
@@ -86,6 +85,7 @@ public class NoticeServices {
 				return output; 
 			}
 			
+			//function to search notices according to the notice type
 			@GET
 			@Path("/search")
 			@Produces(MediaType.TEXT_HTML)

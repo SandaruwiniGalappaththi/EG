@@ -17,7 +17,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class NoticeEmail {
-	
+	//A common method to connect to the DB
 	private Connection connect()
 	 {
 			Connection con = null;
@@ -34,7 +34,7 @@ public class NoticeEmail {
 	 }
 	
 	
-	
+	//method to send email
 	public void sendNoticeMail(String recepient,String date, String topic, String desc, String person) throws MessagingException {
 		Properties properties = new Properties();
 		
@@ -56,7 +56,7 @@ public class NoticeEmail {
 		
 		Message message = prepareMessage(session, myAccountEmail, recepient,date, topic,  desc,  person);
 		
-		Transport.send(message);
+		Transport.send(message);//sending message
 	}
 	
 	
@@ -75,18 +75,18 @@ public class NoticeEmail {
 		}
 		return null;
 	}
- public String sendToUsers(String noticeID) {
+ public String sendToUsers(String noticeID) { //method to send special notices to registered users as email
 	  
 	  String output="";
 	  try {
 			
 			Connection con = connect();
-		 	if (con == null)
+		 	if (con == null)//checking connection
 		 	{
 		 		return "Error while connecting to the database for reading.";
 		 	}
 		 	
-
+		 	//select all notices which had not been sent 
 		 	String query = "select * from notices where noticeID='"+Integer.parseInt(noticeID)+"'"; 
 		 	Statement stmt = con.createStatement(); 
 		 	ResultSet rs = stmt.executeQuery(query);
@@ -96,7 +96,7 @@ public class NoticeEmail {
 				String desc = rs.getString("noticeDesc"); 
 				String person = rs.getString("noticePerson");
 				
-				
+				//get customer information (to get customer mail)
 				String query1 = "select * from customerdetails "; 
 				Statement stmt1 = con.createStatement(); 
 				ResultSet rs1 = stmt1.executeQuery(query1); 
