@@ -70,7 +70,8 @@ public class NoticeEmail {
 			message.setSubject("Special Notice");
 			message.setContent(txt,"text/html");
 			return message;
-		} catch (Exception e) {
+		} 
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
@@ -112,7 +113,8 @@ public class NoticeEmail {
 		 	return output;
 		 	
 		 	
-	  }catch(Exception e) {
+	  }
+	  catch(Exception e) {
 		  return "error";
 	  }
 	
