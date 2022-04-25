@@ -111,7 +111,11 @@ public class PowerCutMail {
 											int ID = rs1.getInt("ID");
 											String consumerEmail = rs1.getString("email");//getting email address of those consumers
 											sendPowerCutMail(consumerEmail,location,start,end,onDate);	//sent mails 
-											output= "Mails are sent successfully";
+											output=  "<html><head>"
+						                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+						                            + "</head><body>"
+						                            + "<div class='card'><h4 class='text-center'style='color:green;'>Mails are sent successfully</h4></div>"
+						                            + "</body></html>";
 					
 														 String query2 = "UPDATE schedules SET mailsSent=? WHERE location=?";
 														 PreparedStatement preparedStmt = con.prepareStatement(query2);

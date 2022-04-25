@@ -39,11 +39,13 @@ public class TimeTable {
 									return "Error while connecting to the database for reading.";
 	 		
                 }                   //preparing HTML table to output
-									output ="<table border='1'><tr>"
+									output ="<html><head></head>"
+								 			+"<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+								 			+ "<table class='table' border='1'><tr>"
 								 			+"<th>zone</th>"
 								 			+"<th>location</th>"
-								 			+"<th>start</th>"
-								 			+"<th>end</th>"
+								 			+"<th>starting time</th>"
+								 			+"<th>ending time</th>"
 								 			+"<th>date</th></tr><tr>";
 									            //read consumer data which matches to given account number
 											 	String query = "select * from consumerinfo where accountNo='"+acc+"'"; 
@@ -89,17 +91,17 @@ public class TimeTable {
 								con.close();
 								output += "</table>";
 							 		if(existacc == false) {//if user input account number is not included in database, it will give error as invalid account 
-							 			return output =  "<html><head><title>Payment Page</title>"
+							 			return output =  "<html><head>"
 					                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 					                            + "</head><body>"
-					                            + "<div class='card'><h4 class='text-center'>Invalid account number. Please recheck</h4></div>"
+					                            + "<div class='card'><h4 class='text-center'style='color:red;'>Invalid account number. Please recheck</h4></div>"
 					                            + "</body></html>";//otherwise give error message 
 							 		}	
 							 		if(existschedule == false) {//if user's location has no schedules assigned, it will inform 
 							 			return output = "<html><head><title>Payment Page</title>"
 					                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 					                            + "</head><body>"
-					                            + "<div class='card'><h4 class='text-center'>No schedule added yet for your area</h4></div>"
+					                            + "<div class='card'><h4 class='text-center'style='color:red;'>No schedule added yet for your area</h4></div>"
 					                            + "</body></html>";//otherwise give error message
 							 		}	
 			
@@ -128,11 +130,13 @@ public class TimeTable {
 								return "Error while connecting to the database for reading.";
 	 		
                             } //preparing HTML table to output
-							 	output ="<table border='1'><tr>"
+							 	output ="<html><head></head>"
+							 			+"<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+							 			+ "<table class='table' border='1'><tr>"
 							 			+"<th>zone</th>"
 							 			+"<th>location</th>"
-							 			+"<th>start</th>"
-							 			+"<th>end</th>"
+							 			+"<th>starting time</th>"
+							 			+"<th>ending time</th>"
 							 			+"<th>date</th></tr><tr>";
 							 	       //reading zone information which matches to user input zone letter
 									 	String query = "select * from zone where zone_character='"+zoneLetter+"'";
@@ -168,14 +172,14 @@ public class TimeTable {
 									return output ="<html><head><title>Payment Page</title>"
 				                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 				                            + "</head><body>"
-				                            + "<div class='card'><h4 class='text-center'>Requested zone is not an available zone. Please enter letter between A-Z</h4></div>"
+				                            + "<div class='card'><h4 class='text-center'style='color:red;'>Requested zone is not an available zone. Please enter letter between A-Z</h4></div>"
 				                            + "</body></html>";//otherwise give error message 
 								}	
 								if(existschedule == false) {//if user's location has no schedules assigned, it will inform 
 									return output ="<html><head><title>Payment Page</title>"
 				                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 				                            + "</head><body>"
-				                            + "<div class='card'><h4 class='text-center'>No schedule added yet for requested zone</h4></div>"
+				                            + "<div class='card'><h4 class='text-center'style='color:red;'>No schedule added yet for requested zone</h4></div>"
 				                            + "</body></html>";//otherwise give error message 
 								}	
 								return output;
@@ -200,11 +204,13 @@ public class TimeTable {
 			 		
 						}
 						//preparing HTML table to output
-					 	output ="<table border='1'><tr>"
+					 	output ="<html><head></head>"
+					 			+"<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+					 			+ "<table class='table' border='1'><tr>"
 					 			+"<th>zone</th>"
 					 			+"<th>location</th>"
-					 			+"<th>start</th>"
-					 			+"<th>end</th>"
+					 			+"<th>starting time</th>"
+					 			+"<th>ending time</th>"
 					 			+"<th>date</th></tr><tr>";
 					 	//reading zone information which matches to user input zone 
 					 	String query = "select * from zone where zone='"+loc+"'"; 
@@ -241,14 +247,14 @@ public class TimeTable {
 								return output = "<html><head><title>Payment Page</title>"
 			                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 			                            + "</head><body>"
-			                            + "<div class='card'><h4 class='text-center'>Requested location is not an available location</h4></div>"
+			                            + "<div class='card'><h4 class='text-center'style='color:red;'>Requested location is not an available location</h4></div>"
 			                            + "</body></html>";//otherwise give error message "Requested location is not an available location"; 
 							}	
 							if(existschedule == false) {//if user's location has no schedules assigned, it will inform 
 								return output =  "<html><head><title>Payment Page</title>"
 			                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 			                            + "</head><body>"
-			                            + "<div class='card'><h4 class='text-center'>No schedule added yet for requested area</h4></div>"
+			                            + "<div class='card'><h4 class='text-center'style='color:red;'>No schedule added yet for requested area</h4></div>"
 			                            + "</body></html>";
 							}	
 							return output;
