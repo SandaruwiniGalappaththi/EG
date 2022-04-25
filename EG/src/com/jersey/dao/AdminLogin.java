@@ -1,22 +1,19 @@
 package com.jersey.dao;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import com.jersey.dbconn.DbConnectionProvider;
-
 import Login.AdminLoaginBean;
 
 
-public class AdminLogin {
+public class AdminLogin 
+   {
 
-	public static String login(AdminLoaginBean adminloginBean) 
-	{
-		Connection con =DbConnectionProvider.getConnection();
-		String output;
+		public static String login(AdminLoaginBean adminloginBean) 
+   {
+	    Connection con =DbConnectionProvider.getConnection();
+	    String output;
 		
 		try {
 			
@@ -40,18 +37,18 @@ public class AdminLogin {
 			System.out.println(adminloginBean.getPassword());
 			
 			if(rs.next())
-			{
-				PreparedStatement ps2=con.prepareStatement("select name,email,accountNo,status from user");
-				ResultSet rrs = ps2.executeQuery();
+			    {
+					PreparedStatement ps2=con.prepareStatement("select name,email,accountNo,status from user");
+					ResultSet rrs = ps2.executeQuery();
 			
-				while(rrs.next()) {
-			
-					
-					 String name = rrs.getString("name"); 
-					 String email = rrs.getString("email"); 
-					 String accountNo = Integer.toString(rrs.getInt("accountNo")); 
-					 String status = rrs.getString("status");
-//					 String otp = Integer.toString(rs.getInt("otp"));
+					while(rrs.next())
+					{
+
+						String name = rrs.getString("name"); 
+						String email = rrs.getString("email"); 
+						String accountNo = Integer.toString(rrs.getInt("accountNo")); 
+						String status = rrs.getString("status");
+
 					 
 
 						// Add into the html table
@@ -65,46 +62,37 @@ public class AdminLogin {
 								+ "<td><input name='btnRemove' type='button' value='Download User' class='btn btn-secondary'></td>"
 								+ "</form></td></tr>";
 						
-				}
+				     }
 			
 				
 				
 				
 				
-				PreparedStatement ps1 = con.prepareStatement("update user set status=? where email=?");
-			
-				ps1.setString(1,"Admin");
-				ps1.setString(2, adminloginBean.getEmail());
-				int i =ps1.executeUpdate();
-				if(i>0)
-				{
+					PreparedStatement ps1 = con.prepareStatement("update user set status=? where email=?");
+					ps1.setString(1,"Admin");
+					ps1.setString(2, adminloginBean.getEmail());
+					int i =ps1.executeUpdate();
+					if(i>0)
+						{
 					//return ""+jsonArray
-					return ""+output + "</table>";
-					
-				}
-				else {
-					return "fail";
-				}
+							return ""+output + "</table>";
+						}
+						else 
+						{
+							return "fail";
+						}
 				
-			
-			}
+		         }
 
-		} catch (Exception e ) {
-			//TODO: handle exception
-			e.printStackTrace();
-		}
+			} catch (Exception e )
+				{
+					//TODO: handle exception
+					e.printStackTrace();
+				}
 		
-		return "fail"; 
+				return "fail"; 
 	
+	     }
 		
-	
-	
-	
-	}
-
-	
-		
-	
-		
-}
+ }
 	
