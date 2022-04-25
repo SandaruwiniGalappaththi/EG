@@ -70,7 +70,7 @@ public class ScheduleService {
 					        	output = "<html><head><title>Payment Page</title>"
 			                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 			                            + "</head><body>"
-			                            + "<div class='card'><h4 class='text-center'>Incorrect time format.Please use HH:MM format</h4></div>"
+			                            + "<div class='card'><h4 class='text-center'style='color:red;'>Incorrect time format.Please use HH:MM format</h4></div>"
 			                            + "</body></html>";
 							}
 	
@@ -84,7 +84,7 @@ public class ScheduleService {
 					        	output = "<html><head><title>Payment Page</title>"
 			                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 			                            + "</head><body>"
-			                            + "<div class='card'><h4 class='text-center'>Incorrect time format.Please use HH:MM format</h4></div>"
+			                            + "<div class='card'><h4 class='text-center'style='color:red;'>Incorrect time format.Please use HH:MM format</h4></div>"
 			                            + "</body></html>";
 							}	
 	
@@ -110,7 +110,7 @@ public class ScheduleService {
 							        output = "<html><head><title>Payment Page</title>"
 				                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 				                            + "</head><body>"
-				                            + "<div class='card'><h4 class='text-center'>Incorrect date format.Please use DD/MM/YYYY format</h4></div>"
+				                            + "<div class='card'><h4 class='text-center'style='color:red;'>Incorrect date format.Please use DD/MM/YYYY format</h4></div>"
 				                            + "</body></html>";
 	       
 		    				}
@@ -123,7 +123,7 @@ public class ScheduleService {
 							    	 	output = "<html><head><title>Payment Page</title>"
 					                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 					                            + "</head><body>"
-					                            + "<div class='card'><h4 class='text-center'>Start time is greater than end time</h4></div>"
+					                            + "<div class='card'><h4 class='text-center'style='color:red;'>Start time is greater than end time</h4></div>"
 					                            + "</body></html>";
 							    		}
 		    				}catch(DateTimeParseException|NullPointerException e) {
@@ -138,7 +138,7 @@ public class ScheduleService {
 		    						output = "<html><head><title>Payment Page</title>"
 				                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 				                            + "</head><body>"
-				                            + "<div class='card'><h4 class='text-center'>Enter valid location</h4></div>"
+				                            + "<div class='card'><h4 class='text-center'style='color:red;'>Enter valid location</h4></div>"
 				                            + "</body></html>";//otherwise give error message
 		    					}
 		    					
@@ -190,7 +190,7 @@ public class ScheduleService {
 					        output = "<html><head><title>Payment Page</title>"
 		                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 		                            + "</head><body>"
-		                            + "<div class='card'><h4 class='text-center'>Incorrect time format.Please use HH:MM format</h4></div>"
+		                            + "<div class='card'><h4 class='text-center'style='color:red;'>Incorrect time format.Please use HH:MM format</h4></div>"
 		                            + "</body></html>";
 					 }
 				
@@ -205,7 +205,7 @@ public class ScheduleService {
 					        output =  "<html><head><title>Payment Page</title>"
 		                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 		                            + "</head><body>"
-		                            + "<div class='card'><h4 class='text-center'>Incorrect time format.Please use HH:MM format</h4></div>"
+		                            + "<div class='card'><h4 class='text-center'style='color:red;'>Incorrect time format.Please use HH:MM format</h4></div>"
 		                            + "</body></html>";
 					}
 				
@@ -231,7 +231,7 @@ public class ScheduleService {
 						        output =  "<html><head><title>Payment Page</title>"
 			                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 			                            + "</head><body>"
-			                            + "<div class='card'><h4 class='text-center'>Incorrect time format.Please use HH:MM format</h4></div>"
+			                            + "<div class='card'><h4 class='text-center'style='color:red;'>Incorrect time format.Please use HH:MM format</h4></div>"
 			                            + "</body></html>";
 				       
 				    }
@@ -244,7 +244,7 @@ public class ScheduleService {
 						    	 	output = "<html><head><title>Payment Page</title>"
 				                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 				                            + "</head><body>"
-				                            + "<div class='card'><h4 class='text-center'>start time is greater than end time</h4></div>"
+				                            + "<div class='card'><h4 class='text-center'style='color:red;'>start time is greater than end time</h4></div>"
 				                            + "</body></html>";
 						    	    }
 				    }catch(DateTimeParseException|NullPointerException e) {
@@ -258,7 +258,7 @@ public class ScheduleService {
    					 				output = "<html><head><title>Payment Page</title>"
 				                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 				                            + "</head><body>"
-				                            + "<div class='card'><h4 class='text-center'>Enter valid location</h4></div>"
+				                            + "<div class='card'><h4 class='text-center'style='color:red;'>Enter valid location</h4></div>"
 				                            + "</body></html>";//otherwise give error message
    					}
    					
