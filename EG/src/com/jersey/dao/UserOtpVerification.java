@@ -29,7 +29,7 @@ public class UserOtpVerification {
 				
 				//create a prepared statement
 				PreparedStatement ps1 = con.prepareStatement("update user set status=? where email=?");
-				ps1.setString(1, "active");
+				ps1.setString(1, "Active");
 				ps1.setString(2, otpVerficationBean.getEmail());
 				int i = ps1.executeUpdate(); //execute the statement
 				if(i>0) {

@@ -38,7 +38,14 @@ public class AdminLogin
 			System.out.println(adminloginBean.getEmail());
 			System.out.println(adminloginBean.getPassword());
 			
-			if(rs.next())
+			if(rs.next()) {
+				
+				String state = rs.getString("status");
+				if(state.equals("Inactive")) {
+					
+					return "Please Verify Your Otp Number.";
+				}
+				else
 			    {
 					PreparedStatement ps2=con.prepareStatement("select name,email,accountNo,status from user");
 					ResultSet rrs = ps2.executeQuery(); //execute statement
@@ -86,17 +93,18 @@ public class AdminLogin
 							return "fail";
 						}
 				
-		         }
+		          }
+			  }
 
-			} catch (Exception e )
+		  } catch (Exception e )
 				{
 					//TODO: handle exception
 					e.printStackTrace();
 				}
 		
 				return "fail"; 
-	
-	     }
+       }
+	     
 		
  }
 	
