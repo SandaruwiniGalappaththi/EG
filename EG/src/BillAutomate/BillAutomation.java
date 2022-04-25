@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class BillAutomation {
-	//Database Connection
+	// database Connection
 	private Connection connect() { 
 		Connection con = null; 
 		try { 
@@ -26,7 +26,7 @@ public class BillAutomation {
 	} 
 	
 	
-	//Read Per Unit
+	// read Per Unit
 	public String readPerUnit() { 
 		String output = ""; 
 		try { 
@@ -92,7 +92,7 @@ public class BillAutomation {
 	} 
 	
 	
-	//Search by Bill Type
+	// search by Bill Type
 	public String readPerUnitBySearch(String billtype) { 
 		String output = "";
 		if(!billtype.equals("Residential") && !billtype.equals("Commercial"))
@@ -167,7 +167,7 @@ public class BillAutomation {
 	} 
 	
 	
-	//Insert Per Unit
+	// insert Per Unit
 	public String insertPerUnit(String billType, String KWH, String Fixed, String Fuel, String Rebate, String Tax, String Total) { 
 		String output = ""; 
 		try { 
@@ -223,7 +223,7 @@ public class BillAutomation {
 	} 
 	
 	
-	//Update Per Unit
+	// update Per Unit
 	public String updatePerUnit(String billType, String KWH, String Fixed, String Fuel, String Rebate, String Tax, String Total) { 
 		String output = ""; 
 		if(!billType.equals("Residential") && !billType.equals("Commercial"))
@@ -287,7 +287,7 @@ public class BillAutomation {
 	}
 	
 	
-	//Delete Per Unit
+	// delete Per Unit
 	public String deletePerUnit(String billType) { 
 		String output = ""; 
 		if(!billType.equals("Residential") && !billType.equals("Commercial"))
