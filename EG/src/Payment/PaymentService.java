@@ -48,7 +48,7 @@ public class PaymentService {
 	
 	
 	@PUT
-	@Path("/") 
+	@Path("/Update") 
 	@Consumes(MediaType.APPLICATION_JSON) 
 	@Produces(MediaType.TEXT_PLAIN) 
 	public String updatePayment(String paymentData) { 
@@ -71,7 +71,7 @@ public class PaymentService {
 	
 	
 	@DELETE 
- 	@Path("/")  
+ 	@Path("/Delete")  
  	@Consumes(MediaType.APPLICATION_XML)  
  	@Produces(MediaType.TEXT_PLAIN)  
  	public String deletePayment(String paymentData) {  
@@ -84,8 +84,8 @@ public class PaymentService {
   	return output;  
   } 
 	
-	@POST
- 	@Path("/online")  
+	@PUT
+ 	@Path("/Online")  
  	@Consumes(MediaType.APPLICATION_XML)  
  	@Produces(MediaType.TEXT_PLAIN)  
  	public String payOnline(String paymentData) {  
