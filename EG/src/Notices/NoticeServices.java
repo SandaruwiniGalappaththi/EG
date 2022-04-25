@@ -18,7 +18,7 @@ import org.jsoup.parser.Parser;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-//import Notices.Notice;
+
 @Path("/notices")
 public class NoticeServices {
 	Notice noticeObj = new Notice(); 
@@ -28,7 +28,7 @@ public class NoticeServices {
 	@Produces(MediaType.TEXT_HTML)
 	public String readItems() 
 	{ 
-			//return "Hello"; 
+			
 			return noticeObj.readNotices();
 	} 
 	
