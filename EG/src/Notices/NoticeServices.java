@@ -38,15 +38,27 @@ public class NoticeServices {
 			@Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
 			@Produces(MediaType.TEXT_PLAIN) 
 			public String insertNotice(@FormParam("noticeType") String noticeType, 
-			@FormParam("noticeType") String noticeCode, 
+			@FormParam("noticeCode") String noticeCode, 
 			@FormParam("noticeDate") String noticeDate,
 			@FormParam("noticeTopic") String noticeTopic,   
 			@FormParam("noticeDesc") String noticeDesc,
 			@FormParam("noticePerson") String noticePerson,
 			@FormParam("noticeMails") String noticeMails)
 			{ 
-			 String output = noticeObj.inserNotice(noticeType,noticeCode, noticeDate, noticeTopic, noticeDesc, noticePerson,noticeMails); 
-			return output; 
+				//inserting validations
+				if(noticeType.isEmpty()||noticeCode.isEmpty()||noticeDate.isEmpty()||noticeTopic.isEmpty()||noticeDesc.isEmpty()||noticePerson.isEmpty()||noticeMails.isEmpty()){
+					return "all fields must be filled out";
+				}
+				else if(noticeCode.length()!=9) {
+					 return "notice code length must be 9 characters long";
+				 }
+				else if((noticeDate.length()>=11)||(noticeDate.length()<=7)) {
+					 return "invalid date ! please enter date in DD/MM/YYYY format";
+				 }
+				else {
+					
+					String output = noticeObj.inserNotice(noticeType,noticeCode, noticeDate, noticeTopic, noticeDesc, noticePerson,noticeMails); 
+					return output; }
 			}
 		
 			//function to update notice and remainders 
