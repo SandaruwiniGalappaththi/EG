@@ -15,7 +15,7 @@ public class Online_payment {
         try { 
             Class.forName("com.mysql.cj.jdbc.Driver"); 
 
-            //Provide the correct details: DBServer/DBName, user-name, password 
+            
             String url = "jdbc:mysql://127.0.0.1:3306/Payment";
             String user = "root";
             String password = "sandaru@1S";
