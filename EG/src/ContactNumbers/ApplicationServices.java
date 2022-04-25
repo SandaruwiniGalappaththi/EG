@@ -25,7 +25,7 @@ public class ApplicationServices {
 	@GET
 	@Path("/")
 	@Produces(MediaType.TEXT_HTML) 
-	public String getContact() {		
+	public String getApply() {		
 	return apply.getPdf();	
 	}
 	
@@ -77,7 +77,7 @@ public class ApplicationServices {
 	@Path("/") 
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
 	@Produces(MediaType.TEXT_PLAIN) 
-	public String insertContact(@FormParam("ServiceType") String ServiceType, 
+	public String insertApply(@FormParam("ServiceType") String ServiceType, 
 				 @FormParam("Description") String Description,
 				 @FormParam("Link") String Link) { 
 		String output = apply.insertApplication(ServiceType,Description,Link); 
