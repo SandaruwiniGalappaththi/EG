@@ -67,7 +67,11 @@ public class ScheduleService {
 							}catch(DateTimeParseException|NullPointerException e) {
     	                        //if start time is invalid, give error message to use correct format
 					        	System.out.println("Invalid time string: " + start);
-					        	output = "Incorrect time format.Please use HH:MM format";
+					        	output = "<html><head><title>Payment Page</title>"
+			                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+			                            + "</head><body>"
+			                            + "<div class='card'><h4 class='text-center'>Incorrect time format.Please use HH:MM format</h4></div>"
+			                            + "</body></html>";
 							}
 	
 							try{//check input end time is valid time
@@ -77,7 +81,11 @@ public class ScheduleService {
 							}catch(DateTimeParseException|NullPointerException e) {
 								//if end time is invalid, give error message to use correct format
 					        	System.out.println("Invalid time string: " + end);
-					        	output = "Incorrect time format.Please use HH:MM format";
+					        	output = "<html><head><title>Payment Page</title>"
+			                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+			                            + "</head><body>"
+			                            + "<div class='card'><h4 class='text-center'>Incorrect time format.Please use HH:MM format</h4></div>"
+			                            + "</body></html>";
 							}	
 	
 	
@@ -99,7 +107,11 @@ public class ScheduleService {
 		    				{       
 								   // if date format is invalid, give error message to use correct format
 							        System.out.println(onDate+" is Invalid Date format");
-							        output = "Incorrect date format.Please use DD/MM/YYYY format";
+							        output = "<html><head><title>Payment Page</title>"
+				                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+				                            + "</head><body>"
+				                            + "<div class='card'><h4 class='text-center'>Incorrect date format.Please use DD/MM/YYYY format</h4></div>"
+				                            + "</body></html>";
 	       
 		    				}
 		    				try {  //getting the time duration
@@ -108,7 +120,11 @@ public class ScheduleService {
 							    	if(timeElapsed.toMinutes() < 0) {//checking start time is greater than end time
 							    	  	startOk = false;
 							    	 	endOk = false;
-							    	 	output = "Start time is greater than end time";
+							    	 	output = "<html><head><title>Payment Page</title>"
+					                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+					                            + "</head><body>"
+					                            + "<div class='card'><h4 class='text-center'>Start time is greater than end time</h4></div>"
+					                            + "</body></html>";
 							    		}
 		    				}catch(DateTimeParseException|NullPointerException e) {
 	    	
@@ -119,7 +135,11 @@ public class ScheduleService {
 		    				try {//checking input location is available location
 		    					 locationOk = schedule.findLocation(location);//find location is a valid one using findLocation function in Schedule class
 		    					if(locationOk == false) {
-		    						output = "Enter valid location";//otherwise give error message
+		    						output = "<html><head><title>Payment Page</title>"
+				                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+				                            + "</head><body>"
+				                            + "<div class='card'><h4 class='text-center'>Enter valid location</h4></div>"
+				                            + "</body></html>";//otherwise give error message
 		    					}
 		    					
 		    				}catch(Exception e) {
@@ -167,7 +187,11 @@ public class ScheduleService {
 					 }catch (DateTimeParseException|NullPointerException e) {
 						  //if start time is invalid, give error message to use correct format
 					        System.out.println("Invalid time string: " + start);
-					        output = "Incorrect time format.Please use HH:MM format";
+					        output = "<html><head><title>Payment Page</title>"
+		                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+		                            + "</head><body>"
+		                            + "<div class='card'><h4 class='text-center'>Incorrect time format.Please use HH:MM format</h4></div>"
+		                            + "</body></html>";
 					 }
 				
 					try{  //check input end time is valid time
@@ -178,7 +202,11 @@ public class ScheduleService {
 					}catch (DateTimeParseException|NullPointerException e) {
 						//if end time is invalid, give error message to use correct format
 					        System.out.println("Invalid time string: " + end);
-					        output = "Incorrect time format.Please use HH:MM format";
+					        output =  "<html><head><title>Payment Page</title>"
+		                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+		                            + "</head><body>"
+		                            + "<div class='card'><h4 class='text-center'>Incorrect time format.Please use HH:MM format</h4></div>"
+		                            + "</body></html>";
 					}
 				
 				
@@ -200,7 +228,11 @@ public class ScheduleService {
 				    }catch (ParseException e)
 				    {           // if date format is invalid, give error message to use correct format
 						        System.out.println(onDate+" is Invalid Date format");
-						        output = "Incorrect time format.Please use HH:MM format";
+						        output =  "<html><head><title>Payment Page</title>"
+			                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+			                            + "</head><body>"
+			                            + "<div class='card'><h4 class='text-center'>Incorrect time format.Please use HH:MM format</h4></div>"
+			                            + "</body></html>";
 				       
 				    }
 				    try {      //getting the time duration
@@ -209,7 +241,11 @@ public class ScheduleService {
 						    	if(timeElapsed.toMinutes() < 0) {//checking start time is greater than end time
 						    	  	startOk = false;
 						    	 	endOk = false;
-						    	 	output = "Start time is greater than end time";
+						    	 	output = "<html><head><title>Payment Page</title>"
+				                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+				                            + "</head><body>"
+				                            + "<div class='card'><h4 class='text-center'>start time is greater than end time</h4></div>"
+				                            + "</body></html>";
 						    	    }
 				    }catch(DateTimeParseException|NullPointerException e) {
 				    	
@@ -219,7 +255,11 @@ public class ScheduleService {
 				    try {//checking input location is available location
    					 			locationOk = schedule.findLocation(location);//find location is a valid one using findLocation function in Schedule class
    					 			if(locationOk == false) {
-   					 				output = "Enter valid location";//otherwise give error message
+   					 				output = "<html><head><title>Payment Page</title>"
+				                            + "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+				                            + "</head><body>"
+				                            + "<div class='card'><h4 class='text-center'>Enter valid location</h4></div>"
+				                            + "</body></html>";//otherwise give error message
    					}
    					
 				    }catch(Exception e) {
