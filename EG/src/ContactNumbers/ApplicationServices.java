@@ -25,7 +25,7 @@ public class ApplicationServices {
 	@GET
 	@Path("/")
 	@Produces(MediaType.TEXT_HTML) 
-	public String getContact() {		
+	public String getApply() {		
 	return apply.getPdf();	
 	}
 	
@@ -68,6 +68,8 @@ public class ApplicationServices {
 		String ServiceType= itemObject.get("ServiceType").getAsString(); 
 		String Description= itemObject.get("Description").getAsString(); 
 		String Link= itemObject.get("Link").getAsString(); 
+		if(ServiceType.isEmpty() || Description.isEmpty()||Link.isEmpty() )
+			  return "complain fields must be filled out";
 		String output = apply.updateApply(ServiceType,Description,Link); 
 		return output;
 	
@@ -77,9 +79,11 @@ public class ApplicationServices {
 	@Path("/") 
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
 	@Produces(MediaType.TEXT_PLAIN) 
-	public String insertContact(@FormParam("ServiceType") String ServiceType, 
+	public String insertApply(@FormParam("ServiceType") String ServiceType, 
 				 @FormParam("Description") String Description,
 				 @FormParam("Link") String Link) { 
+		if(ServiceType.isEmpty() || Description.isEmpty()||Link.isEmpty() )
+			  return "complain fields must be filled out";
 		String output = apply.insertApplication(ServiceType,Description,Link); 
 		return output; 
 	}

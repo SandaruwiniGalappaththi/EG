@@ -75,10 +75,29 @@ public class ContactServices {
 				 			@FormParam("CustomerServiceNo") String CustomerServiceNo, 
 				 			@FormParam("NewConnectionsNo") String NewConnectionsNo, 
 				 			@FormParam("EmergencyNo") String EmergencyNo,
-				 			@FormParam("Address") String Address) { 
+				 			@FormParam("Address") String Address) 
+		
+	    {
+		 //inserting validations
+		if(DistrictCode.isEmpty() || Description.isEmpty()||ComplainNo.isEmpty() ||CustomerServiceNo.isEmpty()||NewConnectionsNo.isEmpty()||EmergencyNo.isEmpty()|| Address.isEmpty())
+			  return "complain fields must be filled out";
+	
+		 else if(ComplainNo.length()!=10) {
+		 return "ComplainNo length must be 10 characters long";
+		 }
+		 else if(CustomerServiceNo.length()!=10) {
+		 return "Customer Service No length must be 10 characters long";
+		 }
+		 else if(NewConnectionsNo.length()!=10) {
+		 return "New Connection Length must be 10 characters long";
+		 }
+		 else if(EmergencyNo.length()!=10) {
+		 return "Emergency length must be 10 characters long";
+		 }
+	
 			String output = contact.insertContact(DistrictCode,Description,ComplainNo,CustomerServiceNo,NewConnectionsNo,EmergencyNo,Address); 
-			return output; 
-	}
+			return output;
+	    }
 		
 	@PUT
 	@Path("/") 
@@ -95,6 +114,23 @@ public class ContactServices {
 			String NewConnectionsNo= itemObject.get("NewConnectionsNo").getAsString(); 
 			String EmergencyNo= itemObject.get("EmergencyNo").getAsString(); 
 			String Address= itemObject.get("Address").getAsString();
+			
+			 //inserting validations
+			if(DistrictCode.isEmpty() || Description.isEmpty()||ComplainNo.isEmpty() ||CustomerServiceNo.isEmpty()||NewConnectionsNo.isEmpty()||EmergencyNo.isEmpty()|| Address.isEmpty())
+				  return "fields must be filled out";
+		
+			 else if(ComplainNo.length()!=10) {
+			 return "Complain No length must be 10 characters long";
+			 }
+			 else if(CustomerServiceNo.length()!=10) {
+			 return "Customer Service No length must be 10 characters long";
+			 }
+			 else if(NewConnectionsNo.length()!=10) {
+			 return "New Connection Length must be 10 characters long";
+			 }
+			 else if(EmergencyNo.length()!=10) {
+			 return "Emergency length must be 10 characters long";
+			 }
 			String output = contact.updateContact(DistrictCode,Description,ComplainNo,CustomerServiceNo,NewConnectionsNo,EmergencyNo,Address); 
 			return output;
 		
