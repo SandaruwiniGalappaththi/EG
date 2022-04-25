@@ -10,14 +10,16 @@ public class RestPassword {
 
 	public static boolean checkEmail(RestPasswordBean restPasswordBean) {
 		boolean output;
+		
+		//create db connection
 		Connection con=DbConnectionProvider.getConnection();
 		
 		try {
-					
+				//create prepared statement	
 				PreparedStatement ps=con.prepareStatement("select * from user where email=? and otp=?");
 				ps.setString(1, restPasswordBean.getEmail());
 				ps.setString(2, restPasswordBean.getOtp());
-				ResultSet rs = ps.executeQuery();
+				ResultSet rs = ps.executeQuery();  //execute the statement 
 				if(rs.next()) {
 					
 					output = true;
@@ -46,15 +48,17 @@ public class RestPassword {
 		public static boolean restPasswordUser(RestPasswordBean restPasswordBean) {
 		
 		boolean output;
+		
+		//create db connection
 		Connection con=DbConnectionProvider.getConnection();
 		
 		try {
 			
-			
+			    //create prepared statement
 				PreparedStatement ps=con.prepareStatement("update user set password=? where email=?");
 				ps.setString(1, restPasswordBean.getNewPassword());
 				ps.setString(2, restPasswordBean.getEmail());
-				int i  = ps.executeUpdate();
+				int i  = ps.executeUpdate();//execute the statement
 				if(i>0) {
 					
 					output = true;

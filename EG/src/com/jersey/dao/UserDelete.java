@@ -10,7 +10,8 @@ public class UserDelete {
 			
 			String output = ""; 
 			
-			try { 
+			try {   
+				    //create db connection
 					Connection con = DbConnectionProvider.getConnection(); 
 					if (con == null) 
 					{return "Error while connecting to the database for deleting."; } 
@@ -21,7 +22,7 @@ public class UserDelete {
 	 
 					// binding values
 	 
-					preparedStmt.setInt(1, Integer.parseInt(accountNo));                 
+					preparedStmt.setString(1, accountNo);                 
 	 
 					// execute the statement
 					preparedStmt.execute(); 

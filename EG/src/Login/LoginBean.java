@@ -6,11 +6,6 @@ package Login;
 public class LoginBean {
 	
 	public String email,password,status;
-	
-
-	
-
-	
 
 	public String getStatus() {
 		return status;

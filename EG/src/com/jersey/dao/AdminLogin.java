@@ -11,13 +11,14 @@ public class AdminLogin
    {
 
 		public static String login(AdminLoaginBean adminloginBean) 
-   {
+   {    
+		//provide db connection	
 	    Connection con =DbConnectionProvider.getConnection();
 	    String output;
 		
 		try {
 			
-			
+			        //build a table
 			output = "<html><head><title>Admin Profile</title>"
 					+ "<link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC\" crossorigin=\"anonymous\">"
 					+ "</head><body><table class='table' border='1'><tr>"
@@ -28,6 +29,7 @@ public class AdminLogin
 					+ "<th>Search User</th>"
 					+ "<th>Download</th></tr>"; 
 			
+			//create prepare statement
 			PreparedStatement ps=con.prepareStatement("select * from user where email=? and password=?");
 			ps.setString(1,adminloginBean.getEmail());
 			ps.setString(2,adminloginBean.getPassword());
@@ -39,14 +41,15 @@ public class AdminLogin
 			if(rs.next())
 			    {
 					PreparedStatement ps2=con.prepareStatement("select name,email,accountNo,status from user");
-					ResultSet rrs = ps2.executeQuery();
+					ResultSet rrs = ps2.executeQuery(); //execute statement
 			
+					 // iterate through the rows in the result set
 					while(rrs.next())
 					{
-
+                       
 						String name = rrs.getString("name"); 
 						String email = rrs.getString("email"); 
-						String accountNo = Integer.toString(rrs.getInt("accountNo")); 
+						String accountNo = rrs.getString("accountNo"); 
 						String status = rrs.getString("status");
 
 					 
@@ -56,7 +59,8 @@ public class AdminLogin
 						 output += "<td>" + email + "</td>"; 
 						 output += "<td>" + accountNo + "</td>"; 
 						 output += "<td>" + status + "</td>"; 
-						// buttons
+						
+						 // buttons
 						 output +="<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
 								+ "<td><input name='btnUpdate' type='button' value='Search User' class='btn btn-secondary'></td>"
 								+ "<td><input name='btnRemove' type='button' value='Download User' class='btn btn-secondary'></td>"
@@ -67,14 +71,14 @@ public class AdminLogin
 				
 				
 				
-				
+				   // create prepared statement
 					PreparedStatement ps1 = con.prepareStatement("update user set status=? where email=?");
 					ps1.setString(1,"Admin");
 					ps1.setString(2, adminloginBean.getEmail());
 					int i =ps1.executeUpdate();
 					if(i>0)
 						{
-					//return ""+jsonArray
+						    // Complete the html table
 							return ""+output + "</table>";
 						}
 						else 

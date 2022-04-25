@@ -14,13 +14,15 @@ import Login.LoginBean;
 public class Login {
 
 		public static String login(LoginBean loginBean) {
+		
+		//create db connection	
 		Connection con =DbConnectionProvider.getConnection();
 		String output= "";
 		
 		
 		try {
 			
-			
+			        //build a table
 			output = "<html><head><title>User Profile</title>"
 					+ "<link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC\" crossorigin=\"anonymous\">"
 					+ "</head><body><table class='table' border='2'><tr>"
@@ -31,14 +33,15 @@ public class Login {
 					+ "<th>Update Account</th>"
 					+ "<th>Remove Account</th></tr>"; 
 			
+			//cretae a prepared statement
 			PreparedStatement ps=con.prepareStatement("select * from user where email=? and password=?");
 			ps.setString(1,loginBean.getEmail());
 			ps.setString(2,loginBean.getPassword());
-			ResultSet rs = ps.executeQuery();
+			ResultSet rs = ps.executeQuery(); //execute the statement
 			if(rs.next()) {
 				
 					String status = rs.getString("status");
-					if(status.equals("inactive")) {
+					if(status.equals("Inactive")) {
 						
 						return "Please Verify Your Otp Number.";
 					}
@@ -47,7 +50,7 @@ public class Login {
 						 String name = rs.getString("name"); 
 						 String email = rs.getString("email"); 
 						 String password = rs.getString("password") ; 
-						 String accountNo = Integer.toString(rs.getInt("accountNo")); 
+						 String accountNo = rs.getString("accountNo"); 
 						 String otp = Integer.toString(rs.getInt("otp"));
 						
 						
@@ -68,7 +71,7 @@ public class Login {
 					
 						 ps1.setString(1,"Logged");
 						 ps1.setString(2, loginBean.getEmail());
-						 int i =ps1.executeUpdate();
+						 int i =ps1.executeUpdate(); //execute the satement
 						 if(i>0) {
 							 
 							 return ""+output + "</table>";
