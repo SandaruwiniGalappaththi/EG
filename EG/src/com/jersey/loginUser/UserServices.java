@@ -1,10 +1,8 @@
 package com.jersey.loginUser;
 
-
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -13,7 +11,6 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -22,8 +19,6 @@ import org.json.simple.JSONValue;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.parser.Parser;
-
-
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -33,7 +28,6 @@ import Login.UserBean;
 import Login.LoginBean;
 import Login.AdminLoaginBean;
 import Login.UserOtpVerificationBean;
-
 import com.jersey.dao.AdminLogin;
 import com.jersey.dao.ChangePassword;
 import com.jersey.dao.ForgotPassword;
@@ -44,131 +38,99 @@ import com.jersey.dao.UserRegister;
 import com.jersey.dao.UserOtpVerification;
 import Login.RestPasswordBean;
 import Login.SearchUserBean;
-
 import com.jersey.dao.UpdateUser;
 import com.jersey.dao.UserDelete;
 
 
 @Path("/user")
-public class UserServices 
-{   
-	
-	 
-	
+public class UserServices {   
+		
     @Path("/register")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-	public String registerUser(String userdata) throws JsonParseException, JsonMappingException, IOException 
-    {
-    
+	public String registerUser(String userdata) throws JsonParseException, JsonMappingException, IOException {
+        	
+    	String str = null; 
+    	if(null!=userdata) {   
+    	   	
+    		ObjectMapper mapper = new ObjectMapper();
+    		UserBean userbean = mapper.readValue(userdata, UserBean.class);
+    		str = UserRegister.registerDao(userbean);    	
     	
-    String str = null; 
-    if(null!=userdata)   
-    {   
-    	
-    	
-    	ObjectMapper mapper = new ObjectMapper();
-    	UserBean userbean = mapper.readValue(userdata, UserBean.class);
-    	str = UserRegister.registerDao(userbean);
- 
-    
-    	
-    	
-    	if(str.equals("already exist"))
-    	{
+    	if(str.equals("already exist")) {
+    		
     		return "<html><head><title>Register Here</title>"
     				+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
     				+ "</head><body>"
     				+ "<div class='card'><h4 class='text-center'>Already Exist...! Please Use another Email for Registring Purpose.</h4></div>"
-    				+ "</body></html>"; 
-    				
-    				
-    	}
-    	else if(str.equals("success"))
-    	{
-    		return "<html><head><title>Register Here</title>"
-    				+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
-    				+ "</head><body>"
-    				+ "<div class='card'><h4 class='text-center'>Register Successfully...!</h4></div>"
-    				+ "</body></html>"; 
-    				
-    	}
-    	else if(str.equals("Invalid Email Format")) {
-    		return "<html><head><title>Register Here</title>"
-    				+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
-    				+ "</head><body>"
-    				+ "<div class='card'><h4 class='text-center'>Invalid Email Format...!</h4></div>"
-    				+ "</body></html>"; 
-    				
-    				
-    	}
-    	else
-    	{
-    		return "<html><head><title>Register Here</title>"
-    				+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
-    				+ "</head><body>"
-    				+ "<div class='card'><h4 class='text-center'>register fail...!!!</h4></div>"
-    				+ "</body></html>"; 
-    				
-    				
-    	}
+    				+ "</body></html>";     				
+    		}
+    		else if(str.equals("success")) {
+    			
+    				return "<html><head><title>Register Here</title>"
+    						+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+    						+ "</head><body>"
+    						+ "<div class='card'><h4 class='text-center'>Register Successfully...!</h4></div>"
+    						+ "</body></html>"; 
+    				}
+    				else if(str.equals("Invalid Email Format")) {
+    					
+    						return "<html><head><title>Register Here</title>"
+    								+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+    								+ "</head><body>"
+    								+ "<div class='card'><h4 class='text-center'>Invalid Email Format...!</h4></div>"
+    								+ "</body></html>";   				
+    				}
+    				else {
+    							return "<html><head><title>Register Here</title>"
+    									+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+    									+ "</head><body>"
+    									+ "<div class='card'><h4 class='text-center'>register fail...!!!</h4></div>"
+    									+ "</body></html>";    				
+    				}
+    		}
+		
+    		return str;				
     }
-		
-	return str;
-		
-		
-	}
-    
-    
+      
     @Path("/login")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-	public String loginUser(String userdata) throws JsonParseException, JsonMappingException, IOException
-    {
-    	try {
-    		ObjectMapper objectMapper = new ObjectMapper();
-    		LoginBean loginBean = objectMapper.readValue(userdata, LoginBean.class);
+	public String loginUser(String userdata) throws JsonParseException, JsonMappingException, IOException {
     	
-    String str = Login.login(loginBean);
+    	try {
+    			ObjectMapper objectMapper = new ObjectMapper();
+    			LoginBean loginBean = objectMapper.readValue(userdata, LoginBean.class);
+    	
+    			String str = Login.login(loginBean);
     
-    	if(str.equals("Please Verify Your Otp Number.")){
+    			if(str.equals("Please Verify Your Otp Number.")) {
     		
-    		return "<html><head><title>Login Here</title>"
-    				+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
-    				+ "</head><body>"
-    				+ "<div class='card'><h4 class='text-center'>Please Verify Your Otp Number.</h4></div>"
-    				+ "</body></html>"; 
-    				
-    			
-    	}
-    
-    
-    
-       else if(str.equals("fail")) 
+    				return "<html><head><title>Login Here</title>"
+    						+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+    						+ "</head><body>"
+    						+ "<div class='card'><h4 class='text-center'>Please Verify Your Otp Number.</h4></div>"
+    						+ "</body></html>"; 
+    			}
+    			else if(str.equals("fail")) {
     		
-    		
-    	{
-    		return "<html><head><title>Login Here</title>"
-    				+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
-    				+ "</head><body>"
-    				+ "<div class='card'><h4 class='text-center'>Username or Password Incorrect ...!!! Please Check and Log Again</h4></div>"
-    				+ "</body></html>"; 
-    				
-    				
-    				
-    	}
-    	else
-    	{
-    		return str;
-    	} 
+    					return "<html><head><title>Login Here</title>"
+    							+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+    							+ "</head><body>"
+    							+ "<div class='card'><h4 class='text-center'>Username or Password Incorrect ...!!! Please Check and Log Again</h4></div>"
+    							+ "</body></html>";   				
+    			       }
+    					else {
+    							return str;
+    						 } 
    
-    
-    	} catch (Exception e) {
-    		//TODO: handle exception
-    		e.printStackTrace();
-    	}
+    			} catch (Exception e) {
+    				//TODO: handle exception
+    				e.printStackTrace();
+    			}
+    			
     	return "fail";
 	
 	}
@@ -178,40 +140,36 @@ public class UserServices
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-	public String optUser(String userdata) throws JsonParseException, JsonMappingException, IOException
-    {
+	public String optUser(String userdata) throws JsonParseException, JsonMappingException, IOException {
+    	
     	try {
     		
-    		ObjectMapper objectMapper = new ObjectMapper();
-    		UserOtpVerificationBean otpVerificationBean=objectMapper.readValue(userdata,UserOtpVerificationBean.class);
-    		String str=UserOtpVerification.OtpVerification(otpVerificationBean);
-    		if(str.equals("success"))
-    				{
-    				   return "<html><head><title>Verifing Otp</title>"
+    			ObjectMapper objectMapper = new ObjectMapper();
+    			UserOtpVerificationBean otpVerificationBean=objectMapper.readValue(userdata,UserOtpVerificationBean.class);
+    			String str=UserOtpVerification.OtpVerification(otpVerificationBean);
+    			if(str.equals("success")) {
+    				    
+    				return "<html><head><title>Verifing Otp</title>"
     		    				+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
     		    				+ "</head><body>"
     		    				+ "<div class='card'><h4 class='text-center'>Otp Verify Success...!!!</h4></div>"
     		    				+ "</body></html>"; 
-    						   
-    						   
     				}
-    		else
-    		{
-    			return "<html><head><title>Verifing Otp</title>"
-	    				+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
-	    				+ "</head><body>"
-	    				+ "<div class='card'><h4 class='text-center'>Otp Verify Fail...!!! Please Re-Check Your Otp Or Email.</h4></div>"
-	    				+ "</body></html>"; 
-    					
-    					
-    		}
-    	}catch (Exception e) {
-    		//TODO: handle exception
-    		e.printStackTrace();
-    	}
-		
+    				else
+    				{
+    						return "<html><head><title>Verifing Otp</title>"
+    								+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
+    								+ "</head><body>"
+    								+ "<div class='card'><h4 class='text-center'>Otp Verify Fail...!!! Please Re-Check Your Otp Or Email.</h4></div>"
+    								+ "</body></html>";     					
+    				}
     	
-    return "otp verify fail";
+    			}catch (Exception e) {
+    					//TODO: handle exception
+    					e.printStackTrace();
+    			 }
+				
+    	return "otp verify fail";
     	
     	
   
@@ -341,8 +299,8 @@ public class UserServices
      UserDelete deletU =new UserDelete();
      
     //Read the value from the element <itemID>
-     String otp = doc.select("otp").text(); 
-     String output = deletU.deleteUser(otp); 
+     String accountNo = doc.select("accountNo").text(); 
+     String output = deletU.deleteUser(accountNo); 
     return output; 
     }
     
@@ -450,7 +408,7 @@ public class UserServices
     		return "<html><head><title>Admin Login</title>"
     				+ "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>"
     				+ "</head><body>"
-    				+ "<div class='card'><h4 class='text-center'> User Name Or Password Incoorect...!!! Pleace contact EG User Manager. </h4></div>"
+    				+ "<div class='card'><h4 class='text-center'> User Name Or Password Incorrect...!!! Pleace contact EG User Manager. </h4></div>"
     				+ "</body></html>";
     				
     				
